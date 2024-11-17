@@ -20,7 +20,7 @@ const CmsTitle = styled.h1`
   font-size: ${size.text.h1};
   font-weight: 900;
   text-align: center;
-  margin-bottom: ${size.normal[2]};
+  margin-bottom: ${size.normal[5]};
 `;
 
 export default function layout({ children, }: Props) {

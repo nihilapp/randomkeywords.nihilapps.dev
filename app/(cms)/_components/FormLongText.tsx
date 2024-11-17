@@ -14,7 +14,7 @@ interface Props {
 }
 
 const LongText = styled.textarea`
-  width: 40%;
+  width: 100%;
   border: 2px solid ${color.black[200]};
   padding: ${size.normal[2]};
   resize: none;
@@ -29,8 +29,6 @@ const LongText = styled.textarea`
 export function FormLongText({
   label, name, id, value, onChange,
 }: Props) {
-  console.log('value >> ', value);
-
   return (
     <>
       <FormLabel htmlFor={id}>{label}</FormLabel>

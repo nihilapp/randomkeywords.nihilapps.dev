@@ -6,5 +6,5 @@ import { size } from '@/src/styles';
 export const BottomButtons = styled.div`
   display: flex;
   flex-direction: row;
-  gap: ${size.normal[2]};
+  gap: ${size.normal[1]};
 `;

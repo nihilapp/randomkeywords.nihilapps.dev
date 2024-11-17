@@ -17,6 +17,21 @@ const textColorMap = {
   white: color.black.base,
 };
 
+const hoverBgColorMap = {
+  black: color.blue[500],
+  white: color.red[500],
+};
+
+const hoverTextColorMap = {
+  black: color.white,
+  white: color.white,
+};
+
+const hoverBorderColorMap = {
+  black: color.blue[500],
+  white: color.red[500],
+};
+
 export const Button = styled.button<ButtonProps>`
   background-color: ${({ $color, }) => (
     bgColorMap[$color]
@@ -26,5 +41,19 @@ export const Button = styled.button<ButtonProps>`
     textColorMap[$color]
   )};
   padding: ${size.normal[2]};
+  flex: 1;
+  flex-shrink: 0;
+  transition: all 0.2s ease-in-out;
 
+  &:hover {
+    background-color: ${({ $color, }) => (
+    hoverBgColorMap[$color]
+  )};
+    color: ${({ $color, }) => (
+    hoverTextColorMap[$color]
+  )};
+    border-color: ${({ $color, }) => (
+    hoverBorderColorMap[$color]
+  )};
+  }
 `;
