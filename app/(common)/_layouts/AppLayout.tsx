@@ -1,10 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Header } from './Header';
-import { Nav } from './Nav';
-import { Main } from './Main';
-import { Footer } from './Footer';
+import { AppMain, AppFooter, AppHeader } from '@/app/(common)/_layouts';
 
 interface Props {
   children?: React.ReactNode;
@@ -13,10 +10,13 @@ interface Props {
 export function AppLayout({ children, }: Props) {
   return (
     <>
-      <Header />
-      <Nav />
-      <Main>{children}</Main>
-      <Footer />
+      <AppHeader />
+
+      <AppMain>
+        {children}
+      </AppMain>
+
+      <AppFooter />
     </>
   );
 }

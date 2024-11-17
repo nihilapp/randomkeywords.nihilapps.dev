@@ -1,3 +1,22 @@
+import { HttpStatusCode } from 'axios';
+
+export type ApiResponse<T> = {
+  resData: T;
+  message: string;
+}
+
+export type ApiError = {
+  resData: null;
+  message: string;
+}
+
+export interface CreateResponse<T> {
+  type: 'success' | 'error'
+  resData: T;
+  message: string,
+  status: keyof typeof HttpStatusCode;
+}
+
 export interface ISiteMeta {
   title: string;
   url?: string;

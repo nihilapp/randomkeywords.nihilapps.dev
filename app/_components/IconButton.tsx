@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Icon } from '@iconify/react';
+import styled from 'styled-components';
 import { Button } from '@/app/_components/Button';
 
 interface Props {
@@ -13,6 +14,14 @@ interface Props {
   onClick?: any;
 }
 
+const ButtonLabel = styled.span`
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
+`;
+
 export function IconButton({
   children, color = 'black', icon, onClick, iconSize = '100%', type = 'button',
 }: Props) {
@@ -21,7 +30,7 @@ export function IconButton({
       {icon && (
         <Icon icon={icon} fontSize={iconSize} />
       )}
-      <span>{children}</span>
+      <ButtonLabel>{children}</ButtonLabel>
     </Button>
   );
 }

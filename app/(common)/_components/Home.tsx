@@ -8,8 +8,9 @@ interface Props {
 
 export function Home({ children, }: Props) {
   return (
-    <>
-      <div>content</div>
-    </>
+    <div>
+      <div>키워드 버튼</div>
+      <div>키워드 결과</div>
+    </div>
   );
 }

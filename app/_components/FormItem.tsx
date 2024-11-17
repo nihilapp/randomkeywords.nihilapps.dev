@@ -7,7 +7,6 @@ import { RequiredMark } from '@/app/_components/RequiredMark';
 import { color, size } from '@/src/styles';
 
 interface Props {
-  children?: React.ReactNode;
   field: ControllerRenderProps;
   label: string;
   name: string;
@@ -35,7 +34,7 @@ const FormItemBlock = styled.label`
 `;
 
 export function FormItem({
-  children, field, label, name, type = 'text', required = false,
+  field, label, name, type = 'text', required = false,
 }: Props) {
   return (
     <FormItemBlock htmlFor={name}>
