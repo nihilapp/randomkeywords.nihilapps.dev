@@ -44,8 +44,8 @@ export const CategoryButton = styled.button<CategoryButtonProps>`
   flex-shrink: 0;
   border: 1px solid ${color.black[200]};
   padding: ${size.normal[2]};
-  height: 60px;
-  font-size: ${size.text.h5};
+  height: 40px;
+  font-size: ${size.text.md};
   font-weight: 500;
   line-height: 0;
   transition: all 0.2s ease-in-out;

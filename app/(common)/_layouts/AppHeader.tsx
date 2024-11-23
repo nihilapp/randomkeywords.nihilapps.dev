@@ -3,7 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { AppLogo, AppNav } from '@/app/(common)/_layouts';
-import { size } from '@/src/styles';
+import { color, size } from '@/src/styles';
 
 interface Props {
   children?: React.ReactNode;
@@ -11,6 +11,7 @@ interface Props {
 
 const Header = styled.header`
   font-size: ${size.text.md};
+  color: ${color.black.base};
   font-weight: 500;
 `;
 

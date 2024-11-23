@@ -11,6 +11,7 @@ interface Props {
 
 const Nav = styled.nav`
   background-color: ${color.white};
+  color: ${color.black.base};
   padding: ${size.normal[2]};
   font-weight: 500;
 

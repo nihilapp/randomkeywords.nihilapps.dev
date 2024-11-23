@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { size } from '@/src/styles';
+import { color, size } from '@/src/styles';
 
 interface Props {
   children: React.ReactNode;
@@ -11,6 +11,7 @@ interface Props {
 const Main = styled.main`
   font-size: ${size.text.md};
   font-weight: 500;
+  color: ${color.black.base};
   width: 100%;
   padding: ${size.normal[2]};
 `;

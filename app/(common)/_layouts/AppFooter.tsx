@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { size } from '@/src/styles';
+import { color, size } from '@/src/styles';
 
 interface Props {
   children?: React.ReactNode;
@@ -10,6 +10,7 @@ interface Props {
 
 const Footer = styled.footer`
   font-size: ${size.text.sm};
+  color: ${color.black.base};
   font-weight: 500;
 `;
 

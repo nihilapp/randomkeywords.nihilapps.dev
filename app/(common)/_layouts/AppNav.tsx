@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
-import { size } from '@/src/styles';
+import { color, size } from '@/src/styles';
 
 interface Props {
   children?: React.ReactNode;
@@ -12,6 +12,7 @@ interface Props {
 const Nav = styled.nav`
   font-size: ${size.text.md};
   font-weight: 500;
+  color: ${color.black.base};
 `;
 
 export function AppNav({ children, }: Props) {

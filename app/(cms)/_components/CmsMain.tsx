@@ -10,6 +10,7 @@ interface Props {
 
 const Main = styled.main`
   padding: ${size.normal[5]};
+  color: ${color.black.base};
   background-color: ${color.white};
   margin-top: ${size.normal[5]};
   font-weight: 500;

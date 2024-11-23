@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useGetCategories } from '@/src/hooks/query';
 import { tools } from '@/src/utils/tools';
 import { color, size } from '@/src/styles';
+import { ToggleSection } from '@/app/(cms)/_components';
 
 interface Props {
   children?: React.ReactNode;
@@ -31,7 +32,7 @@ export function CategoryList({ children, }: Props) {
   const { data: categories, loading, done, } = useGetCategories();
 
   return (
-    <>
+    <ToggleSection title='카테고리 리스트'>
       {loading && (
         <div>loading</div>
       )}
@@ -44,6 +45,6 @@ export function CategoryList({ children, }: Props) {
           ))}
         </List>
       )}
-    </>
+    </ToggleSection>
   );
 }

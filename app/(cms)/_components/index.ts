@@ -4,3 +4,5 @@ export { PageTitle } from './PageTitle';
 export { FormLongText } from './FormLongText';
 export { FormLabel } from './FormLabel';
 export { CmsForm } from './CmsForm';
+export { FormText } from './FormText';
+export { ToggleSection } from './ToggleSection';
