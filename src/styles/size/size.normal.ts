@@ -1,3 +1,6 @@
+import { css } from 'styled-components';
+import { size } from '.';
+
 export const normal = {
   0: '0px',
   0.5: '0.125rem',
@@ -47,5 +50,11 @@ export const normal = {
   },
   per(size: number) {
     return `${size}%`;
+  },
+  grid(gap: string, width: number, columns: number) {
+    return css`
+      --gap: ${gap};
+      flex-basis: calc(${width}% - ((var(--gap) * (${columns} - 1))) / ${columns});
+    `;
   },
 };

@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  swcMinify: true,
   distDir: 'build',
   reactStrictMode: false,
   compiler: {

@@ -3,3 +3,4 @@ export { setMeta } from './setMeta';
 export { cx } from './classnames';
 export { localStorageEffect } from './localstorageEffect';
 export { createResponse } from './createResponse';
+export { DB } from './db';

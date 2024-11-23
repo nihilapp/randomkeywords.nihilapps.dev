@@ -3,7 +3,7 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { CmsNav, CmsMain } from './_components';
-import { color, size } from '@/src/styles';
+import { color, media, size } from '@/src/styles';
 
 interface Props {
   children?: React.ReactNode;
@@ -13,6 +13,13 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${color.black[100]};
     color: ${color.black.base};
+    width: 100%;
+    padding: ${size.normal[5]};
+
+    ${media.momd`
+      max-width: 900px;
+      margin: 0 auto;
+    `}
   }
 `;
 

@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id          String        @id @default(cuid())
+  name        String        @unique
+  order       Int
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  SubCategory SubCategory[]
+
+  @@index([name])
+  @@index([order])
+  @@map("categories")
+}
+
+model SubCategory {
+  id         String    @id @default(cuid())
+  name       String    @unique
+  category   Category  @relation(fields: [categoryId], references: [id])
+  categoryId String
+  Keyword    Keyword[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@index([name])
+  @@map("sub_categories")
+}
+
+model Keyword {
+  id            String      @id @default(cuid())
+  keyword       String      @unique
+  subCategory   SubCategory @relation(fields: [subCategoryId], references: [id])
+  subCategoryId String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([keyword])
+  @@map("keywords")
+}

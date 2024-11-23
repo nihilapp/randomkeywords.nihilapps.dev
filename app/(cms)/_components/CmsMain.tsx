@@ -9,9 +9,10 @@ interface Props {
 }
 
 const Main = styled.main`
-  padding: 20px;
+  padding: ${size.normal[5]};
   background-color: ${color.white};
   margin-top: ${size.normal[5]};
+  font-weight: 500;
 `;
 
 export function CmsMain({ children, }: Props) {

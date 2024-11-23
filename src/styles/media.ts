@@ -1,25 +1,27 @@
-import { css } from 'styled-components';
+import {
+  css,
+  type CSSObject,
+  type Interpolation
+} from 'styled-components';
 
-export const breakpoints = {
-  mosm: '480px',
-  momd: '768px',
-  molg: '1024px',
+export type Breakpoints = 'mosm' | 'momd' | 'molg';
+
+export const breakpoints: Record<Breakpoints, string> = {
+  mosm: '@media (min-width: 480px)',
+  momd: '@media (min-width: 768px)',
+  molg: '@media (min-width: 1024px)',
 };
 
-export const media = {
-  mosm: (styles: TemplateStringsArray | string) => css`
-    @media (min-width: ${breakpoints.mosm}) {
-      ${styles};
-    }
-  `,
-  momd: (styles: TemplateStringsArray | string) => css`
-    @media (min-width: ${breakpoints.momd}) {
-      ${styles};
-    }
-  `,
-  molg: (styles: TemplateStringsArray | string) => css`
-    @media (min-width: ${breakpoints.molg}) {
-      ${styles};
-    }
-  `,
-};
+export const media = Object.entries(breakpoints).reduce((acc, [ key, value, ]) => {
+  return {
+    ...acc,
+    [key]: (
+      first: CSSObject | TemplateStringsArray,
+      ...interpolations: Interpolation<object>[]
+    ) => css`
+      ${value} {
+        ${css(first, ...interpolations)}
+      }
+    `,
+  };
+}, {}) as Record<Breakpoints, any>;
