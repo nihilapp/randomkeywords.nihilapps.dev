@@ -6,10 +6,7 @@ import { MainCategory } from './MainCategory';
 import { SubCategory } from './SubCategory';
 import { CategoryButton } from './CategoryButton';
 import { size } from '@/src/styles';
-
-interface Props {
-  children?: React.ReactNode;
-}
+import { TopNavi } from '@/app/(cms)/_components';
 
 const Buttons = styled.div`
   display: flex;
@@ -18,7 +15,7 @@ const Buttons = styled.div`
   margin-bottom: ${size.normal[5]};
 `;
 
-export function AddCategory({ children, }: Props) {
+export function AddCategory() {
   const [
     categoryType, setCategoryType,
   ] = useState<'main' | 'sub'>('main');
@@ -39,11 +36,21 @@ export function AddCategory({ children, }: Props) {
 
   return (
     <>
+      <TopNavi route={[ '홈', 'CMS', '카테고리 관리', ]} />
+
       <Buttons>
-        <CategoryButton $type='main' $categoryType={categoryType} onClick={onClickMainCategory}>
+        <CategoryButton
+          $type='main'
+          $categoryType={categoryType}
+          onClick={onClickMainCategory}
+        >
           메인 카테고리
         </CategoryButton>
-        <CategoryButton $type='sub' $categoryType={categoryType} onClick={onClickSubCategory}>
+        <CategoryButton
+          $type='sub'
+          $categoryType={categoryType}
+          onClick={onClickSubCategory}
+        >
           서브 카테고리
         </CategoryButton>
       </Buttons>

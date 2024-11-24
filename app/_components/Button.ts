@@ -5,6 +5,7 @@ import { color, size } from '@/src/styles';
 
 interface ButtonProps {
   $color?: ('black' | 'white');
+  $top?: boolean;
 }
 
 const bgColorMap = {
@@ -44,6 +45,12 @@ export const Button = styled.button<ButtonProps>`
   flex: 1;
   flex-shrink: 0;
   transition: all 0.2s ease-in-out;
+  font-size: ${size.text.lg};
+  ${({ $top, }) => (
+    $top && `
+      margin-top: ${size.normal[5]};
+    `
+  )}
 
   &:hover {
     background-color: ${({ $color, }) => (

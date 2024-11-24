@@ -1,0 +1,1 @@
+export { SubCategoryDetail } from './SubCategoryDetail';

@@ -4,7 +4,12 @@ import { createResponse, DB } from '@/src/utils';
 import { CreateSubCategoryDto } from '@/src/entities';
 
 export async function GET() {
-  const subCategories = await DB.subCategories().findMany();
+  const subCategories = await DB.subCategories()
+    .findMany({
+      include: {
+        Keyword: true,
+      },
+    });
 
   return createResponse<SubCategory[]>({
     type: 'success',
@@ -17,9 +22,10 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   const createSubCategoryDto: CreateSubCategoryDto = await request.json();
 
-  const subCategory = await DB.subCategories().create({
-    data: createSubCategoryDto,
-  });
+  const subCategory = await DB.subCategories()
+    .create({
+      data: createSubCategoryDto,
+    });
 
   return createResponse<SubCategory>({
     type: 'success',

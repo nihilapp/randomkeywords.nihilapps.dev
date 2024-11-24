@@ -1,26 +1,26 @@
 import { NextRequest } from 'next/server';
 import { createResponse, DB } from '@/src/utils';
-import { ExtendedCategory } from '@/src/entities';
+import { ExtendedSubCategory } from '@/src/entities';
 
 interface Params {
   params: Promise<{ id: string; }>;
 }
 
-export async function GET(req: NextRequest, { params, }: Params) {
+export async function GET(request: NextRequest, { params, }: Params) {
   const { id, } = await params;
 
-  const category = await DB.categories().findFirst({
+  const subCategory = await DB.subCategories().findFirst({
     where: {
       id,
     },
     include: {
-      SubCategory: true,
+      Keyword: true,
     },
   });
 
-  return createResponse<ExtendedCategory>({
+  return createResponse<ExtendedSubCategory>({
     type: 'success',
-    resData: category,
+    resData: subCategory,
     message: 'ok',
     status: 'Ok',
   });
@@ -29,7 +29,7 @@ export async function GET(req: NextRequest, { params, }: Params) {
 export async function DELETE(req: NextRequest, { params, }: Params) {
   const { id, } = await params;
 
-  await DB.categories().delete({
+  await DB.subCategories().delete({
     where: {
       id,
     },

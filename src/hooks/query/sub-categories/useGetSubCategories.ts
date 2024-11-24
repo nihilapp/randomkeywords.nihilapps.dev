@@ -20,7 +20,7 @@ export function useGetSubCategories() {
   const done = useDone(loading, isSuccess);
 
   return {
-    data,
+    subCategories: data,
     loading,
     done,
     ...query,

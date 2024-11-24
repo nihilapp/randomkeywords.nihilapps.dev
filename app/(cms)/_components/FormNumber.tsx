@@ -13,14 +13,14 @@ interface Props {
   onChange: any;
 }
 
-export function FormText({
+export function FormNumber({
   label, name, id, value, onChange,
 }: Props) {
   return (
     <FormLabel htmlFor={id}>
       <LabelString>{label}</LabelString>
       <Input
-        type='text'
+        type='number'
         id={id}
         name={name}
         value={value}

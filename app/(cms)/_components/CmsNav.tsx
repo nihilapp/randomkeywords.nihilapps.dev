@@ -52,10 +52,10 @@ export function CmsNav({ children, }: Props) {
     <Nav>
       <ul>
         <li>
-          <Link href='/cms/add_category'>카테고리 관리</Link>
+          <Link href='/cms/manage_category'>카테고리 관리</Link>
         </li>
         <li>
-          <Link href='/cms/add_keyword'>키워드 관리</Link>
+          <Link href='/cms/manage_keyword'>키워드 관리</Link>
         </li>
         <li>
           <Link href='/cms/text_convert'>텍스트 컨버터</Link>

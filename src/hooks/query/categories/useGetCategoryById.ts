@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { CategoriesQuery } from '@/src/features/query';
 import { queryKeys } from '@/src/data';
+import { CategoriesQuery } from '@/src/features/query';
 import { useLoading } from '../../useLoading';
 import { useDone } from '../../useDone';
 
-export function useGetCategories() {
+export function useGetCategoryById(id: string) {
   const {
     data,
     isLoading,
@@ -12,15 +12,15 @@ export function useGetCategories() {
     isSuccess,
     ...query
   } = useQuery({
-    queryKey: queryKeys.categories.getAll,
-    queryFn: CategoriesQuery.getCategories,
+    queryKey: queryKeys.categories.getById(id),
+    queryFn: () => CategoriesQuery.getCategory(id),
   });
 
   const loading = useLoading(isLoading, isFetching);
   const done = useDone(loading, isSuccess);
 
   return {
-    categories: data,
+    category: data,
     loading,
     done,
     ...query,

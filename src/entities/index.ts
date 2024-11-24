@@ -7,11 +7,13 @@ export type {
 } from './common/common.types';
 
 export type {
-  CreateCategoryDto
+  CreateCategoryDto,
+  ExtendedCategory
 } from './categories/categories.types';
 
 export type {
-  CreateSubCategoryDto
+  CreateSubCategoryDto,
+  ExtendedSubCategory
 } from './sub_categories/sub-categories.types';
 
 export type {

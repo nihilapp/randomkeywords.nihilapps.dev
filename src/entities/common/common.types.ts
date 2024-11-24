@@ -1,14 +1,16 @@
-import { HttpStatusCode } from 'axios';
+import { AxiosError, HttpStatusCode } from 'axios';
 
 export type ApiResponse<T> = {
   resData: T;
   message: string;
 }
 
-export type ApiError = {
+type ResponseError = {
   resData: null;
   message: string;
 }
+
+export type ApiError = AxiosError<ResponseError>;
 
 export interface CreateResponse<T> {
   type: 'success' | 'error'
