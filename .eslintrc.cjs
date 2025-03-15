@@ -26,7 +26,7 @@ module.exports = {
   plugins: [ '@typescript-eslint', 'import', 'react', 'react-hooks', 'html', ],
   rules: {
     // 일반 규칙
-    indent: [ 'warn', 2, ],
+    indent: [ 'warn', 2, { SwitchCase: 1, }, ],
     'no-console': 'off',
     'no-unused-vars': 'off',
     'no-unexpected-multiline': 'off',
@@ -93,6 +93,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-empty-object-type': 'off',
 
     // 리액트 규칙
     'react/jsx-curly-spacing': [ 'error', { when: 'never', children: true, }, ],

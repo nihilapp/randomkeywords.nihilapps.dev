@@ -4,10 +4,9 @@ import {
 
 export default [
   // home
-  layout('layouts/common/CommonLayout.tsx', [
-    index('routes/home.tsx'),
+  layout('layouts/CommonLayout.tsx', [
+    index('./pages/common/routes/home.tsx'),
   ]),
 
   // api
-  ...prefix('api', [ index('routes/api/index.tsx'), ]),
 ] satisfies RouteConfig;
