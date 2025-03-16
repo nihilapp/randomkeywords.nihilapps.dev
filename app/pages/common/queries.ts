@@ -31,6 +31,14 @@ export async function createTodo(content: string) {
 export async function deleteAllTodos() {
   const todos = await getTodos();
 
+  if (todos.length === 0) {
+    return {
+      deletedCount: 0,
+    };
+  }
+
+  const copy = [ ...todos, ];
+
   const { error, } = await supabase
     .from('todos')
     .delete()
@@ -41,6 +49,6 @@ export async function deleteAllTodos() {
   }
 
   return {
-    deletedCount: todos.length,
+    deletedCount: copy.length,
   };
 }

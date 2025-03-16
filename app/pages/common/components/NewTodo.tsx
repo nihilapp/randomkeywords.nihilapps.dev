@@ -1,16 +1,17 @@
 // import { Outlet } from 'react-router';
 
 import React, { useEffect, useRef } from 'react';
-import { Form, useFetcher, useNavigation } from 'react-router';
+import { Form, useNavigation, type FetcherWithComponents } from 'react-router';
 
 interface Props {
-  // children?: React.ReactNode;
+  deleteFetcher: FetcherWithComponents<{
+    deletedCount: number;
+  }>;
 }
 
-export function NewTodo({ }: Props) {
+export function NewTodo({ deleteFetcher, }: Props) {
   const { state, } = useNavigation();
   const inputRef = useRef<HTMLInputElement>(null);
-  const deleteFetcher = useFetcher();
 
   useEffect(() => {
     if (state === 'idle') {

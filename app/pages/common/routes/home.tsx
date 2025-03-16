@@ -1,4 +1,4 @@
-import { useNavigation } from 'react-router';
+import { useFetcher, useNavigation } from 'react-router';
 import { useEffect } from 'react';
 import { NewTodo, TodoList } from '../components';
 import type { Route } from './+types/home';
@@ -22,9 +22,7 @@ export const action = (
         return { todo, };
       }
       case 'DELETE': {
-        console.log('delete');
         const { deletedCount, } = await deleteAllTodos();
-        console.log('deletedCount', deletedCount);
         return { deletedCount, };
       }
       default:
@@ -43,20 +41,19 @@ export const meta = ({}: Route.MetaArgs) => {
 };
 
 export default function HomePage({
-  loaderData, actionData,
+  loaderData,
 }: Route.ComponentProps) {
-  const { state, formMethod, } = useNavigation();
   const { todos, } = loaderData;
+  const deleteFetcher = useFetcher<{ deletedCount: number; }>();
 
   useEffect(() => {
-    if (state === 'idle' && formMethod === 'DELETE') {
-      console.log('count', actionData?.deletedCount);
-    }
-  }, [ state, formMethod, actionData, ]);
+    console.log(deleteFetcher.state);
+    console.log(deleteFetcher.data);
+  }, [ deleteFetcher, ]);
 
   return (
     <>
-      <NewTodo />
+      <NewTodo deleteFetcher={deleteFetcher} />
       <TodoList todos={todos} />
     </>
   );
