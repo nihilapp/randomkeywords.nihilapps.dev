@@ -1,4 +1,4 @@
-import type { Route } from './+types/home';
+import type { Route } from './+types/CategoryDetail';
 import { setMeta } from '~/utils';
 
 export const loader = (
@@ -13,16 +13,18 @@ export const action = (
   }
 );
 
-export const meta = ({}: Route.MetaArgs) => {
+export const meta = ({ params, }: Route.MetaArgs) => {
+  const { categoryId, } = params;
+
   return setMeta({
     data: {
-      title: `홈`,
-      url: `/`,
+      title: `카테고리`,
+      url: `/categories/${categoryId}`,
     },
   });
 };
 
-export default function HomePage({}: Route.ComponentProps) {
+export default function CategoryDetailPage({}: Route.ComponentProps) {
   return (
     <div>content</div>
   );
