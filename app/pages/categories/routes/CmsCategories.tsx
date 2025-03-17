@@ -1,4 +1,4 @@
-import type { Route } from './+types/Home';
+import type { Route } from './+types/CmsCategories';
 import { setMeta } from '~/utils';
 
 export const loader = (
@@ -16,14 +16,14 @@ export const action = (
 export const meta = ({}: Route.MetaArgs) => {
   return setMeta({
     data: {
-      title: `홈`,
-      url: `/`,
+      title: `카테고리 관리`,
+      url: `/cms/categories`,
     },
   });
 };
 
-export default function HomePage({}: Route.ComponentProps) {
+export default function CmsCategoriesPage({}: Route.ComponentProps) {
   return (
-    <div>content</div>
+    <div>cms categories</div>
   );
 }

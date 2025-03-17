@@ -9,9 +9,11 @@
 - 라우트 타입은 다음과 같이 임포트해야 한다: 'import type { Route } from "./+types/..."'
 - 'loader' 함수는 'Route.LoaderArgs' 타입 파라미터를 받는다.
 - 'action' 함수는 'Route.ActionArgs' 타입 파라미터를 받는다.
-- 'meta' 함수는 'Route.MetaFunction' 타입 파라미터를 받는다.
+- 'meta' 함수는 'Route.MetaArgs' 타입 파라미터를 받는다.
 - 'meta'는 'MetaFunction' 타입을 반환한다.
-- 'loader' 나 'action' 에서 더 이상 'Response.json' 을 사용하지 않는다. 그저 일반 객체를 반환하면 된다.
+- 'loader' 나 'action' 에서 더 이상 'Response.json()' 을 사용하지 않는다. 그저 일반 객체를 반환하면 된다.
+- 페이지가 아닌 컴포넌트를 만들 때에는 무조건 export 만을 해야하며 components 폴더의 index.ts 에서 export 해야한다.
+- index.ts 에서 export를 할 때에는 *로 전체를 가져오는 것이 아닌, 구조분해로 각각의 컴포넌트를 가져와야 한다.
 
 [CSS 스타일에 대해]
 - 기본적으로 스타일의 경우 'tailwindcss'를 사용하며 'tailwindcss' 버전은 4이다.

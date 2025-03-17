@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router';
 import { cva, type VariantProps } from 'class-variance-authority';
 import type { HTMLAttributes } from 'react';
-import { CommonSide } from './CommonSide';
+import { CmsSide } from './CmsSide';
 import { cn } from '~/utils';
 
-const commonLayoutCva = cva(
+const cmsLayoutCva = cva(
   [
     'flex flex-row font-500 text-md text-black-base',
   ],
@@ -15,19 +15,19 @@ const commonLayoutCva = cva(
   }
 );
 
-interface CommonLayoutProps extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof commonLayoutCva> {}
+interface CmsLayoutProps extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof cmsLayoutCva> {}
 
-export function CommonLayout({
+export function CmsLayout({
   className,
   ...props
-}: CommonLayoutProps) {
+}: CmsLayoutProps) {
   return (
     <>
       <div
-        className={cn(commonLayoutCva(), className)}
+        className={cn(cmsLayoutCva(), className)}
         {...props}
       >
-        <CommonSide />
+        <CmsSide />
         <main className='p-2 flex-1 shrink-0 min-h-0'>
           <Outlet />
         </main>
