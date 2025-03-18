@@ -1,4 +1,3 @@
-import { Outlet } from 'react-router';
 import { cva, type VariantProps } from 'class-variance-authority';
 import type { HTMLAttributes } from 'react';
 import { CmsSide } from './CmsSide';
@@ -19,19 +18,18 @@ interface CmsLayoutProps extends HTMLAttributes<HTMLDivElement>, VariantProps<ty
 
 export function CmsLayout({
   className,
+  children,
   ...props
 }: CmsLayoutProps) {
   return (
-    <>
-      <div
-        className={cn(cmsLayoutCva(), className)}
-        {...props}
-      >
-        <CmsSide />
-        <main className='p-2 flex-1 shrink-0 min-h-0'>
-          <Outlet />
-        </main>
-      </div>
-    </>
+    <div
+      className={cn(cmsLayoutCva(), className)}
+      {...props}
+    >
+      <CmsSide />
+      <main className='p-2 flex-1 shrink-0 min-h-0'>
+        {children}
+      </main>
+    </div>
   );
 }

@@ -3,6 +3,7 @@
 import { Link } from 'react-router';
 import { cva, type VariantProps } from 'class-variance-authority';
 import type { HTMLAttributes } from 'react';
+import { Icon } from '@iconify/react';
 import { cn } from '~/utils';
 
 const navs = [
@@ -44,7 +45,12 @@ export function CommonSide({
         ))}
       </ul>
 
-      <footer>footer</footer>
+      <footer>
+        <Link to='/cms'>
+          <Icon icon='mdi:cog' />
+          <span>CMS로 가기</span>
+        </Link>
+      </footer>
     </aside>
   );
 }

@@ -1,3 +1,4 @@
+import { CommonLayout } from '~/layouts';
 import type { Route } from './+types/CategoryDetail';
 import { setMeta } from '~/utils';
 
@@ -26,6 +27,8 @@ export const meta = ({ params, }: Route.MetaArgs) => {
 
 export default function CategoryDetailPage({}: Route.ComponentProps) {
   return (
-    <div>content</div>
+    <CommonLayout>
+      <div>content</div>
+    </CommonLayout>
   );
 }

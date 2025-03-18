@@ -1,23 +1,28 @@
 import {
-  type RouteConfig, index, layout, prefix,
+  type RouteConfig, index, prefix,
   route
 } from '@react-router/dev/routes';
 
 export default [
-  // home
-  layout('layouts/CommonLayout.tsx', [
-    index('./pages/common/routes/Home.tsx'),
-    route('/categories', './pages/categories/routes/CategoryDetail.tsx'),
-    // /categories
-    // /sub-categories/:subCategoryId/keywords
-  ]),
+  index('./pages/common/routes/Home.tsx'),
+  route(
+    '/categories',
+    './pages/categories/routes/CategoryDetail.tsx'
+  ),
 
-  layout('layouts/CmsLayout.tsx', [
-    ...prefix('/cms', [
-      index('./pages/common/routes/CmsHome.tsx'),
-      route('/categories', './pages/categories/routes/CmsCategories.tsx'),
-    ]),
+  ...prefix('/cms/', [
+    index('./pages/common/routes/CmsHome.tsx'),
+    route(
+      '/categories',
+      './pages/categories/routes/CmsCategories.tsx'
+    ),
+    route(
+      '/sub-categories',
+      './pages/sub-categories/routes/CmsSubCategories.tsx'
+    ),
+    route(
+      '/keywords',
+      './pages/keywords/routes/CmsKeywords.tsx'
+    ),
   ]),
-
-  // api
 ] satisfies RouteConfig;

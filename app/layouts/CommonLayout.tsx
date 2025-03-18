@@ -1,4 +1,3 @@
-import { Outlet } from 'react-router';
 import { cva, type VariantProps } from 'class-variance-authority';
 import type { HTMLAttributes } from 'react';
 import { CommonSide } from './CommonSide';
@@ -19,19 +18,18 @@ interface CommonLayoutProps extends HTMLAttributes<HTMLDivElement>, VariantProps
 
 export function CommonLayout({
   className,
+  children,
   ...props
 }: CommonLayoutProps) {
   return (
-    <>
-      <div
-        className={cn(commonLayoutCva(), className)}
-        {...props}
-      >
-        <CommonSide />
-        <main className='p-2 flex-1 shrink-0 min-h-0'>
-          <Outlet />
-        </main>
-      </div>
-    </>
+    <div
+      className={cn(commonLayoutCva(), className)}
+      {...props}
+    >
+      <CommonSide />
+      <main className='p-2 flex-1 shrink-0 min-h-0'>
+        {children}
+      </main>
+    </div>
   );
 }

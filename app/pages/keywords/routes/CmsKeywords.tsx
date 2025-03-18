@@ -1,5 +1,5 @@
-import { CommonLayout } from '~/layouts';
-import type { Route } from './+types/Home';
+import { CmsLayout } from '~/layouts';
+import type { Route } from './+types/CmsKeywords';
 import { setMeta } from '~/utils';
 
 export const loader = (
@@ -17,16 +17,16 @@ export const action = (
 export const meta = ({}: Route.MetaArgs) => {
   return setMeta({
     data: {
-      title: `홈`,
-      url: `/`,
+      title: `키워드 관리`,
+      url: `/cms/keywords`,
     },
   });
 };
 
-export default function HomePage({}: Route.ComponentProps) {
+export default function CmsKeywordsPage({}: Route.ComponentProps) {
   return (
-    <CommonLayout>
+    <CmsLayout>
       <div>content</div>
-    </CommonLayout>
+    </CmsLayout>
   );
 }

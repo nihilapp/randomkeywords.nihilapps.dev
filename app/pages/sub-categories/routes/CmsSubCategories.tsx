@@ -1,5 +1,5 @@
-import { CommonLayout } from '~/layouts';
-import type { Route } from './+types/Home';
+import { CmsLayout } from '~/layouts';
+import type { Route } from './+types/CmsSubCategories';
 import { setMeta } from '~/utils';
 
 export const loader = (
@@ -17,16 +17,16 @@ export const action = (
 export const meta = ({}: Route.MetaArgs) => {
   return setMeta({
     data: {
-      title: `홈`,
-      url: `/`,
+      title: `서브 카테고리 관리`,
+      url: `/cms/sub-categories`,
     },
   });
 };
 
-export default function HomePage({}: Route.ComponentProps) {
+export default function CmsSubCategoriesPage({}: Route.ComponentProps) {
   return (
-    <CommonLayout>
+    <CmsLayout>
       <div>content</div>
-    </CommonLayout>
+    </CmsLayout>
   );
 }
