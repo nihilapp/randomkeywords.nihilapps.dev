@@ -3,8 +3,9 @@
 import { Link } from 'react-router';
 import { cva, type VariantProps } from 'class-variance-authority';
 import type { HTMLAttributes } from 'react';
-import { Icon } from '@iconify/react';
 import { cn } from '~/utils';
+import { SideLogo } from './SideLogo';
+import { FooterButton } from '~/layouts/FooterButton';
 
 const navs = [
   {
@@ -23,7 +24,7 @@ const navs = [
 
 const cmsSideCva = cva(
   [
-    'p-2 shrink-0',
+    'p-5 shrink-0 bg-black-base text-white w-[350px] dvh-100 overflow-y-auto flex flex-col gap-5',
   ],
   {
     variants: {},
@@ -43,9 +44,14 @@ export function CmsSide({
       className={cn(cmsSideCva(), className)}
       {...props}
     >
-      <header>header</header>
+      <header>
+        <SideLogo
+          text='랜덤키워드 CMS'
+          isCms
+        />
+      </header>
 
-      <nav>
+      <nav className='flex-1 shrink-0'>
         <ul>
           {navs.map((nav) => (
             <li key={nav.to}>
@@ -55,11 +61,10 @@ export function CmsSide({
         </ul>
       </nav>
 
-      <footer>
-        <Link to='/'>
-          <Icon icon='mdi:home' />
-          <span>홈으로 가기</span>
-        </Link>
+      <footer className='mt-auto'>
+        <FooterButton
+          isCms
+        />
       </footer>
     </aside>
   );

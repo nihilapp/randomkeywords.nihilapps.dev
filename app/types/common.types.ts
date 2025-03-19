@@ -19,10 +19,12 @@ export interface SiteConfig {
   description: string;
   url: string;
   type: string;
-  image: {
+  cover: {
     link: string;
     alt: string;
   };
+  logo: string;
+  darkLogo: string;
   keywords: string;
   author: {
     name: string;

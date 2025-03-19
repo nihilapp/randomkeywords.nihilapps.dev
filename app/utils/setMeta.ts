@@ -11,7 +11,7 @@ export const setMeta = (options: { data: SiteMeta }) => {
   const siteUrl = `${siteConfig.url}${metaData.url}`;
   const siteImageLink = metaData.imageLink
     ? `${siteConfig.url}${metaData.imageLink}`
-    : `${siteConfig.url}${siteConfig.image.link}`;
+    : `${siteConfig.url}${siteConfig.cover.link}`;
 
   return [
     { title: `${metaData.title} - ${siteConfig.title}`, },

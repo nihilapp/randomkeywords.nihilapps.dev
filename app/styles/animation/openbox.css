@@ -1,0 +1,16 @@
+@layer components {
+  /* 열고 닫히는 컨테이너 */
+  .open-animation-box {
+    @apply relative overflow-hidden transition-[height] duration-200 ease-in-out;
+  }
+
+  /* 열리는 애니메이션 */
+  .animation-open {
+    @apply relative w-full translate-y-0 transition-all duration-200 ease-in-out;
+  }
+
+  /* 닫히는 애니메이션 */
+  .animation-close {
+    @apply relative w-full -translate-y-full transition-all duration-200 ease-in-out;
+  }
+}

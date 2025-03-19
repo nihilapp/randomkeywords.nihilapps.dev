@@ -3,8 +3,9 @@
 import { Link } from 'react-router';
 import { cva, type VariantProps } from 'class-variance-authority';
 import type { HTMLAttributes } from 'react';
-import { Icon } from '@iconify/react';
 import { cn } from '~/utils';
+import { SideLogo } from './SideLogo';
+import { FooterButton } from '~/layouts/FooterButton';
 
 const navs = [
   {
@@ -35,7 +36,11 @@ export function CommonSide({
       className={cn(commonSideCva(), className)}
       {...props}
     >
-      <header>header</header>
+      <header>
+        <SideLogo
+          text='랜덤키워드'
+        />
+      </header>
 
       <ul>
         {navs.map((nav) => (
@@ -46,10 +51,7 @@ export function CommonSide({
       </ul>
 
       <footer>
-        <Link to='/cms'>
-          <Icon icon='mdi:cog' />
-          <span>CMS로 가기</span>
-        </Link>
+        <FooterButton />
       </footer>
     </aside>
   );

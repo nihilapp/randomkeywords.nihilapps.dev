@@ -1,3 +1,4 @@
+import { MdFolder, MdLocalOffer, MdOutlineFolder } from 'react-icons/md';
 import { getCategories } from '~/pages/categories/queries';
 import type { Route } from './+types/CmsHome';
 import { setMeta } from '~/utils';
@@ -42,19 +43,19 @@ export default function CmsHomePage({
     <CmsLayout>
       <div className='flex flex-col mo-md:flex-row gap-2'>
         <StatCard
-          icon='mdi:folder'
+          icon={MdFolder}
           title='카테고리'
           count={loaderData.categories.length}
           variant='blue'
         />
         <StatCard
-          icon='mdi:folder-outline'
+          icon={MdOutlineFolder}
           title='서브카테고리'
           count={loaderData.subCategories.length}
           variant='red'
         />
         <StatCard
-          icon='mdi:tag'
+          icon={MdLocalOffer}
           title='키워드'
           count={loaderData.keywords.length}
           variant='green'

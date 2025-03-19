@@ -12,10 +12,12 @@ export const siteConfig: SiteConfig = {
   url: process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
     : '',
-  image: {
-    link: '/opengraph-image.png',
+  cover: {
+    link: '/images/opengraph-image.png',
     alt: 'site image',
   },
+  logo: '/images/nihil-logo.png',
+  darkLogo: '/images/nihil-logo-w.png',
   version: 'v0.0.0',
   googleVerfi: '',
   googleAdSrc: '',

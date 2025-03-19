@@ -1,6 +1,6 @@
-import { Icon } from '@iconify/react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import type { HTMLAttributes } from 'react';
+import type { IconType } from 'react-icons/lib';
 import { cn } from '~/utils';
 
 const statCardCva = cva(
@@ -24,13 +24,13 @@ const statCardCva = cva(
 );
 
 interface StatCardProps extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof statCardCva> {
-  icon: string;
+  icon: IconType;
   title: string;
   count: number;
 }
 
 export function StatCard({
-  icon,
+  icon: Icon,
   title,
   count,
   variant,
@@ -43,7 +43,7 @@ export function StatCard({
       {...props}
     >
       <div className='flex flex-row gap-1 items-center'>
-        <Icon icon={icon} />
+        <Icon />
         <span>{title}</span>
       </div>
       <div>{count}개</div>

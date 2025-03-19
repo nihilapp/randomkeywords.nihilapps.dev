@@ -3,6 +3,7 @@ import type { Route } from './+types/CmsCategories';
 import { setMeta } from '~/utils';
 import { getCategories } from '../queries';
 import { CategoryList } from '../components';
+import { ExpandBlock } from '~/pages/common/components/ExpandBlock';
 
 export const loader = (
   async ({ request, }: Route.LoaderArgs) => {
@@ -34,9 +35,22 @@ export default function CmsCategoriesPage({
 }: Route.ComponentProps) {
   return (
     <CmsLayout>
-      <CategoryList
-        categories={loaderData.categories}
-      />
+      <ExpandBlock
+        title='카테고리 목록'
+      >
+        <CategoryList
+          categories={loaderData.categories}
+        />
+      </ExpandBlock>
+
+      <ExpandBlock
+        title='닫힌 블록'
+        defaultOpen={false}
+      >
+        <div>
+          <input type='text' />
+        </div>
+      </ExpandBlock>
     </CmsLayout>
   );
 }
