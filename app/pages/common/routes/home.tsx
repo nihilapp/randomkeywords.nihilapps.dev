@@ -16,10 +16,8 @@ export const action = (
 
 export const meta = ({}: Route.MetaArgs) => {
   return setMeta({
-    data: {
-      title: `홈`,
-      url: `/`,
-    },
+    title: `홈`,
+    url: `/`,
   });
 };
 

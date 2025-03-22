@@ -29,10 +29,8 @@ export const action = (
 
 export const meta = ({}: Route.MetaArgs) => {
   return setMeta({
-    data: {
-      title: `CMS 홈`,
-      url: `/cms`,
-    },
+    title: `CMS 홈`,
+    url: `/cms`,
   });
 };
 

@@ -16,10 +16,8 @@ export const action = (
 
 export const meta = ({}: Route.MetaArgs) => {
   return setMeta({
-    data: {
-      title: `키워드 관리`,
-      url: `/cms/keywords`,
-    },
+    title: `키워드 관리`,
+    url: `/cms/keywords`,
   });
 };
 

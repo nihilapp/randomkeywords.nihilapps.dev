@@ -18,10 +18,8 @@ export const meta = ({ params, }: Route.MetaArgs) => {
   const { categoryId, } = params;
 
   return setMeta({
-    data: {
-      title: `카테고리`,
-      url: `/categories/${categoryId}`,
-    },
+    title: `카테고리`,
+    url: `/categories/${categoryId}`,
   });
 };
 

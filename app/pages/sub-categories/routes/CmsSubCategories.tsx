@@ -16,10 +16,8 @@ export const action = (
 
 export const meta = ({}: Route.MetaArgs) => {
   return setMeta({
-    data: {
-      title: `서브 카테고리 관리`,
-      url: `/cms/sub-categories`,
-    },
+    title: `서브 카테고리 관리`,
+    url: `/cms/sub-categories`,
   });
 };
 

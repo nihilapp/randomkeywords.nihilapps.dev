@@ -21,7 +21,7 @@ const expandBlockCva = cva(
 
 const titleCva = cva(
   [
-    'p-5 flex items-center justify-between rounded-t-2 cursor-pointer select-none relative z-10 border border-black-200 bg-white font-900 text-lg',
+    'p-2 flex items-center justify-between rounded-t-2 cursor-pointer select-none relative z-10 border border-black-200 bg-white font-900 text-lg hover:bg-black-base hover:text-white transition-colors duration-200 ease-in-out',
   ],
   {
     variants: {
@@ -51,9 +51,15 @@ export function ExpandBlock({
   ...props
 }: ExpandBlockProps) {
   const [ isOpen, setIsOpen, ] = useState(defaultOpen);
-  const { contentRef, heightStyle, } = useExpandAnimation({ isOpen, defaultOpen, });
 
-  const onClick = () => {
+  // children을 의존성 배열에 추가하여 콘텐츠 변경 감지
+  const { contentRef, heightStyle, } = useExpandAnimation({
+    isOpen,
+    defaultOpen,
+    dependencies: [ children, ],
+  });
+
+  const onClickTitle = () => {
     setIsOpen(!isOpen);
   };
 
@@ -69,7 +75,7 @@ export function ExpandBlock({
         className={cn(
           titleCva({ isOpen, })
         )}
-        onClick={onClick}
+        onClick={onClickTitle}
       >
         <span>{title}</span>
         <MdKeyboardArrowUp

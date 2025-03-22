@@ -3,6 +3,7 @@
 import { Link } from 'react-router';
 import { cva, type VariantProps } from 'class-variance-authority';
 import type { HTMLAttributes } from 'react';
+import { MdFolder, MdLocalOffer, MdOutlineFolder } from 'react-icons/md';
 import { cn } from '~/utils';
 import { SideLogo } from './SideLogo';
 import { FooterButton } from '~/layouts/FooterButton';
@@ -11,14 +12,17 @@ const navs = [
   {
     label: '카테고리 관리',
     to: '/cms/categories',
+    icon: <MdFolder />,
   },
   {
     label: '서브 카테고리 관리',
     to: '/cms/sub-categories',
+    icon: <MdOutlineFolder />,
   },
   {
     label: '키워드 관리',
     to: '/cms/keywords',
+    icon: <MdLocalOffer />,
   },
 ];
 
@@ -52,16 +56,19 @@ export function CmsSide({
       </header>
 
       <nav className='flex-1 shrink-0'>
-        <ul>
+        <ul className='flex flex-col gap-2'>
           {navs.map((nav) => (
             <li key={nav.to}>
-              <Link to={nav.to}>{nav.label}</Link>
+              <Link to={nav.to} className='flex flex-row gap-2 items-center p-2 px-3 rounded-2 bg-black-800 border border-black-900 hover:bg-white hover:border-white hover:text-black-base transition-colors duration-200 ease-in-out'>
+                {nav.icon}
+                {nav.label}
+              </Link>
             </li>
           ))}
         </ul>
       </nav>
 
-      <footer className='mt-auto'>
+      <footer>
         <FooterButton
           isCms
         />

@@ -22,7 +22,7 @@ export async function getCategory(id: string) {
       `)
     .eq('id', id);
 
-  return category;
+  return category.data[0];
 }
 
 export const createCategory = (

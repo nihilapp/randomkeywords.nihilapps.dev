@@ -6,22 +6,26 @@ import {
 export default [
   index('./pages/common/routes/Home.tsx'),
   route(
-    '/categories',
+    'categories',
     './pages/categories/routes/CategoryDetail.tsx'
   ),
 
-  ...prefix('/cms/', [
+  ...prefix('cms', [
     index('./pages/common/routes/CmsHome.tsx'),
     route(
-      '/categories',
+      'categories',
       './pages/categories/routes/CmsCategories.tsx'
     ),
     route(
-      '/sub-categories',
+      'categories/:categoryId',
+      './pages/categories/routes/CmsCategoryDetail.tsx'
+    ),
+    route(
+      'sub-categories',
       './pages/sub-categories/routes/CmsSubCategories.tsx'
     ),
     route(
-      '/keywords',
+      'keywords',
       './pages/keywords/routes/CmsKeywords.tsx'
     ),
   ]),
