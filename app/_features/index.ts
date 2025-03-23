@@ -1,1 +1,1 @@
-export { TodosQuery } from './query/todos.query';
+export { CategoriesQuery } from './query/categories.query';

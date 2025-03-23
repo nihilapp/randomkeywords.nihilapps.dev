@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { ApiResponse } from '@/_types';
 import { siteConfig } from '../_config';
 
 export class Api {
@@ -21,7 +20,7 @@ export class Api {
     restApi: string,
     config?: AxiosRequestConfig
   ) {
-    return this.createInstance().get<ApiResponse<T>>(
+    return this.createInstance().get<T>(
       restApi,
       config
     );
@@ -32,7 +31,7 @@ export class Api {
     data: P,
     config?: AxiosRequestConfig
   ) {
-    return this.createInstance().post<T, AxiosResponse<ApiResponse<T>, P>, P>(
+    return this.createInstance().post<T, AxiosResponse<T, P>, P>(
       restApi,
       data,
       config
@@ -44,7 +43,7 @@ export class Api {
     data: P,
     config?: AxiosRequestConfig
   ) {
-    return this.createInstance().post<T, AxiosResponse<ApiResponse<T>, P>, P>(
+    return this.createInstance().post<T, AxiosResponse<T, P>, P>(
       restApi,
       data,
       {
@@ -61,7 +60,7 @@ export class Api {
     data: P,
     config?: AxiosRequestConfig
   ) {
-    return this.createInstance().patch<T, AxiosResponse<ApiResponse<T>, P>, P>(
+    return this.createInstance().patch<T, AxiosResponse<T, P>, P>(
       restApi,
       data,
       config
@@ -73,7 +72,7 @@ export class Api {
     data: P,
     config?: AxiosRequestConfig
   ) {
-    return this.createInstance().put<T, AxiosResponse<ApiResponse<T>, P>, P>(
+    return this.createInstance().put<T, AxiosResponse<T, P>, P>(
       restApi,
       data,
       config
@@ -84,7 +83,7 @@ export class Api {
     restApi: string,
     config?: AxiosRequestConfig
   ) {
-    return this.createInstance().delete<ApiResponse<T>>(
+    return this.createInstance().delete<T>(
       restApi,
       config
     );

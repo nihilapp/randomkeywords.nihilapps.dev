@@ -1,11 +1,11 @@
 {
-  "id": "249f05c5-ba2d-475c-bbc2-eb144b0055a9",
+  "id": "2493ab67-e00e-43b4-859a-f5b5779c7cdf",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.todos": {
-      "name": "todos",
+    "public.categories": {
+      "name": "categories",
       "schema": "",
       "columns": {
         "id": {
@@ -15,19 +15,39 @@
           "notNull": true,
           "default": "gen_random_uuid()"
         },
-        "content": {
-          "name": "content",
+        "name": {
+          "name": "name",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "status": {
-          "name": "status",
-          "type": "todo_status",
-          "typeSchema": "public",
+        "order": {
+          "name": "order",
+          "type": "bigint",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'waiting'"
+          "notNull": false,
+          "default": 0
+        },
+        "is_prod_hidden": {
+          "name": "is_prod_hidden",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
         }
       },
       "indexes": {},

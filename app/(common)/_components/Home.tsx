@@ -3,7 +3,7 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
 import { cn } from '@/_libs';
-import { useGetTodos } from '@/_hooks/query';
+import { useGetCategories } from '@/_hooks/query/categories';
 import { LoadingCircle } from '@/(common)/_components/LoadingCircle';
 
 interface Props
@@ -26,7 +26,7 @@ const cssVariants = {
 };
 
 export function Home({ styles, ...props }: Props) {
-  const { todos, loading, done, } = useGetTodos();
+  const { categories, loading, done, } = useGetCategories();
 
   return (
     <div
@@ -42,7 +42,7 @@ export function Home({ styles, ...props }: Props) {
       {done && (
         <div>
           <pre>
-            {JSON.stringify(todos, null, 2)}
+            {JSON.stringify(categories, null, 2)}
           </pre>
         </div>
       )}

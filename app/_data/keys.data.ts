@@ -1,4 +1,4 @@
-export const todosKeys = {
-  list: [ 'todos', 'list', ],
-  detailId: (id: string) => [ 'todos', 'detail', id, ],
+export const categoriesKeys = {
+  list: [ 'categories', 'list', ],
+  detailId: (id: string) => [ 'categories', 'detail', id, ],
 };

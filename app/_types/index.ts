@@ -4,9 +4,8 @@ export type {
 } from './common.types';
 
 export type {
-  CreateTodo,
-  UpdateTodo,
-  DeleteTodo,
-  Todo,
-  TodoStatus
-} from './todos.types';
+  CreateCategory,
+  UpdateCategory,
+  DeleteCategories,
+  Category
+} from './categories.types';

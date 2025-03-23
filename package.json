@@ -9,7 +9,7 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
-    "db:typegen": "npx supabase gen types typescript --project-id pkdzqsspvumtqfkoeiyx --schema public > app/_types/database.types.ts"
+    "db:typegen": "npx supabase gen types typescript --project-id ticucipwpkrbjsptrzne --schema public > app/_types/database.types.ts"
   },
   "license": "MIT",
   "dependencies": {

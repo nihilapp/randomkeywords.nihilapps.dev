@@ -14,7 +14,7 @@ interface Props
 const cssVariants = {
   default: cva(
     [
-      `flex flex-col gap-1 items-center justify-center`,
+      `flex flex-col gap-1 items-center justify-center p-2 rounded-2 bg-black-50`,
     ],
     {
       variants: {},
@@ -34,7 +34,7 @@ export function LoadingCircle({ styles, ...props }: Props) {
       {...props}
     >
       <AiOutlineLoading3Quarters className='animate-spin text-[250%]' />
-      <span>데이터 로딩중...</span>
+      <span className='text-lg font-900'>데이터 로딩중...</span>
     </div>
   );
 }

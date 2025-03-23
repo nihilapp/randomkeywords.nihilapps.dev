@@ -1,1 +1,1 @@
-export { todosKeys } from './keys.data';
+export { categoriesKeys } from './keys.data';

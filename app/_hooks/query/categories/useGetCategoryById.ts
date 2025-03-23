@@ -1,19 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
-import { todosKeys } from '@/_data';
-import { TodosQuery } from '@/_features';
+import { categoriesKeys } from '@/_data';
+import { CategoriesQuery } from '@/_features';
 import { useDone } from '@/_hooks/useDone';
 import { useLoading } from '@/_hooks/useLoading';
 
-export function useGetTodoById(id: string) {
+export function useGetCategoryById(id: string) {
   const {
-    data: todo,
+    data: category,
     isLoading,
     isFetching,
     isSuccess,
     ...query
   } = useQuery({
-    queryKey: todosKeys.detailId(id),
-    queryFn: () => TodosQuery.getById(id),
+    queryKey: categoriesKeys.detailId(id),
+    queryFn: () => CategoriesQuery.getById(id),
     enabled: !!id,
   });
 
@@ -21,7 +21,7 @@ export function useGetTodoById(id: string) {
   const done = useDone(loading, isSuccess);
 
   return {
-    todo,
+    category,
     loading,
     done,
     ...query,
