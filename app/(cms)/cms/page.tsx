@@ -1,16 +1,15 @@
 import React from 'react';
 import { setMeta } from '@/_libs';
-import { Home } from './_components';
 
 interface Props {}
 
 export const metadata = setMeta({
-  title: `홈`,
-  url: `/`,
+  title: `CMS`,
+  url: `/cms`,
 });
 
-export default function HomePage() {
+export default function CmsPage() {
   return (
-    <Home />
+    <div>content</div>
   );
 }

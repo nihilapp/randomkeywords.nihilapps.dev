@@ -7,28 +7,26 @@ import { Logo } from '@/(common)/_layouts/Logo';
 
 interface Props
   extends React.HTMLAttributes<HTMLElement>,
-  VariantProps<typeof cssVariants.default> {
+  VariantProps<typeof cssVariants> {
   styles?: string;
 }
 
-const cssVariants = {
-  default: cva(
-    [
-      ``,
-    ],
-    {
-      variants: {},
-      defaultVariants: {},
-      compoundVariants: [],
-    }
-  ),
-};
+const cssVariants = cva(
+  [
+    ``,
+  ],
+  {
+    variants: {},
+    defaultVariants: {},
+    compoundVariants: [],
+  }
+);
 
 export function CommonHeader({ styles, ...props }: Props) {
   return (
     <header
       className={cn(
-        cssVariants.default({}),
+        cssVariants({}),
         styles
       )}
       {...props}

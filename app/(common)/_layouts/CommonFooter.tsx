@@ -6,28 +6,26 @@ import { cn } from '@/_libs';
 
 interface Props
   extends React.HTMLAttributes<HTMLElement>,
-  VariantProps<typeof cssVariants.default> {
+  VariantProps<typeof cssVariants> {
   styles?: string;
 }
 
-const cssVariants = {
-  default: cva(
-    [
-      ``,
-    ],
-    {
-      variants: {},
-      defaultVariants: {},
-      compoundVariants: [],
-    }
-  ),
-};
+const cssVariants = cva(
+  [
+    ``,
+  ],
+  {
+    variants: {},
+    defaultVariants: {},
+    compoundVariants: [],
+  }
+);
 
 export function CommonFooter({ styles, ...props }: Props) {
   return (
     <footer
       className={cn(
-        cssVariants.default({}),
+        cssVariants({}),
         styles
       )}
       {...props}

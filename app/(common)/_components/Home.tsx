@@ -8,22 +8,20 @@ import { LoadingCircle } from '@/(common)/_components/LoadingCircle';
 
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
-  VariantProps<typeof cssVariants.default> {
+  VariantProps<typeof cssVariants> {
   styles?: string;
 }
 
-const cssVariants = {
-  default: cva(
-    [
-      ``,
-    ],
-    {
-      variants: {},
-      defaultVariants: {},
-      compoundVariants: [],
-    }
-  ),
-};
+const cssVariants = cva(
+  [
+    ``,
+  ],
+  {
+    variants: {},
+    defaultVariants: {},
+    compoundVariants: [],
+  }
+);
 
 export function Home({ styles, ...props }: Props) {
   const { categories, loading, done, } = useGetCategories();
@@ -31,7 +29,7 @@ export function Home({ styles, ...props }: Props) {
   return (
     <div
       className={cn(
-        cssVariants.default({}),
+        cssVariants({}),
         styles
       )}
       {...props}

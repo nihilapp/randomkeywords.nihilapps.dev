@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { cn } from '@/_libs';
 
 interface Props
-  extends React.HTMLAttributes<HTMLElement>,
+  extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
   styles?: string;
 }
@@ -22,7 +22,7 @@ const cssVariants = cva(
   }
 );
 
-export function CommonNav({ styles, ...props }: Props) {
+export function CmsNav({ styles, ...props }: Props) {
   return (
     <nav
       className={cn(
@@ -33,7 +33,16 @@ export function CommonNav({ styles, ...props }: Props) {
     >
       <ul>
         <li>
-          <Link href='/'>홈</Link>
+          <Link href='/cms'>CMS 홈</Link>
+        </li>
+        <li>
+          <Link href='/cms/categories'>카테고리 관리</Link>
+        </li>
+        <li>
+          <Link href='/cms/sub_categories'>서브 카테고리 관리</Link>
+        </li>
+        <li>
+          <Link href='/cms/keywords'>키워드 관리</Link>
         </li>
       </ul>
     </nav>

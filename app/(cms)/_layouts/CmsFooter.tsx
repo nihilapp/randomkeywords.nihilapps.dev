@@ -2,18 +2,17 @@
 
 import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { cn } from '@/_libs';
 
 interface Props
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends React.HTMLAttributes<HTMLElement>,
   VariantProps<typeof cssVariants> {
   styles?: string;
 }
 
 const cssVariants = cva(
   [
-    `flex flex-col gap-1 items-center justify-center p-2 rounded-2 bg-black-50`,
+    ``,
   ],
   {
     variants: {},
@@ -22,17 +21,16 @@ const cssVariants = cva(
   }
 );
 
-export function LoadingCircle({ styles, ...props }: Props) {
+export function CmsFooter({ styles, ...props }: Props) {
   return (
-    <div
+    <footer
       className={cn(
         cssVariants({}),
         styles
       )}
       {...props}
     >
-      <AiOutlineLoading3Quarters className='animate-spin text-[250%]' />
-      <span className='text-lg font-900'>데이터 로딩중...</span>
-    </div>
+      footer
+    </footer>
   );
 }
