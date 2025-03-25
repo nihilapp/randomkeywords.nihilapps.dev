@@ -3,6 +3,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import React from 'react';
+import StyledComponentsRegistry from '@/registry';
 
 interface Props {
   children: React.ReactNode;
@@ -24,11 +25,11 @@ const queryClient = new QueryClient({
 
 export function Providers({ children, }: Props) {
   return (
-    <>
+    <StyledComponentsRegistry>
       <QueryClientProvider client={queryClient}>
         {children}
         <ReactQueryDevtools />
       </QueryClientProvider>
-    </>
+    </StyledComponentsRegistry>
   );
 }

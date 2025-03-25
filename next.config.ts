@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   experimental: {
     esmExternals: true,
   },
+  sassOptions: {
+    implementation: 'sass-embedded',
+  },
   pageExtensions: [
     'tsx',
     'ts',

@@ -4,6 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
 import Link from 'next/link';
 import { cn } from '@/_libs';
+import { MenuItem } from '@/(common)/_components';
 
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -33,16 +34,24 @@ export function CmsNav({ styles, ...props }: Props) {
     >
       <ul>
         <li>
-          <Link href='/cms'>CMS 홈</Link>
+          <MenuItem href='/cms'>
+            CMS 홈
+          </MenuItem>
         </li>
         <li>
-          <Link href='/cms/categories'>카테고리 관리</Link>
+          <MenuItem href='/cms/categories'>
+            카테고리 관리
+          </MenuItem>
         </li>
         <li>
-          <Link href='/cms/sub_categories'>서브 카테고리 관리</Link>
+          <MenuItem href='/cms/sub_categories'>
+            서브 카테고리 관리
+          </MenuItem>
         </li>
         <li>
-          <Link href='/cms/keywords'>키워드 관리</Link>
+          <MenuItem href='/cms/keywords'>
+            키워드 관리
+          </MenuItem>
         </li>
       </ul>
     </nav>
