@@ -1,8 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import { fontSize, fw } from '@/_styles/size.styles';
-import { colors } from '@/_styles/color.styles';
+import { fontSize, fw, colors } from '@/_styles/ts';
 
 export const LogoText = styled.span({
   fontSize: fontSize.h3,

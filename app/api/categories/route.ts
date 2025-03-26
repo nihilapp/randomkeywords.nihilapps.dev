@@ -1,11 +1,22 @@
 import type { NextRequest } from 'next/server';
-import { inArray } from 'drizzle-orm';
+import { eq, inArray } from 'drizzle-orm';
 import { categoriesTable } from '@/_entities/categories/table';
 import { db } from '@/api/_libs';
 import type { CreateCategory, DeleteCategories } from '@/_types';
+import { subCategoriesTable } from '@/_entities/sub_categories/table';
 
 export async function GET() {
-  const categories = await db.select().from(categoriesTable);
+  const categories = await db
+    .select()
+    .from(categoriesTable)
+    .orderBy(categoriesTable.order)
+    .leftJoin(
+      subCategoriesTable,
+      eq(
+        categoriesTable.id,
+        subCategoriesTable.category_id
+      )
+    );
 
   return Response.json(categories, {
     status: 200,

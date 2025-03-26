@@ -3,13 +3,20 @@ import type { NextRequest } from 'next/server';
 import { categoriesTable } from '@/_entities/categories/table';
 import { db } from '@/api/_libs';
 import type { UpdateCategory } from '@/_types';
+import { subCategoriesTable } from '@/_entities/sub_categories/table';
 
 export async function GET(request: NextRequest, { params, }: Params) {
   const [ category, ] = await db
     .select()
     .from(categoriesTable)
     .where(eq(categoriesTable.id, params.id))
-    .limit(1);
+    .leftJoin(
+      subCategoriesTable,
+      eq(
+        categoriesTable.id,
+        subCategoriesTable.category_id
+      )
+    );
 
   return Response.json(category, {
     status: 200,

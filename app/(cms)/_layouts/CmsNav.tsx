@@ -2,7 +2,10 @@
 
 import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
-import Link from 'next/link';
+import {
+  MdFolder, MdOutlineFolder, MdSell,
+  MdSettings
+} from 'react-icons/md';
 import { cn } from '@/_libs';
 import { MenuItem } from '@/(common)/_components';
 
@@ -14,7 +17,7 @@ interface Props
 
 const cssVariants = cva(
   [
-    ``,
+    `flex-1 shrink-0`,
   ],
   {
     variants: {},
@@ -32,24 +35,36 @@ export function CmsNav({ styles, ...props }: Props) {
       )}
       {...props}
     >
-      <ul>
+      <ul className='flex flex-col gap-2'>
         <li>
-          <MenuItem href='/cms'>
+          <MenuItem
+            href='/cms'
+            icon={MdSettings}
+          >
             CMS 홈
           </MenuItem>
         </li>
         <li>
-          <MenuItem href='/cms/categories'>
+          <MenuItem
+            href='/cms/categories'
+            icon={MdFolder}
+          >
             카테고리 관리
           </MenuItem>
         </li>
         <li>
-          <MenuItem href='/cms/sub_categories'>
+          <MenuItem
+            href='/cms/sub_categories'
+            icon={MdOutlineFolder}
+          >
             서브 카테고리 관리
           </MenuItem>
         </li>
         <li>
-          <MenuItem href='/cms/keywords'>
+          <MenuItem
+            href='/cms/keywords'
+            icon={MdSell}
+          >
             키워드 관리
           </MenuItem>
         </li>

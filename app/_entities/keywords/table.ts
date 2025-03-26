@@ -1,17 +1,17 @@
 import { sql } from 'drizzle-orm';
 import {
-  bigint, boolean, pgTable, text, timestamp, uuid
+  pgTable, text, timestamp, uuid
 } from 'drizzle-orm/pg-core';
+import { subCategoriesTable } from '@/_entities/sub_categories/table';
 
-export const categoriesTable = pgTable('categories', {
+export const keywordsTable = pgTable('keywords', {
   id: uuid()
     .primaryKey()
     .default(sql`gen_random_uuid()`),
-  name: text()
+  sub_category_id: uuid()
+    .references(() => subCategoriesTable.id),
+  keyword: text()
     .notNull(),
-  order: bigint({ mode: 'number', })
-    .default(0),
-  is_prod_hidden: boolean().default(false),
   created_at: timestamp()
     .default(sql`now()`),
   updated_at: timestamp()

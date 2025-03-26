@@ -1,26 +1,26 @@
 import { useQuery } from '@tanstack/react-query';
-import { categoriesKeys } from '@/_data';
-import { CategoriesQuery } from '@/_features';
+import { subCategoriesKeys } from '@/_data';
+import { SubCategoriesQuery } from '@/_features';
 import { useLoading } from '@/_hooks/useLoading';
 import { useDone } from '@/_hooks/useDone';
 
-export function useGetCategories() {
+export function useGetSubCategories() {
   const {
-    data: categories,
+    data: subCategories,
     isLoading,
     isFetching,
     isSuccess,
     ...query
   } = useQuery({
-    queryKey: categoriesKeys.list(),
-    queryFn: () => CategoriesQuery.getAll(),
+    queryKey: subCategoriesKeys.list(),
+    queryFn: () => SubCategoriesQuery.getAll(),
   });
 
   const loading = useLoading(isLoading, isFetching);
   const done = useDone(loading, isSuccess);
 
   return {
-    categories,
+    subCategories,
     loading,
     done,
     ...query,

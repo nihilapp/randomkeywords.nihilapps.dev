@@ -9,7 +9,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/_libs';
 import { siteConfig } from '@/_config';
-import { LogoText } from '@/(common)/_components';
 
 interface Props
   extends React.HTMLAttributes<HTMLAnchorElement>,
@@ -53,12 +52,9 @@ export function Logo({
           height={100}
           className='w-[40px] h-[40px] block'
         />
-        <LogoText>
+        <span className='font-900 text-h3 text-white'>
           {title}
-        </LogoText>
-        {/* <span className='font-900 text-xs text-white leading-0'>
-          {title}
-        </span> */}
+        </span>
       </h1>
     </Link>
   );

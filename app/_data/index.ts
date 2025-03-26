@@ -1,1 +1,5 @@
-export { categoriesKeys } from './keys.data';
+export {
+  categoriesKeys,
+  subCategoriesKeys,
+  keywordsKeys
+} from './keys.data';

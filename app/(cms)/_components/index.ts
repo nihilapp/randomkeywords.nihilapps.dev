@@ -1,0 +1,1 @@
+export { CmsHome } from './CmsHome';

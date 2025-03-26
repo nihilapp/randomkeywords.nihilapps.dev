@@ -1,5 +1,6 @@
 import React from 'react';
 import { setMeta } from '@/_libs';
+import { CmsHome } from '@/(cms)/_components';
 
 interface Props {}
 
@@ -10,6 +11,6 @@ export const metadata = setMeta({
 
 export default function CmsPage() {
   return (
-    <div>content</div>
+    <CmsHome />
   );
 }
