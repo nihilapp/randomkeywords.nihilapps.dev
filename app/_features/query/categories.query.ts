@@ -1,15 +1,19 @@
+import type { Category } from '@prisma/client';
 import { Api } from '@/_libs';
 import type {
-  Category, CreateCategory, DeleteCategories, UpdateCategory
+  ExCategory,
+  CreateCategory,
+  DeleteCategories,
+  UpdateCategory
 } from '@/_types';
 
 export class CategoriesQuery {
   static getAll() {
-    return Api.getQuery<Category[]>('/categories');
+    return Api.getQuery<ExCategory[]>('/categories');
   }
 
   static getById(id: string) {
-    return Api.getQuery<Category>(`/categories/${id}`);
+    return Api.getQuery<ExCategory>(`/categories/${id}`);
   }
 
   static create(createCategoryDto: CreateCategory) {

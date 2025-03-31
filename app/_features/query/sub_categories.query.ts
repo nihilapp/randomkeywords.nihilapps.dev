@@ -1,19 +1,20 @@
 import { Api } from '@/_libs';
 import type {
-  SubCategory, CreateSubCategory, DeleteSubCategories, UpdateSubCategory
+  SubCategory, CreateSubCategory, DeleteSubCategories, UpdateSubCategory,
+  ExSubCategory
 } from '@/_types';
 
 export class SubCategoriesQuery {
   static getAll() {
-    return Api.getQuery<SubCategory[]>('/sub_categories');
+    return Api.getQuery<ExSubCategory[]>('/sub_categories');
   }
 
   static getById(id: string) {
-    return Api.getQuery<SubCategory>(`/sub_categories/${id}`);
+    return Api.getQuery<ExSubCategory>(`/sub_categories/${id}`);
   }
 
   static getByCategoryId(categoryId: string) {
-    return Api.getQuery<SubCategory[]>(`/sub_categories/category/${categoryId}`);
+    return Api.getQuery<ExSubCategory[]>(`/sub_categories/category/${categoryId}`);
   }
 
   static create(createSubCategoryDto: CreateSubCategory) {

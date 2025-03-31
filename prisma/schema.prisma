@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Category {
+  id           String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String
+  order        Int?          @default(0)
+  isProdHidden Boolean?      @default(false)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  SubCategory  SubCategory[]
+
+  @@map("categories")
+}
+
+model SubCategory {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  categoryId   String    @db.Uuid
+  name         String
+  isProdHidden Boolean?  @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  Keyword      Keyword[]
+  Category     Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@map("sub_categories")
+}
+
+model Keyword {
+  id            String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  subCategoryId String      @db.Uuid
+  keyword       String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  SubCategory   SubCategory @relation(fields: [subCategoryId], references: [id], onDelete: Cascade)
+
+  @@map("keywords")
+}

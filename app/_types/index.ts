@@ -8,19 +8,18 @@ export type {
   CreateCategory,
   UpdateCategory,
   DeleteCategories,
-  Category
+  ExCategory
 } from './categories.types';
 
 export type {
   CreateSubCategory,
   UpdateSubCategory,
   DeleteSubCategories,
-  SubCategory
+  ExSubCategory
 } from './sub_categories.types';
 
 export type {
   CreateKeyword,
   UpdateKeyword,
-  DeleteKeywords,
-  Keyword
+  DeleteKeywords
 } from './keywords.types';

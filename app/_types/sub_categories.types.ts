@@ -1,16 +1,20 @@
-import type { subCategoriesTable } from '@/_entities/sub_categories/table';
+import type { Prisma } from '@prisma/client';
 
-export type SubCategory = typeof subCategoriesTable.$inferSelect;
+export type ExSubCategory = Prisma.SubCategoryGetPayload<{
+  include: {
+    Keyword: true;
+  };
+}>;
 
 export interface CreateSubCategory {
-  name: string;
-  category_id: string;
-  is_prod_hidden?: boolean;
+  name: string
+  categoryId: string
+  isProdHidden?: boolean
 }
 
 export interface UpdateSubCategory {
   name?: string;
-  is_prod_hidden?: boolean;
+  isProdHidden?: boolean;
 }
 
 export interface DeleteSubCategories {

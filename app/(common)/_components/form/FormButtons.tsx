@@ -2,7 +2,6 @@
 
 import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { cn } from '@/_libs';
 
 interface Props
@@ -13,7 +12,7 @@ interface Props
 
 const cssVariants = cva(
   [
-    `flex flex-col gap-1 items-center justify-center p-2 rounded-2 bg-black-50 w-full border border-black-200`,
+    `flex flex-row gap-5`,
   ],
   {
     variants: {},
@@ -22,7 +21,7 @@ const cssVariants = cva(
   }
 );
 
-export function LoadingCircle({ styles, ...props }: Props) {
+export function FormButtons({ styles, children, ...props }: Props) {
   return (
     <div
       className={cn(
@@ -31,12 +30,7 @@ export function LoadingCircle({ styles, ...props }: Props) {
       )}
       {...props}
     >
-      <AiOutlineLoading3Quarters
-        className='animate-spin text-[250%]'
-      />
-      <span className='text-lg font-900'>
-        데이터 로딩중...
-      </span>
+      {children}
     </div>
   );
 }

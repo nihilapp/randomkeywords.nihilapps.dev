@@ -1,17 +1,22 @@
-import type { categoriesTable } from '@/_entities/categories/table';
+import type { Prisma } from '@prisma/client';
 
-export type Category = typeof categoriesTable.$inferSelect;
+// 서브 카테고리를 포함한 확장 카테고리 인터페이스
+export type ExCategory = Prisma.CategoryGetPayload<{
+  include: {
+    SubCategory: true;
+  };
+}>;
 
 export interface CreateCategory {
   name: string;
   order?: number;
-  is_prod_hidden?: boolean;
+  isProdHidden?: boolean;
 }
 
 export interface UpdateCategory {
   name?: string;
   order?: number;
-  is_prod_hidden?: boolean;
+  isProdHidden?: boolean;
 }
 
 export interface DeleteCategories {

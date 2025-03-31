@@ -1,10 +1,6 @@
-import type { keywordsTable } from '@/_entities/keywords/table';
-
-export type Keyword = typeof keywordsTable.$inferSelect;
-
 export interface CreateKeyword {
   keyword: string;
-  sub_category_id: string;
+  subCategoryId: string;
 }
 
 export interface UpdateKeyword {

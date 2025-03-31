@@ -1,6 +1,7 @@
+import type { Keyword } from '@prisma/client';
 import { Api } from '@/_libs';
 import type {
-  Keyword, CreateKeyword, DeleteKeywords, UpdateKeyword
+  CreateKeyword, DeleteKeywords, UpdateKeyword
 } from '@/_types';
 
 export class KeywordsQuery {

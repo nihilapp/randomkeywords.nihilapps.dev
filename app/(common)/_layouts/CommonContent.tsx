@@ -13,7 +13,7 @@ interface Props
 
 const cssVariants = cva(
   [
-    ``,
+    `text-black-base`,
   ],
   {
     variants: {},

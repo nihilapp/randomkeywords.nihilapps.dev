@@ -1,49 +1,49 @@
-import type { NextRequest } from 'next/server';
-import { eq, inArray } from 'drizzle-orm';
-import { categoriesTable } from '@/_entities/categories/table';
-import { db } from '@/api/_libs';
+import { NextResponse, type NextRequest } from 'next/server';
+import { DB } from '@/api/_libs';
 import type { CreateCategory, DeleteCategories } from '@/_types';
-import { subCategoriesTable } from '@/_entities/sub_categories/table';
 
+// 카테고리 목록 조회 (서브카테고리 포함)
 export async function GET() {
-  const categories = await db
-    .select()
-    .from(categoriesTable)
-    .orderBy(categoriesTable.order)
-    .leftJoin(
-      subCategoriesTable,
-      eq(
-        categoriesTable.id,
-        subCategoriesTable.category_id
-      )
-    );
+  const categories = await DB.categories().findMany({
+    include: {
+      SubCategory: true,
+    },
+    orderBy: {
+      order: 'asc',
+    },
+  });
 
-  return Response.json(categories, {
+  return NextResponse.json(categories, {
     status: 200,
   });
 }
 
+// 카테고리 생성
 export async function POST(request: NextRequest) {
   const createCategoryDto: CreateCategory = await request.json();
 
-  const [ category, ] = await db
-    .insert(categoriesTable)
-    .values(createCategoryDto)
-    .returning();
+  const category = await DB.categories().create({
+    data: createCategoryDto,
+  });
 
-  return Response.json(category, {
+  return NextResponse.json(category, {
     status: 201,
   });
 }
 
+// 다수 카테고리 삭제
 export async function DELETE(request: NextRequest) {
   const deleteCategoriesDto: DeleteCategories = await request.json();
 
-  await db
-    .delete(categoriesTable)
-    .where(inArray(categoriesTable.id, deleteCategoriesDto.ids));
+  await DB.categories().deleteMany({
+    where: {
+      id: {
+        in: deleteCategoriesDto.ids,
+      },
+    },
+  });
 
-  return Response.json(null, {
+  return NextResponse.json(null, {
     status: 204,
   });
 }

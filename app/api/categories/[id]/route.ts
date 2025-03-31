@@ -1,54 +1,70 @@
-import { eq } from 'drizzle-orm';
-import type { NextRequest } from 'next/server';
-import { categoriesTable } from '@/_entities/categories/table';
-import { db } from '@/api/_libs';
+import { NextResponse, type NextRequest } from 'next/server';
+import { DB } from '@/api/_libs';
 import type { UpdateCategory } from '@/_types';
-import { subCategoriesTable } from '@/_entities/sub_categories/table';
-
-export async function GET(request: NextRequest, { params, }: Params) {
-  const [ category, ] = await db
-    .select()
-    .from(categoriesTable)
-    .where(eq(categoriesTable.id, params.id))
-    .leftJoin(
-      subCategoriesTable,
-      eq(
-        categoriesTable.id,
-        subCategoriesTable.category_id
-      )
-    );
-
-  return Response.json(category, {
-    status: 200,
-  });
-}
 
 type Params = {
-  params: {
+  params: Promise<{
     id: string;
-  }
+  }>;
 };
 
+// 특정 ID의 카테고리 조회 (서브카테고리 포함)
+export async function GET(request: NextRequest, { params, }: Params) {
+  const { id, } = await params;
+
+  const category = await DB.categories().findUnique({
+    where: {
+      id,
+    },
+    include: {
+      SubCategory: true,
+    },
+  });
+
+  if (!category) {
+    return NextResponse.json({ message: '카테고리를 찾을 수 없습니다.', }, { status: 404, });
+  }
+
+  return NextResponse.json(category, {
+    status: 200,
+  });
+}
+
+// 카테고리 업데이트
 export async function PATCH(request: NextRequest, { params, }: Params) {
+  const { id, } = await params;
+
   const updateCategoryDto: UpdateCategory = await request.json();
 
-  const [ category, ] = await db
-    .update(categoriesTable)
-    .set(updateCategoryDto)
-    .where(eq(categoriesTable.id, params.id))
-    .returning();
+  // BigInt로 형변환이 필요한 경우 처리
+  const updateData: any = { ...updateCategoryDto, };
+  if (typeof updateData.order === 'number') {
+    updateData.order = BigInt(updateData.order);
+  }
+
+  const category = await DB.categories().update({
+    where: {
+      id,
+    },
+    data: updateData,
+  });
 
   return Response.json(category, {
     status: 200,
   });
 }
 
+// 카테고리 삭제
 export async function DELETE(request: NextRequest, { params, }: Params) {
-  await db
-    .delete(categoriesTable)
-    .where(eq(categoriesTable.id, params.id));
+  const { id, } = await params;
 
-  return Response.json(null, {
+  await DB.categories().delete({
+    where: {
+      id,
+    },
+  });
+
+  return NextResponse.json(null, {
     status: 204,
   });
 }
