@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { object, string, type InferType } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useQueryClient } from '@tanstack/react-query';
-import { FormContainer, FormRadio, FormText } from '@/(common)/_components/form';
+import {
+  Button, FormButtons, FormContainer, FormRadio, FormText
+} from '@/(common)/_components/form';
 import { useGetCategoryById } from '@/_hooks/query/categories';
 import { useCreateSubCategory } from '@/_hooks/query/sub_categories';
 import { categoriesKeys, subCategoriesKeys } from '@/_data';
@@ -14,9 +16,13 @@ interface Props {
   categoryId: string;
 }
 
+interface FormValues {
+  name: string;
+  isProdHidden: string;
+}
+
 export function AddSubCategoryForm({ categoryId, }: Props) {
   const { category, done, } = useGetCategoryById(categoryId);
-  const [ CategoryHidden, SetCategoryHidden, ] = useState('false');
 
   const formModel = object({
     name: string()
@@ -24,12 +30,12 @@ export function AddSubCategoryForm({ categoryId, }: Props) {
     isProdHidden: string(),
   });
 
-  const form = useForm<InferType<typeof formModel>>({
+  const form = useForm<FormValues>({
     resolver: yupResolver(formModel),
     mode: 'all',
     defaultValues: {
       name: '',
-      isProdHidden: CategoryHidden,
+      isProdHidden: category.isProdHidden ? 'true' : 'false',
     },
     reValidateMode: 'onChange',
     shouldFocusError: true,
@@ -109,6 +115,13 @@ export function AddSubCategoryForm({ categoryId, }: Props) {
         ]}
         errorMessage={errors.isProdHidden?.message}
       />
+
+      <FormButtons>
+        <Button>
+          추가
+        </Button>
+      </FormButtons>
+
     </FormContainer>
   );
 }

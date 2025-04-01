@@ -13,6 +13,12 @@ import {
 import { useCreateCategory, useGetCategories } from '@/_hooks/query/categories';
 import { categoriesKeys } from '@/_data';
 
+interface FormValues {
+  name: string;
+  order: number;
+  isProdHidden: string;
+}
+
 export function AddCategoryForm() {
   const { categories, done, } = useGetCategories();
 
@@ -25,7 +31,7 @@ export function AddCategoryForm() {
     isProdHidden: string().default('false'),
   });
 
-  const form = useForm<InferType<typeof formModel>>({
+  const form = useForm<FormValues>({
     resolver: yupResolver(formModel),
     mode: 'all',
     defaultValues: {
