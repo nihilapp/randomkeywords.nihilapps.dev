@@ -6,18 +6,19 @@ import Link from 'next/link';
 import { cn } from '@/_libs';
 
 interface Props
-  extends React.HTMLAttributes<HTMLAnchorElement>,
+  extends React.HTMLAttributes<HTMLAnchorElement | HTMLDivElement>,
   VariantProps<typeof cssVariants> {
   styles?: string;
-  href: string;
+  href?: string;
   name: string;
   length?: number;
   upperCategory?: string;
+  mode?: 'link' | 'nolink';
 }
 
 const cssVariants = cva(
   [
-    `flex flex-row justify-between p-2 rounded-2 border border-black-200 hover:bg-blue-50 hover:border-blue-200 transition-colors duration-200 ease-in-out`,
+    `flex flex-row justify-between p-2 rounded-2 border border-black-200`,
   ],
   {
     variants: {},
@@ -27,30 +28,58 @@ const cssVariants = cva(
 );
 
 export function ListItem({
-  styles, href, name, length, upperCategory, ...props
+  styles,
+  href,
+  name,
+  length,
+  upperCategory,
+  mode = 'link',
+  ...props
 }: Props) {
-  return (
-    <Link
-      className={cn(
-        cssVariants({}),
-        styles
-      )}
-      {...props}
-      href={href}
-    >
-      <div className='flex flex-col items-start'>
-        <span className='text-xs text-gray-500'>{upperCategory}</span>
+  const commonClassName = cn(
+    cssVariants({}),
+    styles
+  );
+
+  const innerContent = (
+    <>
+      <div className='flex flex-col justify-center'>
+        {upperCategory && <span className='text-xs text-gray-500'>{upperCategory}</span>}
         <span>
           {name}
         </span>
       </div>
-      {length && (
+      {length !== undefined && (
         <span
           className='text-sm bg-black-base text-white p-2 px-3 rounded-2 flex items-center justify-center'
         >
-          {length || ''}
+          {length}
         </span>
       )}
-    </Link>
+    </>
+  );
+
+  if (mode === 'link' && href) {
+    return (
+      <Link
+        className={cn(
+          commonClassName,
+          `hover:bg-blue-50 hover:border-blue-200 transition-colors duration-200 ease-in-out`
+        )}
+        {...props}
+        href={href}
+      >
+        {innerContent}
+      </Link>
+    );
+  }
+
+  return (
+    <div
+      className={commonClassName}
+      {...props}
+    >
+      {innerContent}
+    </div>
   );
 }

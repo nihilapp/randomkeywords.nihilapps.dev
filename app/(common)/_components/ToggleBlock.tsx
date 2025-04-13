@@ -1,7 +1,7 @@
 'use client';
 
 import { cva, type VariantProps } from 'class-variance-authority';
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { MdOutlineKeyboardArrowUp } from 'react-icons/md';
 import { cn } from '@/_libs';
 
@@ -24,7 +24,7 @@ const cssVariants = cva(
   }
 );
 
-export function ToggleBlock({
+function ToggleBlockComponent({
   styles, title, children, defaultOpen = true, ...props
 }: Props) {
   const [ isOpen, setIsOpen, ] = useState(
@@ -63,3 +63,5 @@ export function ToggleBlock({
     </div>
   );
 }
+
+export const ToggleBlock = memo(ToggleBlockComponent);

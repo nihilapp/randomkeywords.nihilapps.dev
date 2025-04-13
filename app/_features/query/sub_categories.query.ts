@@ -1,13 +1,13 @@
 import type { Prisma, SubCategory } from '@prisma/client';
 import { Api } from '@/_libs';
 import type {
-  CreateSubCategory, DeleteSubCategories, UpdateSubCategory
+  CreateSubCategory, DeleteSubCategories, ExSubCategory, UpdateSubCategory
 } from '@/_types';
 
 // API 응답 페이지 타입을 정의
 interface SubCategoriesPage {
   items: Prisma.SubCategoryGetPayload<{
-    include: { Category: { select: { name: true } } }
+    include: { Category: { select: { name: true } }, _count: { select: { Keyword: true } } }
   }>[]; // Category 정보 포함
   nextCursor: string | undefined;
   count: number;
@@ -30,7 +30,7 @@ export class SubCategoriesQuery {
   }
 
   static getById(id: string) {
-    return Api.getQuery<SubCategory>(`/sub_categories/${id}`);
+    return Api.getQuery<ExSubCategory>(`/sub_categories/${id}`);
   }
 
   static getByCategoryId(categoryId: string) {

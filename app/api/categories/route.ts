@@ -6,7 +6,13 @@ import type { CreateCategory, DeleteCategories } from '@/_types';
 export async function GET() {
   const categories = await DB.categories().findMany({
     include: {
-      SubCategory: true,
+      SubCategory: {
+        include: {
+          _count: {
+            select: { Keyword: true, },
+          },
+        },
+      },
     },
     orderBy: {
       order: 'asc',

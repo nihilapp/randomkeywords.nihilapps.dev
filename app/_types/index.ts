@@ -22,5 +22,7 @@ export type {
 export type {
   CreateKeyword,
   UpdateKeyword,
-  DeleteKeywords
+  DeleteKeywords,
+  KeywordsPage,
+  KeywordInfiniteQueryData
 } from './keywords.types';

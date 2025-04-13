@@ -17,7 +17,13 @@ export async function GET(request: NextRequest, { params, }: Params) {
       id,
     },
     include: {
-      SubCategory: true,
+      SubCategory: {
+        include: {
+          _count: {
+            select: { Keyword: true, },
+          },
+        },
+      },
     },
   });
 

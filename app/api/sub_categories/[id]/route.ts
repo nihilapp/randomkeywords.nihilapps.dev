@@ -17,7 +17,16 @@ export async function GET(request: NextRequest, { params, }: Params) {
       id,
     },
     include: {
-      Keyword: true,
+      _count: {
+        select: {
+          Keyword: true,
+        },
+      },
+      Category: {
+        select: {
+          name: true,
+        },
+      },
     },
   });
 

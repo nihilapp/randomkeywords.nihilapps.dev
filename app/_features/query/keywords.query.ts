@@ -1,17 +1,8 @@
-import type { Keyword, Prisma } from '@prisma/client';
+import type { Keyword } from '@prisma/client';
 import { Api } from '@/_libs';
 import type {
   CreateKeyword, DeleteKeywords, UpdateKeyword
 } from '@/_types';
-
-// API 응답 페이지 타입을 정의
-interface KeywordsPage {
-  items: Prisma.KeywordGetPayload<{
-    include: { SubCategory: { select: { name: true } } }
-  }>[]; // SubCategory 정보 포함
-  nextCursor: string | undefined; // 다음 페이지를 위한 cursor
-  count: number; // 전체 키워드 개수
-}
 
 export class KeywordsQuery {
   // getAll 함수 수정: params (cursor, limit)를 받아 페이지네이션된 데이터 요청
@@ -28,8 +19,36 @@ export class KeywordsQuery {
     // 쿼리 문자열이 있으면 URL에 추가
     const url = queryString ? `/keywords?${queryString}` : '/keywords';
 
-    // API 요청 및 반환 타입 지정 (KeywordsPage)
-    return Api.getQuery<KeywordsPage>(url);
+    // 반환 타입 명시 (필요시 @/_types에서 가져온 KeywordsPage 사용)
+    return Api.getQuery<import('@/_types').KeywordsPage>(url);
+  }
+
+  // 키워드 검색 함수 수정
+  // 파라미터에 subCategoryId 추가
+  static search(params: { word: string, subCategoryId?: string, cursor?: string, limit?: number }) {
+    // subCategoryId가 존재하고 'all'이 아니면 쿼리 파라미터에 추가
+    // URLSearchParams를 사용하여 쿼리 문자열 생성
+    const queryParams = new URLSearchParams();
+
+    // 필수 파라미터인 word 추가
+    queryParams.set('word', params.word);
+
+    // 선택적 파라미터들은 존재할 때만 추가
+    if (params.subCategoryId && params.subCategoryId !== 'all') {
+      queryParams.set('subCategoryId', params.subCategoryId);
+    }
+
+    if (params.cursor) {
+      queryParams.set('cursor', params.cursor);
+    }
+
+    if (params.limit) {
+      queryParams.set('limit', String(params.limit));
+    }
+
+    const url = `/keywords/search?${queryParams.toString()}`;
+
+    return Api.getQuery<import('@/_types').KeywordsPage>(url);
   }
 
   static getById(id: string) {

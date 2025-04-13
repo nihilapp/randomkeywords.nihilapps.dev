@@ -35,8 +35,7 @@ const cssVariants = cva(
 export function SubCategoryList({ styles, ...props }: Props) {
   const {
     subCategories,
-    loading,
-    done,
+    isLoading,
     totalCount,
     fetchNextPage,
     hasNextPage,
@@ -86,12 +85,12 @@ export function SubCategoryList({ styles, ...props }: Props) {
       )}
       {...props}
     >
-      {loading && !done && (
+      {isLoading && (
         <LoadingCircle />
       )}
-      {done && (
+      {!isLoading && (
         <>
-          {totalCount === 0 && (
+          {totalCount === 0 && subCategories.length === 0 && (
             <div className='text-center text-h3 font-900'>
               서브 카테고리가 없습니다.
             </div>
@@ -115,6 +114,7 @@ export function SubCategoryList({ styles, ...props }: Props) {
                       href={`/cms/sub_categories/${subCategory.id}`}
                       name={subCategory.name}
                       upperCategory={subCategory.Category.name}
+                      length={subCategory._count.Keyword}
                     />
                   ))}
                   {hasNextPage && (

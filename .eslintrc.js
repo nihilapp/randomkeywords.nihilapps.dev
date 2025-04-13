@@ -77,6 +77,7 @@ module.exports = {
     'no-empty-function': 'off',
     camelcase: 'off',
     'no-empty-pattern': 'off',
+    'no-underscore-dangle': 'off',
 
     // 임포트 규칙
     'import/extensions': 'off',

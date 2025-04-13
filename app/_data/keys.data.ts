@@ -11,6 +11,7 @@ export const subCategoriesKeys = {
   details: () => [ ...subCategoriesKeys.all, 'detail', ] as const,
   detailId: (id: string) => [ ...subCategoriesKeys.details(), id, ] as const,
   detailCategoryId: (categoryId: string) => [ ...subCategoriesKeys.details(), categoryId, ] as const,
+  options: () => [ ...subCategoriesKeys.all, 'options', ] as const,
 };
 
 export const keywordsKeys = {
@@ -19,4 +20,10 @@ export const keywordsKeys = {
   details: () => [ ...keywordsKeys.all, 'detail', ] as const,
   detailId: (id: string) => [ ...keywordsKeys.details(), id, ] as const,
   detailSubCategoryId: (subCategoryId: string) => [ ...keywordsKeys.details(), subCategoryId, ] as const,
+  search: (word: string, subCategoryId?: string) => [
+    ...keywordsKeys.all,
+    'search',
+    word,
+    subCategoryId,
+  ] as const,
 };

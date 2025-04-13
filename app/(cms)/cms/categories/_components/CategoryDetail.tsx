@@ -4,10 +4,10 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
 import { cn, tools } from '@/_libs';
 import {
-  InfoBlock, LoadingCircle, ToggleBlock
+  InfoBlock, ListItem, LoadingCircle, ToggleBlock
 } from '@/(common)/_components';
 import { useGetCategoryById } from '@/_hooks/query/categories';
-import { AddSubCategoryForm, SubCategoryItem } from '@/(cms)/cms/sub_categories/_components';
+import { AddSubCategoryForm } from '@/(cms)/cms/sub_categories/_components';
 
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -79,9 +79,12 @@ export function CategoryDetail({ styles, id, ...props }: Props) {
             {category.SubCategory.length > 0 && (
               <div className='grid grid-cols-2 mo-md:grid-cols-3 gap-2'>
                 {category.SubCategory.map((item) => (
-                  <SubCategoryItem
+                  <ListItem
                     key={tools.common.uuid()}
+                    name={item.name}
+                    href={`/cms/sub_categories/${item.id}`}
                     id={item.id}
+                    length={item._count.Keyword}
                   />
                 ))}
               </div>

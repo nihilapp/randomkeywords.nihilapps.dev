@@ -5,3 +5,4 @@ export { useCreateSubCategory } from './useCreateSubCategory';
 export { useUpdateSubCategory } from './useUpdateSubCategory';
 export { useDeleteSubCategory } from './useDeleteSubCategory';
 export { useDeleteSubCategories } from './useDeleteSubCategories';
+export { useGetSubCategoryOptions } from './useGetSubCategoryOptions';

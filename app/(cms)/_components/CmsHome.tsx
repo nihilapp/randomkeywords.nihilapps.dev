@@ -35,15 +35,15 @@ export function CmsHome({ styles, ...props }: Props) {
   } = useGetCategories();
 
   const {
-    subCategories,
     loading: subCategoriesLoading,
     done: subCategoriesDone,
+    totalCount: subCategoriesTotalCount,
   } = useGetSubCategories();
 
   const {
-    keywords,
     loading: keywordsLoading,
     done: keywordsDone,
+    totalCount: keywordsTotalCount,
   } = useGetKeywords();
 
   return (
@@ -72,7 +72,7 @@ export function CmsHome({ styles, ...props }: Props) {
       {subCategoriesDone && (
         <CountCard
           name='서브 카테고리'
-          count={subCategories.length}
+          count={subCategoriesTotalCount}
           icon={MdOutlineFolder}
           styles='bg-green-100 text-green-600 border-green-200'
         />
@@ -84,7 +84,7 @@ export function CmsHome({ styles, ...props }: Props) {
       {keywordsDone && (
         <CountCard
           name='키워드'
-          count={keywords.length}
+          count={keywordsTotalCount}
           icon={MdSell}
           styles='bg-red-100 text-red-500 border-red-200'
         />

@@ -3,6 +3,7 @@ import { keywordsKeys } from '@/_data';
 import { KeywordsQuery } from '@/_features';
 import { useLoading } from '@/_hooks/useLoading';
 import { useDone } from '@/_hooks/useDone';
+import type { KeywordsPage, KeywordInfiniteQueryData } from '@/_types/keywords.types';
 
 export function useGetKeywords() {
   // useInfiniteQuery 사용: 무한 스크롤 구현
@@ -15,7 +16,7 @@ export function useGetKeywords() {
     hasNextPage, // 다음 페이지 존재 여부 (getNextPageParam 결과 기반)
     isFetchingNextPage, // 다음 페이지 로딩 중 상태
     ...query
-  } = useInfiniteQuery({
+  } = useInfiniteQuery<KeywordsPage, Error, KeywordInfiniteQueryData, ReturnType<typeof keywordsKeys.list>, string | undefined>({
     queryKey: keywordsKeys.list(), // 쿼리 키
     // queryFn: 각 페이지 데이터를 가져오는 함수
     // pageParam은 getNextPageParam에서 반환된 값 (첫 페이지는 initialPageParam)
@@ -38,7 +39,8 @@ export function useGetKeywords() {
   // 훅 반환값
   return {
     keywords, // 모든 페이지의 키워드 목록
-    loading, // 초기 로딩 + fetching 상태
+    loading, // 초기 로딩 + fetching 상태 (필요시 유지)
+    isLoading, // react-query의 초기 로딩 상태 명시적 반환
     done, // 로딩 완료 및 성공 상태
     fetchNextPage, // 다음 페이지 로드 함수 (컴포넌트에서 사용)
     hasNextPage, // 다음 페이지 존재 여부 (컴포넌트에서 사용)

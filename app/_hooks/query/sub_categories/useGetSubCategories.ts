@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, keepPreviousData } from '@tanstack/react-query';
 import { subCategoriesKeys } from '@/_data';
 import { SubCategoriesQuery } from '@/_features';
 import { useLoading } from '@/_hooks/useLoading';
@@ -19,6 +19,7 @@ export function useGetSubCategories() {
     queryFn: ({ pageParam, }) => SubCategoriesQuery.getAll({ cursor: pageParam, }),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
+    placeholderData: keepPreviousData,
   });
 
   const loading = useLoading(isLoading, isFetching);
@@ -30,6 +31,7 @@ export function useGetSubCategories() {
   return {
     subCategories,
     loading,
+    isLoading,
     done,
     fetchNextPage,
     hasNextPage,

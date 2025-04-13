@@ -2,7 +2,16 @@ import type { Prisma } from '@prisma/client';
 
 export type ExSubCategory = Prisma.SubCategoryGetPayload<{
   include: {
-    Keyword: true;
+    _count: {
+      select: {
+        Keyword: true,
+      },
+    },
+    Category: {
+      select: {
+        name: true,
+      },
+    },
   };
 }>;
 

@@ -25,6 +25,11 @@ export async function GET(request: NextRequest) {
     },
     // 연관된 Category의 name 포함
     include: {
+      _count: {
+        select: {
+          Keyword: true,
+        },
+      },
       Category: {
         select: {
           name: true,

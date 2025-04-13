@@ -87,7 +87,7 @@ export function CategoryList({ styles, ...props }: Props) {
                 <SearchBar
                   register={form.register}
                   name='search'
-                  placeholder='카테고리 검색'
+                  placeholder={`총 ${categories.length}개 카테고리 검색`}
                   styles='w-full'
                 />
               </div>

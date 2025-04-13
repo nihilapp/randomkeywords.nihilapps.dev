@@ -5,7 +5,6 @@ import React from 'react';
 import { cn } from '@/_libs';
 import { InfoBlock, LoadingCircle, ToggleBlock } from '@/(common)/_components';
 import { useGetSubCategoryById } from '@/_hooks/query/sub_categories';
-import { AddSubCategoryForm } from '@/(cms)/cms/sub_categories/_components/AddSubCategoryForm';
 import { AddKeywordForm } from '@/(cms)/cms/keywords/_components/AddKeywordForm';
 
 interface Props
@@ -55,7 +54,7 @@ export function SubCategoryDetail({ styles, id, ...props }: Props) {
             />
             <InfoBlock
               name='키워드 개수'
-              content={subCategory.Keyword.length.toString()}
+              content={subCategory._count.Keyword.toString()}
               suffix='개'
             />
           </div>
