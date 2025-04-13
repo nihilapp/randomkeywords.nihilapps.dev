@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useForm } from 'react-hook-form';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { cn } from '@/_libs';
 import { useSearchKeywords } from '@/_hooks/query/keywords';
 import { useGetSubCategoryOptions } from '@/_hooks/query/sub_categories';
@@ -11,6 +11,8 @@ import { LoadingCircle, ListItem } from '@/(common)/_components';
 import { SearchBar } from '@/(cms)/cms/_components';
 
 interface Props {
+  word: string;
+  subCategoryId: string;
   styles?: string;
 }
 
@@ -19,11 +21,8 @@ interface FormValues {
   subCategoryId: string;
 }
 
-export function SearchingList({ styles, }: Props) {
+export function SearchingList({ word, subCategoryId, styles, }: Props) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const word = searchParams.get('word') ?? '';
-  const currentSubCategoryId = searchParams.get('subCategoryId') ?? 'all';
 
   const {
     keywords,
@@ -33,7 +32,7 @@ export function SearchingList({ styles, }: Props) {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useSearchKeywords(word, currentSubCategoryId);
+  } = useSearchKeywords(word, subCategoryId);
 
   const { data: subCategoryOptions, isLoading: isLoadingSubCategories, } = useGetSubCategoryOptions();
 
@@ -46,7 +45,7 @@ export function SearchingList({ styles, }: Props) {
     mode: 'onSubmit',
     defaultValues: {
       search: word,
-      subCategoryId: currentSubCategoryId,
+      subCategoryId,
     },
   });
 
@@ -66,7 +65,7 @@ export function SearchingList({ styles, }: Props) {
     if (word && inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  }, [ word, inView, hasNextPage, isFetchingNextPage, fetchNextPage, ]);
+  }, [ word, subCategoryId, inView, hasNextPage, isFetchingNextPage, fetchNextPage, ]);
 
   if (!word) {
     return <div className='text-center text-gray-500'>검색어를 입력해주세요.</div>;
