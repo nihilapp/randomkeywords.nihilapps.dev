@@ -1,16 +1,18 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { object, string, type InferType } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useQueryClient } from '@tanstack/react-query';
+import type { AxiosError } from 'axios';
 import {
-  Button, FormButtons, FormContainer, FormRadio, FormText
+  Button, FormButtons, FormContainer, FormMessage, FormRadio, FormText
 } from '@/(common)/_components/form';
 import { useGetCategoryById } from '@/_hooks/query/categories';
 import { useCreateSubCategory } from '@/_hooks/query/sub_categories';
 import { categoriesKeys, subCategoriesKeys } from '@/_data';
+import type { ApiError } from '@/_types';
 
 interface Props {
   categoryId: string;
@@ -22,6 +24,7 @@ interface FormValues {
 }
 
 export function AddSubCategoryForm({ categoryId, }: Props) {
+  const [ errorMessage, setErrorMessage, ] = useState('');
   const { category, done, } = useGetCategoryById(categoryId);
 
   const formModel = object({
@@ -35,7 +38,7 @@ export function AddSubCategoryForm({ categoryId, }: Props) {
     mode: 'all',
     defaultValues: {
       name: '',
-      isProdHidden: category.isProdHidden ? 'true' : 'false',
+      isProdHidden: category?.isProdHidden ? 'true' : 'false',
     },
     reValidateMode: 'onChange',
     shouldFocusError: true,
@@ -60,9 +63,13 @@ export function AddSubCategoryForm({ categoryId, }: Props) {
   const createSubCategory = useCreateSubCategory();
   const qc = useQueryClient();
 
-  const onSubmitForm: SubmitHandler<InferType<typeof formModel>> = (data) => {
-    console.log(data);
+  const onClickReset = () => {
+    form.reset();
+    createSubCategory.reset();
+    setErrorMessage('');
+  };
 
+  const onSubmitForm: SubmitHandler<InferType<typeof formModel>> = (data) => {
     createSubCategory.mutate({
       categoryId,
       name: data.name,
@@ -87,8 +94,11 @@ export function AddSubCategoryForm({ categoryId, }: Props) {
 
         createSubCategory.reset();
         form.reset();
+        setErrorMessage('');
       },
-
+      onError: (error: AxiosError<ApiError>) => {
+        setErrorMessage(error.response?.data.message);
+      },
     });
   };
 
@@ -116,9 +126,23 @@ export function AddSubCategoryForm({ categoryId, }: Props) {
         errorMessage={errors.isProdHidden?.message}
       />
 
+      {errorMessage && (
+        <FormMessage>
+          {errorMessage}
+        </FormMessage>
+      )}
+
       <FormButtons>
         <Button>
           추가
+        </Button>
+
+        <Button
+          variant='red'
+          type='button'
+          onClick={onClickReset}
+        >
+          초기화
         </Button>
       </FormButtons>
 

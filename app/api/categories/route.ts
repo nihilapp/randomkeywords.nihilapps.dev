@@ -22,6 +22,20 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   const createCategoryDto: CreateCategory = await request.json();
 
+  const findCategory = await DB.categories().findFirst({
+    where: {
+      name: createCategoryDto.name,
+    },
+  });
+
+  if (findCategory) {
+    return NextResponse.json({
+      message: '이미 존재하는 카테고리입니다.',
+    }, {
+      status: 400,
+    });
+  }
+
   const category = await DB.categories().create({
     data: createCategoryDto,
   });

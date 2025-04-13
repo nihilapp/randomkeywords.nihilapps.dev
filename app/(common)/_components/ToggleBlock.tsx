@@ -15,7 +15,7 @@ interface Props
 
 const cssVariants = cva(
   [
-    `flex flex-col w-full border border-black-200 p-2 gap-2 rounded-2`,
+    `flex flex-col w-full border border-black-400 p-3 gap-5 rounded-2`,
   ],
   {
     variants: {},
@@ -44,7 +44,7 @@ export function ToggleBlock({
       {...props}
     >
       <div
-        className='flex flex-row items-center justify-between p-2 cursor-pointer bg-black-100 rounded-2 select-none hover:bg-black-base hover:text-white'
+        className='flex flex-row items-center justify-between p-2 cursor-pointer bg-black-200 rounded-2 select-none hover:bg-black-base hover:text-white transition-colors duration-200 ease-in-out'
         onClick={onClickOpen}
       >
         <h2 className='text-lg font-900'>
@@ -58,7 +58,7 @@ export function ToggleBlock({
         />
       </div>
       {isOpen && (
-        <div className='p-2 border border-black-200 rounded-2'>{children}</div>
+        <div className=''>{children}</div>
       )}
     </div>
   );

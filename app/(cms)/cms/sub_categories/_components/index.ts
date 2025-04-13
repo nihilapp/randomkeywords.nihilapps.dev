@@ -1,2 +1,3 @@
 export { AddSubCategoryForm } from './AddSubCategoryForm';
-export { SubCategoryItem } from './SubCategoryItem';
+export { SubCategoryDetail } from './SubCategoryDetail';
+export { SubCategoryList } from './SubCategoryList';

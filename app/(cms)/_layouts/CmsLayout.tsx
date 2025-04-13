@@ -9,7 +9,7 @@ interface Props {
 
 export function CmsLayout({ children, }: Props) {
   return (
-    <CmsContent styles='text-md'>
+    <CmsContent>
       {children}
     </CmsContent>
   );

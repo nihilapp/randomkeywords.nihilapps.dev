@@ -1,20 +1,40 @@
+import type { Prisma, SubCategory } from '@prisma/client';
 import { Api } from '@/_libs';
 import type {
-  SubCategory, CreateSubCategory, DeleteSubCategories, UpdateSubCategory,
-  ExSubCategory
+  CreateSubCategory, DeleteSubCategories, UpdateSubCategory
 } from '@/_types';
 
+// API 응답 페이지 타입을 정의
+interface SubCategoriesPage {
+  items: Prisma.SubCategoryGetPayload<{
+    include: { Category: { select: { name: true } } }
+  }>[]; // Category 정보 포함
+  nextCursor: string | undefined;
+  count: number;
+}
+
 export class SubCategoriesQuery {
-  static getAll() {
-    return Api.getQuery<ExSubCategory[]>('/sub_categories');
+  // getAll 함수 수정: params 를 받고 URLSearchParams 사용, 반환 타입 변경
+  static getAll(params?: { cursor?: string, limit?: number }) {
+    const queryParams = new URLSearchParams();
+    if (params?.limit) {
+      queryParams.set('limit', String(params.limit));
+    }
+    if (params?.cursor) {
+      queryParams.set('cursor', params.cursor);
+    }
+    const queryString = queryParams.toString();
+    const url = queryString ? `/sub_categories?${queryString}` : '/sub_categories';
+    // 반환 타입을 SubCategoriesPage 로 변경
+    return Api.getQuery<SubCategoriesPage>(url);
   }
 
   static getById(id: string) {
-    return Api.getQuery<ExSubCategory>(`/sub_categories/${id}`);
+    return Api.getQuery<SubCategory>(`/sub_categories/${id}`);
   }
 
   static getByCategoryId(categoryId: string) {
-    return Api.getQuery<ExSubCategory[]>(`/sub_categories/category/${categoryId}`);
+    return Api.getQuery<SubCategory[]>(`/sub_categories/category/${categoryId}`);
   }
 
   static create(createSubCategoryDto: CreateSubCategory) {

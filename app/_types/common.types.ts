@@ -1,5 +1,9 @@
 import type { CSSProperties } from 'styled-components';
 
+export interface ApiError {
+  message: string;
+}
+
 type OpenGraphType = 'article' | 'book' | 'music.song' | 'music.album' | 'music.playlist' | 'music.radio_station' | 'profile' | 'website' | 'video.tv_show' | 'video.other' | 'video.movie' | 'video.episode';
 
 export interface SiteMetadata {

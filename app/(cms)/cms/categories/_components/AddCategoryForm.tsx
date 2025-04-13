@@ -1,17 +1,19 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   number, object, string, type InferType
 } from 'yup';
 import { useQueryClient } from '@tanstack/react-query';
+import type { AxiosError } from 'axios';
 import {
-  Button, FormButtons, FormContainer, FormRadio, FormText
+  Button, FormButtons, FormContainer, FormMessage, FormRadio, FormText
 } from '@/(common)/_components/form';
 import { useCreateCategory, useGetCategories } from '@/_hooks/query/categories';
 import { categoriesKeys } from '@/_data';
+import type { ApiError } from '@/_types';
 
 interface FormValues {
   name: string;
@@ -20,6 +22,8 @@ interface FormValues {
 }
 
 export function AddCategoryForm() {
+  const [ errorMessage, setErrorMessage, ] = useState('');
+
   const { categories, done, } = useGetCategories();
 
   const formModel = object({
@@ -59,20 +63,29 @@ export function AddCategoryForm() {
   const createCategory = useCreateCategory();
   const queryClient = useQueryClient();
 
+  const onClickReset = () => {
+    form.reset();
+    createCategory.reset();
+    setErrorMessage('');
+  };
+
   const onSubmitForm: SubmitHandler<InferType<typeof formModel>> = (data) => {
     createCategory.mutate({
       name: data.name,
       order: data.order,
       isProdHidden: data.isProdHidden === 'true',
     }, {
-      onSuccess: (res) => {
-        console.log(res);
+      onSuccess: () => {
         queryClient.invalidateQueries({
           queryKey: categoriesKeys.all,
         });
 
         form.reset();
         createCategory.reset();
+        setErrorMessage('');
+      },
+      onError: (error: AxiosError<ApiError>) => {
+        setErrorMessage(error.response?.data.message);
       },
     });
   };
@@ -100,12 +113,25 @@ export function AddCategoryForm() {
         errorMessage={errors.isProdHidden?.message}
       />
 
+      {errorMessage && (
+        <FormMessage>
+          {errorMessage}
+        </FormMessage>
+      )}
+
       <FormButtons>
         <Button
           variant='blue'
           type='submit'
         >
           추가
+        </Button>
+        <Button
+          variant='red'
+          type='button'
+          onClick={onClickReset}
+        >
+          초기화
         </Button>
       </FormButtons>
     </FormContainer>

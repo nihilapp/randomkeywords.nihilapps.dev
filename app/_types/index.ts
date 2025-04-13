@@ -1,7 +1,8 @@
 export type {
   SiteConfig,
   SiteMetadata,
-  CssType
+  CssType,
+  ApiError
 } from './common.types';
 
 export type {

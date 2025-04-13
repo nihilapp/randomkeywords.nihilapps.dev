@@ -11,12 +11,13 @@ interface Props
   styles?: string;
   href: string;
   name: string;
-  length: number;
+  length?: number;
+  upperCategory?: string;
 }
 
 const cssVariants = cva(
   [
-    `flex flex-row items-center justify-between p-2 rounded-2 border border-black-100 hover:bg-black-100`,
+    `flex flex-row justify-between p-2 rounded-2 border border-black-200 hover:bg-blue-50 hover:border-blue-200 transition-colors duration-200 ease-in-out`,
   ],
   {
     variants: {},
@@ -26,7 +27,7 @@ const cssVariants = cva(
 );
 
 export function ListItem({
-  styles, href, name, length, ...props
+  styles, href, name, length, upperCategory, ...props
 }: Props) {
   return (
     <Link
@@ -37,14 +38,19 @@ export function ListItem({
       {...props}
       href={href}
     >
-      <span>
-        {name}
-      </span>
-      <span
-        className='text-sm bg-black-base text-white p-1 px-3 rounded-2'
-      >
-        {length}
-      </span>
+      <div className='flex flex-col items-start'>
+        <span className='text-xs text-gray-500'>{upperCategory}</span>
+        <span>
+          {name}
+        </span>
+      </div>
+      {length && (
+        <span
+          className='text-sm bg-black-base text-white p-2 px-3 rounded-2 flex items-center justify-center'
+        >
+          {length || ''}
+        </span>
+      )}
     </Link>
   );
 }
