@@ -3,27 +3,23 @@ import type { Prisma } from '@prisma/client';
 export type ExSubCategory = Prisma.SubCategoryGetPayload<{
   include: {
     _count: {
-      select: {
-        Keyword: true,
-      },
+      select: { keyword: true, },
     },
-    Category: {
-      select: {
-        name: true,
-      },
+    category: {
+      select: { name: true, },
     },
   };
 }>;
 
 export interface CreateSubCategory {
   name: string
-  categoryId: string
-  isProdHidden?: boolean
+  category_id: string
+  is_prod_hidden?: boolean
 }
 
 export interface UpdateSubCategory {
   name?: string;
-  isProdHidden?: boolean;
+  is_prod_hidden?: boolean;
 }
 
 export interface DeleteSubCategories {

@@ -12,16 +12,16 @@ import { SearchBar } from '@/(cms)/cms/_components';
 
 interface Props {
   word: string;
-  subCategoryId: string;
+  sub_category_id: string;
   styles?: string;
 }
 
 interface FormValues {
   search: string;
-  subCategoryId: string;
+  sub_category_id: string;
 }
 
-export function SearchingList({ word, subCategoryId, styles, }: Props) {
+export function SearchingList({ word, sub_category_id, styles, }: Props) {
   const router = useRouter();
 
   const {
@@ -32,7 +32,7 @@ export function SearchingList({ word, subCategoryId, styles, }: Props) {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useSearchKeywords(word, subCategoryId);
+  } = useSearchKeywords(word, sub_category_id);
 
   const { data: subCategoryOptions, isLoading: isLoadingSubCategories, } = useGetSubCategoryOptions();
 
@@ -45,17 +45,17 @@ export function SearchingList({ word, subCategoryId, styles, }: Props) {
     mode: 'onSubmit',
     defaultValues: {
       search: word,
-      subCategoryId,
+      sub_category_id,
     },
   });
 
   const onSubmitSearch = (data: FormValues) => {
-    const { search, subCategoryId, } = data;
+    const { search, sub_category_id, } = data;
 
     if (search) {
       let queryString = `word=${encodeURIComponent(search)}`;
-      if (subCategoryId && subCategoryId !== 'all') {
-        queryString += `&subCategoryId=${subCategoryId}`;
+      if (sub_category_id && sub_category_id !== 'all') {
+        queryString += `&sub_category_id=${sub_category_id}`;
       }
       router.push(`/cms/keywords/search?${queryString}`);
     }
@@ -65,7 +65,7 @@ export function SearchingList({ word, subCategoryId, styles, }: Props) {
     if (word && inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  }, [ word, subCategoryId, inView, hasNextPage, isFetchingNextPage, fetchNextPage, ]);
+  }, [ word, sub_category_id, inView, hasNextPage, isFetchingNextPage, fetchNextPage, ]);
 
   if (!word) {
     return <div className='text-center text-gray-500'>검색어를 입력해주세요.</div>;
@@ -92,7 +92,7 @@ export function SearchingList({ word, subCategoryId, styles, }: Props) {
                 <SearchBar<FormValues>
                   register={form.register}
                   name='search'
-                  subCategoryFieldName='subCategoryId'
+                  subCategoryFieldName='sub_category_id'
                   subCategories={subCategoryOptions}
                   placeholder={`'${word}' 검색 결과 중 다시 검색`}
                   styles='w-full'
@@ -109,7 +109,7 @@ export function SearchingList({ word, subCategoryId, styles, }: Props) {
                       key={keyword.id}
                       mode='nolink'
                       name={keyword.keyword}
-                      upperCategory={keyword.SubCategory.name}
+                      upperCategory={keyword.sub_category.name}
                     />
                   ))}
                   {hasNextPage && keywords.length >= 50 && (

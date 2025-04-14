@@ -99,7 +99,7 @@ export function CategoryList({ styles, ...props }: Props) {
                       key={item.id}
                       href={`/cms/categories/${item.id}`}
                       name={item.name}
-                      length={item.SubCategory.length || 0}
+                      length={item.sub_category.length || 0}
                     />
                   ))}
                 </div>

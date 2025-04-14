@@ -2,7 +2,7 @@
 
 import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
-import { cn } from '@/_libs';
+import { cn, tools } from '@/_libs';
 import { InfoBlock, LoadingCircle, ToggleBlock } from '@/(common)/_components';
 import { useGetSubCategoryById } from '@/_hooks/query/sub_categories';
 import { AddKeywordForm } from '@/(cms)/cms/keywords/_components/AddKeywordForm';
@@ -42,7 +42,7 @@ export function SubCategoryDetail({ styles, id, ...props }: Props) {
         {loading && (
           <LoadingCircle />
         )}
-        {done && (
+        {done && subCategory && (
           <div className='space-y-2'>
             <InfoBlock
               name='이름'
@@ -50,12 +50,16 @@ export function SubCategoryDetail({ styles, id, ...props }: Props) {
             />
             <InfoBlock
               name='노출 여부'
-              content={subCategory.isProdHidden ? '비노출' : '노출'}
+              content={subCategory.is_prod_hidden ? '비노출' : '노출'}
             />
             <InfoBlock
               name='키워드 개수'
-              content={subCategory._count.Keyword.toString()}
+              content={(subCategory._count?.keyword ?? 0).toString()}
               suffix='개'
+            />
+            <InfoBlock
+              name='생성일'
+              content={tools.calendar.dateToFormat(subCategory.created_at)}
             />
           </div>
         )}
@@ -65,7 +69,7 @@ export function SubCategoryDetail({ styles, id, ...props }: Props) {
         title='키워드 추가'
       >
         <AddKeywordForm
-          subCategoryId={id}
+          sub_category_id={id}
         />
       </ToggleBlock>
     </div>

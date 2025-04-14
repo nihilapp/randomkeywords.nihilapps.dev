@@ -14,14 +14,14 @@ import { subCategoriesKeys } from '@/_data';
 import type { ApiError } from '@/_types';
 
 interface Props {
-  subCategoryId: string;
+  sub_category_id: string;
 }
 
 interface FormValues {
   keyword: string;
 }
 
-export function AddKeywordForm({ subCategoryId, }: Props) {
+export function AddKeywordForm({ sub_category_id, }: Props) {
   const [ errorMessage, setErrorMessage, ] = useState('');
 
   const formModel = object({
@@ -50,12 +50,12 @@ export function AddKeywordForm({ subCategoryId, }: Props) {
 
   const onSubmitForm: SubmitHandler<InferType<typeof formModel>> = (data) => {
     createKeyword.mutate({
-      subCategoryId,
+      sub_category_id,
       keyword: data.keyword,
     }, {
       onSuccess: () => {
         qc.invalidateQueries({
-          queryKey: subCategoriesKeys.detailId(subCategoryId),
+          queryKey: subCategoriesKeys.detailId(sub_category_id),
         });
 
         qc.invalidateQueries({

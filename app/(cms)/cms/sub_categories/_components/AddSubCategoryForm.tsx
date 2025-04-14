@@ -15,22 +15,22 @@ import { categoriesKeys, subCategoriesKeys } from '@/_data';
 import type { ApiError } from '@/_types';
 
 interface Props {
-  categoryId: string;
+  category_id: string;
 }
 
 interface FormValues {
   name: string;
-  isProdHidden: string;
+  is_prod_hidden: string;
 }
 
-export function AddSubCategoryForm({ categoryId, }: Props) {
+export function AddSubCategoryForm({ category_id, }: Props) {
   const [ errorMessage, setErrorMessage, ] = useState('');
-  const { category, done, } = useGetCategoryById(categoryId);
+  const { category, done, } = useGetCategoryById(category_id);
 
   const formModel = object({
     name: string()
       .required('이름을 입력해주세요.'),
-    isProdHidden: string(),
+    is_prod_hidden: string(),
   });
 
   const form = useForm<FormValues>({
@@ -38,7 +38,7 @@ export function AddSubCategoryForm({ categoryId, }: Props) {
     mode: 'all',
     defaultValues: {
       name: '',
-      isProdHidden: category?.isProdHidden ? 'true' : 'false',
+      is_prod_hidden: category?.is_prod_hidden ? 'true' : 'false',
     },
     reValidateMode: 'onChange',
     shouldFocusError: true,
@@ -52,8 +52,8 @@ export function AddSubCategoryForm({ categoryId, }: Props) {
   useEffect(() => {
     if (done) {
       form.setValue(
-        'isProdHidden',
-        category.isProdHidden ? 'true' : 'false'
+        'is_prod_hidden',
+        category.is_prod_hidden ? 'true' : 'false'
       );
     }
   }, [ category, done, ]);
@@ -71,9 +71,9 @@ export function AddSubCategoryForm({ categoryId, }: Props) {
 
   const onSubmitForm: SubmitHandler<InferType<typeof formModel>> = (data) => {
     createSubCategory.mutate({
-      categoryId,
+      category_id,
       name: data.name,
-      isProdHidden: data.isProdHidden === 'false',
+      is_prod_hidden: data.is_prod_hidden === 'false',
     }, {
       onSuccess: () => {
         qc.invalidateQueries({
@@ -81,7 +81,7 @@ export function AddSubCategoryForm({ categoryId, }: Props) {
         });
 
         qc.invalidateQueries({
-          queryKey: categoriesKeys.detailId(categoryId),
+          queryKey: categoriesKeys.detailId(category_id),
         });
 
         qc.invalidateQueries({
@@ -89,7 +89,7 @@ export function AddSubCategoryForm({ categoryId, }: Props) {
         });
 
         qc.invalidateQueries({
-          queryKey: subCategoriesKeys.detailId(categoryId),
+          queryKey: subCategoriesKeys.detailId(category_id),
         });
 
         createSubCategory.reset();
@@ -111,7 +111,7 @@ export function AddSubCategoryForm({ categoryId, }: Props) {
       />
 
       <FormRadio
-        name='isProdHidden'
+        name='is_prod_hidden'
         label='노출 여부'
         items={[
           {
@@ -123,7 +123,7 @@ export function AddSubCategoryForm({ categoryId, }: Props) {
             value: 'true',
           },
         ]}
-        errorMessage={errors.isProdHidden?.message}
+        errorMessage={errors.is_prod_hidden?.message}
       />
 
       {errorMessage && (

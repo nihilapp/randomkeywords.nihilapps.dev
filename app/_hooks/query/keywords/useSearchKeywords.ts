@@ -4,7 +4,7 @@ import { KeywordsQuery } from '@/_features';
 import { useLoading } from '@/_hooks/useLoading';
 import type { KeywordsPage, KeywordInfiniteQueryData } from '@/_types/keywords.types';
 
-export function useSearchKeywords(word: string, subCategoryId: string = 'all') {
+export function useSearchKeywords(word: string, sub_category_id: string = 'all') {
   const {
     data,
     isLoading,
@@ -15,11 +15,11 @@ export function useSearchKeywords(word: string, subCategoryId: string = 'all') {
     isFetchingNextPage,
     ...query
   } = useInfiniteQuery<KeywordsPage, Error, KeywordInfiniteQueryData, ReturnType<typeof keywordsKeys.search>, string | undefined>({
-    queryKey: keywordsKeys.search(word, subCategoryId),
+    queryKey: keywordsKeys.search(word, sub_category_id),
     queryFn: ({ pageParam, }) => KeywordsQuery.search({
       word,
       cursor: pageParam,
-      subCategoryId,
+      sub_category_id,
     }),
     initialPageParam: undefined,
     getNextPageParam: (lastPage) => lastPage.nextCursor,

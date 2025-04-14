@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     const limitParam = searchParams.get('limit');
     const parsedLimit = limitParam ? parseInt(limitParam, 10) : NaN; // 10진수로 변환 시도
     const limit = !Number.isNaN(parsedLimit) && parsedLimit > 0 ? parsedLimit : LIMIT; // 유효한 양수인지 확인
-    const subCategoryId = searchParams.get('subCategoryId');
+    const sub_category_id = searchParams.get('subCategoryId');
 
     // 검색어 유효성 검사
     if (!word) {
@@ -33,8 +33,8 @@ export async function GET(request: NextRequest) {
     };
 
     // subCategoryId 조건 추가 (존재하고 'all'이 아닐 경우)
-    if (subCategoryId && subCategoryId !== 'all') {
-      whereCondition.subCategoryId = subCategoryId;
+    if (sub_category_id && sub_category_id !== 'all') {
+      whereCondition.sub_category_id = sub_category_id;
     }
 
     // 검색 쿼리 설정
@@ -42,10 +42,10 @@ export async function GET(request: NextRequest) {
       take: limit,
       where: whereCondition,
       include: {
-        SubCategory: { select: { name: true, }, }, // 연관된 서브카테고리 이름 포함
+        sub_category: { select: { name: true, }, }, // 연관된 서브카테고리 이름 포함
       },
       orderBy: {
-        createdAt: 'desc', // 최신순 정렬
+        created_at: 'desc', // 최신순 정렬
       },
     };
 

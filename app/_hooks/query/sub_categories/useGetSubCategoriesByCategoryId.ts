@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { subCategoriesKeys } from '@/_data';
-import { SubCategoriesQuery } from '@/_features';
-import { useLoading } from '@/_hooks/useLoading';
+import { SubCategoriesQuery } from '@/_features/query/sub_categories.query';
+import { subCategoriesKeys } from '@/_data/keys.data';
 import { useDone } from '@/_hooks/useDone';
+import { useLoading } from '@/_hooks/useLoading';
 
-export function useGetSubCategoriesByCategoryId(categoryId: string) {
+export function useGetSubCategoriesByCategoryId(category_id: string) {
   const {
     data: subCategories,
     isLoading,
@@ -12,16 +12,16 @@ export function useGetSubCategoriesByCategoryId(categoryId: string) {
     isSuccess,
     ...query
   } = useQuery({
-    queryKey: subCategoriesKeys.detailCategoryId(categoryId),
-    queryFn: () => SubCategoriesQuery.getByCategoryId(categoryId),
-    enabled: !!categoryId,
+    queryKey: subCategoriesKeys.detailCategoryId(category_id),
+    queryFn: () => SubCategoriesQuery.getByCategoryId(category_id),
+    enabled: !!category_id,
   });
 
   const loading = useLoading(isLoading, isFetching);
   const done = useDone(loading, isSuccess);
 
   return {
-    subCategories,
+    subCategories: subCategories ?? [],
     loading,
     done,
     ...query,

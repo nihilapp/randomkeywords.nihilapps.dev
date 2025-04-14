@@ -19,10 +19,10 @@ export async function GET(request: NextRequest, { params, }: Params) {
     include: {
       _count: {
         select: {
-          Keyword: true,
+          keyword: true,
         },
       },
-      Category: {
+      category: {
         select: {
           name: true,
         },

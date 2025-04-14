@@ -1,45 +1,45 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Category {
-  id           String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name         String
-  order        Int?          @default(0)
-  isProdHidden Boolean?      @default(false)
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  SubCategory  SubCategory[]
+  id             String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name           String
+  order          Int?          @default(0)
+  is_prod_hidden Boolean?      @default(false)
+  created_at     DateTime      @default(now())
+  updated_at     DateTime      @updatedAt
+  sub_category   SubCategory[]
 
   @@map("categories")
 }
 
 model SubCategory {
-  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  categoryId   String    @db.Uuid
-  name         String
-  isProdHidden Boolean?  @default(false)
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  Keyword      Keyword[]
-  Category     Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  id             String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  category_id    String    @db.Uuid
+  name           String
+  is_prod_hidden Boolean?  @default(false)
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
+  keyword        Keyword[]
+  category       Category  @relation(fields: [category_id], references: [id], onDelete: Cascade)
 
   @@map("sub_categories")
 }
 
 model Keyword {
-  id            String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  subCategoryId String      @db.Uuid
-  keyword       String
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-  SubCategory   SubCategory @relation(fields: [subCategoryId], references: [id], onDelete: Cascade)
+  id              String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  sub_category_id String      @db.Uuid
+  keyword         String
+  created_at      DateTime    @default(now())
+  updated_at      DateTime    @updatedAt
+  sub_category    SubCategory @relation(fields: [sub_category_id], references: [id], onDelete: Cascade)
 
   @@map("keywords")
 }

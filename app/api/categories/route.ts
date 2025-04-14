@@ -3,19 +3,19 @@ import { DB } from '@/api/_libs';
 import type { CreateCategory, DeleteCategories } from '@/_types';
 
 // 카테고리 목록 조회 (서브카테고리 포함)
-export async function GET() {
+export async function GET(request: NextRequest) {
   const categories = await DB.categories().findMany({
+    orderBy: {
+      order: 'asc',
+    },
     include: {
-      SubCategory: {
+      sub_category: {
         include: {
           _count: {
-            select: { Keyword: true, },
+            select: { keyword: true, },
           },
         },
       },
-    },
-    orderBy: {
-      order: 'asc',
     },
   });
 

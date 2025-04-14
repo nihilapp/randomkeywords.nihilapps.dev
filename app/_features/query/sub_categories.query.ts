@@ -7,9 +7,9 @@ import type {
 // API 응답 페이지 타입을 정의
 interface SubCategoriesPage {
   items: Prisma.SubCategoryGetPayload<{
-    include: { Category: { select: { name: true } }, _count: { select: { Keyword: true } } }
+    include: { category: { select: { name: true } }, _count: { select: { keyword: true } } }
   }>[]; // Category 정보 포함
-  nextCursor: string | undefined;
+  next_cursor: string | undefined;
   count: number;
 }
 
@@ -33,8 +33,8 @@ export class SubCategoriesQuery {
     return Api.getQuery<ExSubCategory>(`/sub_categories/${id}`);
   }
 
-  static getByCategoryId(categoryId: string) {
-    return Api.getQuery<SubCategory[]>(`/sub_categories/category/${categoryId}`);
+  static getByCategoryId(category_id: string) {
+    return Api.getQuery<SubCategory[]>(`/sub_categories/category/${category_id}`);
   }
 
   static create(createSubCategoryDto: CreateSubCategory) {

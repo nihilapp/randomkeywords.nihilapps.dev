@@ -27,10 +27,10 @@ export async function GET(request: NextRequest) {
     include: {
       _count: {
         select: {
-          Keyword: true,
+          keyword: true,
         },
       },
-      Category: {
+      category: {
         select: {
           name: true,
         },

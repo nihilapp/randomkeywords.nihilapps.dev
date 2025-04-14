@@ -2,16 +2,22 @@ import type { InfiniteData } from '@tanstack/react-query';
 import type { Prisma } from '@prisma/client';
 
 export interface KeywordsPage {
-  items: Prisma.KeywordGetPayload<{
-    include: { SubCategory: { select: { name: true } } }
-  }>[];
-  nextCursor: string | undefined;
+  items: ExKeyword[];
+  nextCursor?: string;
   count: number;
 }
 
+export type ExKeyword = Prisma.KeywordGetPayload<{
+  include: {
+    sub_category: {
+      select: { name: true, },
+    };
+  };
+}>;
+
 export interface CreateKeyword {
   keyword: string;
-  subCategoryId: string;
+  sub_category_id: string;
 }
 
 export interface UpdateKeyword {
@@ -22,4 +28,4 @@ export interface DeleteKeywords {
   ids: string[];
 }
 
-export type KeywordInfiniteQueryData = InfiniteData<KeywordsPage>;
+export type KeywordInfiniteQueryData = InfiniteData<KeywordsPage, string | undefined>;

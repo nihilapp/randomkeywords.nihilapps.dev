@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
     },
     // 연관된 SubCategory의 name을 함께 조회
     include: {
-      SubCategory: {
+      sub_category: {
         select: {
           name: true,
         },

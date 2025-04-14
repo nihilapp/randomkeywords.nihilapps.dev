@@ -113,8 +113,8 @@ export function SubCategoryList({ styles, ...props }: Props) {
                       key={subCategory.id}
                       href={`/cms/sub_categories/${subCategory.id}`}
                       name={subCategory.name}
-                      upperCategory={subCategory.Category.name}
-                      length={subCategory._count.Keyword}
+                      upperCategory={subCategory.category.name}
+                      length={subCategory._count.keyword}
                     />
                   ))}
                   {hasNextPage && (

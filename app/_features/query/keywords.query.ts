@@ -24,9 +24,9 @@ export class KeywordsQuery {
   }
 
   // 키워드 검색 함수 수정
-  // 파라미터에 subCategoryId 추가
-  static search(params: { word: string, subCategoryId?: string, cursor?: string, limit?: number }) {
-    // subCategoryId가 존재하고 'all'이 아니면 쿼리 파라미터에 추가
+  // 파라미터에 sub_category_id 추가
+  static search(params: { word: string, sub_category_id?: string, cursor?: string, limit?: number }) {
+    // sub_category_id가 존재하고 'all'이 아니면 쿼리 파라미터에 추가
     // URLSearchParams를 사용하여 쿼리 문자열 생성
     const queryParams = new URLSearchParams();
 
@@ -34,8 +34,8 @@ export class KeywordsQuery {
     queryParams.set('word', params.word);
 
     // 선택적 파라미터들은 존재할 때만 추가
-    if (params.subCategoryId && params.subCategoryId !== 'all') {
-      queryParams.set('subCategoryId', params.subCategoryId);
+    if (params.sub_category_id && params.sub_category_id !== 'all') {
+      queryParams.set('sub_category_id', params.sub_category_id);
     }
 
     if (params.cursor) {
@@ -55,8 +55,8 @@ export class KeywordsQuery {
     return Api.getQuery<Keyword>(`/keywords/${id}`);
   }
 
-  static getBySubCategoryId(subCategoryId: string) {
-    return Api.getQuery<Keyword[]>(`/keywords/sub_category/${subCategoryId}`);
+  static getBySubCategoryId(sub_category_id: string) {
+    return Api.getQuery<Keyword[]>(`/keywords/sub_category/${sub_category_id}`);
   }
 
   static create(createKeywordDto: CreateKeyword) {

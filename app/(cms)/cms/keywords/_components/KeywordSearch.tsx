@@ -7,12 +7,12 @@ import { SearchingList } from './SearchingList';
 export function KeywordSearch() {
   const searchParams = useSearchParams();
   const word = searchParams.get('word') ?? '';
-  const subCategoryId = searchParams.get('subCategoryId') ?? 'all';
+  const sub_category_id = searchParams.get('sub_category_id') ?? 'all';
 
   return (
     <SearchingList
       word={word}
-      subCategoryId={subCategoryId}
+      sub_category_id={sub_category_id}
     />
   );
 }

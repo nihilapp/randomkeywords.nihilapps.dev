@@ -9,13 +9,6 @@ import {
 import { useGetCategoryById } from '@/_hooks/query/categories';
 import { AddSubCategoryForm } from '@/(cms)/cms/sub_categories/_components';
 
-interface Props
-  extends React.HTMLAttributes<HTMLDivElement>,
-  VariantProps<typeof cssVariants> {
-  styles?: string;
-  id: string;
-}
-
 const cssVariants = cva(
   [
     `space-y-5`,
@@ -26,6 +19,13 @@ const cssVariants = cva(
     compoundVariants: [],
   }
 );
+
+interface Props
+  extends React.HTMLAttributes<HTMLDivElement>,
+  VariantProps<typeof cssVariants> {
+  styles?: string;
+  id: string;
+}
 
 export function CategoryDetail({ styles, id, ...props }: Props) {
   const { category, loading, done, } = useGetCategoryById(id);
@@ -44,7 +44,7 @@ export function CategoryDetail({ styles, id, ...props }: Props) {
         {loading && (
           <LoadingCircle />
         )}
-        {done && (
+        {done && category && (
           <div className='space-y-2'>
             <InfoBlock
               name='이름'
@@ -52,17 +52,21 @@ export function CategoryDetail({ styles, id, ...props }: Props) {
             />
             <InfoBlock
               name='카테고리 순서'
-              content={category.order.toString()}
+              content={(category.order ?? 0).toString()}
               suffix='번'
             />
             <InfoBlock
               name='노출 여부'
-              content={category.isProdHidden ? '비노출' : '노출'}
+              content={category.is_prod_hidden ? '비노출' : '노출'}
             />
             <InfoBlock
               name='서브 카테고리 개수'
-              content={category.SubCategory.length.toString()}
+              content={category.sub_category.length.toString()}
               suffix='개'
+            />
+            <InfoBlock
+              name='생성일'
+              content={tools.calendar.dateToFormat(category.created_at)}
             />
           </div>
         )}
@@ -74,22 +78,22 @@ export function CategoryDetail({ styles, id, ...props }: Props) {
         {loading && (
           <LoadingCircle />
         )}
-        {done && (
+        {done && category && (
           <>
-            {category.SubCategory.length > 0 && (
+            {category.sub_category.length > 0 && (
               <div className='grid grid-cols-2 mo-md:grid-cols-3 gap-2'>
-                {category.SubCategory.map((item) => (
+                {category.sub_category.map((item) => (
                   <ListItem
                     key={tools.common.uuid()}
                     name={item.name}
                     href={`/cms/sub_categories/${item.id}`}
                     id={item.id}
-                    length={item._count.Keyword}
+                    length={item._count?.keyword ?? 0}
                   />
                 ))}
               </div>
             )}
-            {category.SubCategory.length === 0 && (
+            {category.sub_category.length === 0 && (
               <div className='text-center text-h3 font-900'>
                 서브 카테고리가 없습니다.
               </div>
@@ -102,7 +106,7 @@ export function CategoryDetail({ styles, id, ...props }: Props) {
         title='서브 카테고리 추가'
       >
         <AddSubCategoryForm
-          categoryId={id}
+          category_id={id}
         />
       </ToggleBlock>
     </div>

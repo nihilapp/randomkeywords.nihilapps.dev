@@ -18,7 +18,7 @@ import type { ApiError } from '@/_types';
 interface FormValues {
   name: string;
   order: number;
-  isProdHidden: string;
+  is_prod_hidden: string;
 }
 
 export function AddCategoryForm() {
@@ -32,7 +32,7 @@ export function AddCategoryForm() {
     order: number()
       .min(1, '순서는 1 이상이어야 합니다.')
       .required('순서를 입력해주세요.'),
-    isProdHidden: string().default('false'),
+    is_prod_hidden: string().default('false'),
   });
 
   const form = useForm<FormValues>({
@@ -41,7 +41,7 @@ export function AddCategoryForm() {
     defaultValues: {
       name: '',
       order: 1,
-      isProdHidden: 'false',
+      is_prod_hidden: 'false',
     },
     reValidateMode: 'onChange',
     shouldFocusError: true,
@@ -73,7 +73,7 @@ export function AddCategoryForm() {
     createCategory.mutate({
       name: data.name,
       order: data.order,
-      isProdHidden: data.isProdHidden === 'true',
+      is_prod_hidden: data.is_prod_hidden === 'true',
     }, {
       onSuccess: () => {
         queryClient.invalidateQueries({
@@ -104,13 +104,13 @@ export function AddCategoryForm() {
         errorMessage={errors.order?.message}
       />
       <FormRadio
-        name='isProdHidden'
+        name='is_prod_hidden'
         label='노출 여부'
         items={[
           { label: '노출', value: 'false', },
           { label: '미노출', value: 'true', },
         ]}
-        errorMessage={errors.isProdHidden?.message}
+        errorMessage={errors.is_prod_hidden?.message}
       />
 
       {errorMessage && (

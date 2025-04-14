@@ -15,11 +15,12 @@ interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
   styles?: string;
+  sub_category_id: string;
 }
 
 interface FormValues {
   search: string;
-  subCategoryId: string;
+  sub_category_id: string;
 }
 
 const cssVariants = cva(
@@ -33,7 +34,7 @@ const cssVariants = cva(
   }
 );
 
-export function KeywordList({ styles, ...props }: Props) {
+export function KeywordList({ styles, sub_category_id, ...props }: Props) {
   const {
     keywords,
     isLoading,
@@ -56,17 +57,17 @@ export function KeywordList({ styles, ...props }: Props) {
     mode: 'onSubmit',
     defaultValues: {
       search: '',
-      subCategoryId: 'all',
+      sub_category_id: sub_category_id ?? 'all',
     },
   });
 
   const onSubmitSearch = (data: FormValues) => {
-    const { search, subCategoryId, } = data;
+    const { search, sub_category_id, } = data;
 
     if (search) {
       let queryString = `word=${encodeURIComponent(search)}`;
-      if (subCategoryId && subCategoryId !== 'all') {
-        queryString += `&subCategoryId=${subCategoryId}`;
+      if (sub_category_id && sub_category_id !== 'all') {
+        queryString += `&subCategoryId=${sub_category_id}`;
       }
       router.push(`/cms/keywords/search?${queryString}`);
     }
@@ -100,7 +101,7 @@ export function KeywordList({ styles, ...props }: Props) {
                 <SearchBar<FormValues>
                   register={form.register}
                   name='search'
-                  subCategoryFieldName='subCategoryId'
+                  subCategoryFieldName='sub_category_id'
                   subCategories={subCategoryOptions}
                   placeholder={`총 ${totalCount}개 키워드 검색`}
                   styles='w-full'
@@ -115,7 +116,7 @@ export function KeywordList({ styles, ...props }: Props) {
                       key={keyword.id}
                       mode='nolink'
                       name={keyword.keyword}
-                      upperCategory={keyword.SubCategory.name}
+                      upperCategory={keyword.sub_category.name}
                     />
                   ))}
                   {hasNextPage && keywords.length >= 50 && (
