@@ -32,19 +32,28 @@ export function CmsHome({ styles, ...props }: Props) {
     categories,
     loading: categoriesLoading,
     done: categoriesDone,
+    error: categoriesError,
   } = useGetCategories();
 
   const {
     loading: subCategoriesLoading,
     done: subCategoriesDone,
     totalCount: subCategoriesTotalCount,
+    error: subCategoriesError,
   } = useGetSubCategories();
 
   const {
     loading: keywordsLoading,
     done: keywordsDone,
     totalCount: keywordsTotalCount,
+    error: keywordsError,
   } = useGetKeywords();
+
+  console.log({
+    categoriesError,
+    subCategoriesError,
+    keywordsError,
+  });
 
   return (
     <div
