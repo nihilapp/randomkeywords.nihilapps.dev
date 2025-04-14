@@ -12,7 +12,6 @@ export const siteConfig: SiteConfig = {
   type: 'website',
   url: process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    // : 'http://localhost:3000',
     : 'https://randomkeywords.nihilapps.dev',
   cover: {
     link: '/opengraph-image.png',
