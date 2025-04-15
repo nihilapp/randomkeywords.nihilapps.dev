@@ -15,6 +15,8 @@ export function useGetCategoryById(id: string) {
     queryKey: categoriesKeys.detailId(id),
     queryFn: () => CategoriesQuery.getById(id),
     enabled: !!id,
+    staleTime: Infinity,
+    gcTime: Infinity,
   });
 
   const loading = useLoading(isLoading, isFetching);

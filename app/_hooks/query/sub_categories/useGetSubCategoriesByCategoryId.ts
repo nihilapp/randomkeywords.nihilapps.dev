@@ -15,6 +15,8 @@ export function useGetSubCategoriesByCategoryId(category_id: string) {
     queryKey: subCategoriesKeys.detailCategoryId(category_id),
     queryFn: () => SubCategoriesQuery.getByCategoryId(category_id),
     enabled: !!category_id,
+    staleTime: Infinity,
+    gcTime: Infinity,
   });
 
   const loading = useLoading(isLoading, isFetching);

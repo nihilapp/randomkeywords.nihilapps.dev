@@ -2,6 +2,8 @@
 
 import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
+import Link from 'next/link';
+import { MdSettings } from 'react-icons/md';
 import { cn } from '@/_libs';
 
 interface Props
@@ -30,7 +32,12 @@ export function CommonFooter({ styles, ...props }: Props) {
       )}
       {...props}
     >
-      footer
+      {process.env.NODE_ENV === 'development' && (
+        <Link href='/cms' className='flex flex-row gap-1 items-center justify-center text-white p-2 border border-black-0 rounded-2 hover:bg-white hover:text-black-base transition-colors duration-200 ease-in-out'>
+          <MdSettings />
+          <span>CMS 홈으로</span>
+        </Link>
+      )}
     </footer>
   );
 }

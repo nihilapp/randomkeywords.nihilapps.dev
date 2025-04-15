@@ -12,7 +12,7 @@ export function useGetSubCategoryOptions() {
   return useQuery<SubCategoryOption[], Error>({
     queryKey: subCategoriesKeys.options(), // 새로운 쿼리 키 정의 필요
     queryFn: getSubCategoryIds,
-    staleTime: Infinity, // 서브 카테고리 목록은 자주 변하지 않으므로 캐시 유지
+    staleTime: Infinity,
     gcTime: Infinity,
     refetchOnWindowFocus: false,
   });

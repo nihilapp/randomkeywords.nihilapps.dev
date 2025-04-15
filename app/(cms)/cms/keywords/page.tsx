@@ -8,6 +8,7 @@ interface Props {}
 export const metadata = setMeta({
   title: `키워드 관리`,
   url: `/cms/keywords`,
+  robots: 'noindex, nofollow',
 });
 
 export default function page() {

@@ -34,7 +34,7 @@ export class SubCategoriesQuery {
   }
 
   static getByCategoryId(category_id: string) {
-    return Api.getQuery<SubCategory[]>(`/sub_categories/category/${category_id}`);
+    return Api.getQuery<ExSubCategory[]>(`/sub_categories/category_id/${category_id}`);
   }
 
   static create(createSubCategoryDto: CreateSubCategory) {

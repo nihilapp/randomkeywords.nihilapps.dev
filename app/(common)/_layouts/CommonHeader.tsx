@@ -4,6 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
 import { cn } from '@/_libs';
 import { Logo } from '@/(common)/_layouts/Logo';
+import { siteConfig } from '@/_config';
 
 interface Props
   extends React.HTMLAttributes<HTMLElement>,
@@ -31,8 +32,10 @@ export function CommonHeader({ styles, ...props }: Props) {
       )}
       {...props}
     >
-      <Logo />
-      header
+      <Logo
+        href='/'
+        title={siteConfig.title}
+      />
     </header>
   );
 }

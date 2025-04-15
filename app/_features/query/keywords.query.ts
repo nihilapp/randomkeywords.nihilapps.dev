@@ -56,7 +56,7 @@ export class KeywordsQuery {
   }
 
   static getBySubCategoryId(sub_category_id: string) {
-    return Api.getQuery<Keyword[]>(`/keywords/sub_category/${sub_category_id}`);
+    return Api.getQuery<Keyword[]>(`/keywords/sub_category_id/${sub_category_id}`);
   }
 
   static create(createKeywordDto: CreateKeyword) {

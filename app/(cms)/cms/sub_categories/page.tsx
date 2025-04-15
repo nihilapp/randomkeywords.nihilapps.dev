@@ -8,6 +8,7 @@ interface Props {}
 export const metadata = setMeta({
   title: `서브 카테고리 관리`,
   url: `/cms/sub_categories`,
+  robots: 'noindex, nofollow',
 });
 
 export default function CmsSubCategoriesPage() {

@@ -33,12 +33,16 @@ export function CmsContent({ children, styles, ...props }: Props) {
       )}
       {...props}
     >
-      <aside className='order-2 mo-md:order-1 p-5 w-full mo-md:w-[350px] bg-black-700 mo-md:overflow-y-auto flex flex-col gap-5 shrink-0'>
+      <aside
+        className='order-2 mo-md:order-1 p-5 w-full mo-md:w-[350px] bg-black-700 mo-md:overflow-y-auto flex flex-col gap-5 shrink-0'
+      >
         <CmsHeader />
         <CmsNav />
         <CmsFooter />
       </aside>
-      <main className='order-1 mo-md:order-2 p-5 dvh-100 mo-md:overflow-y-auto mo-md:w-full'>
+      <main
+        className='order-1 mo-md:order-2 p-5 dvh-100 mo-md:overflow-y-auto mo-md:w-full'
+      >
         {children}
       </main>
     </div>

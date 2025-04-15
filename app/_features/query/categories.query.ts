@@ -16,6 +16,12 @@ export class CategoriesQuery {
     return Api.getQuery<ExCategory>(`/categories/${id}`);
   }
 
+  static getByName(name: string) {
+    return Api.getQuery<ExCategory>(
+      `/categories/name/${name}`
+    );
+  }
+
   static create(createCategoryDto: CreateCategory) {
     return Api.postQuery<Category, CreateCategory>(
       '/categories',

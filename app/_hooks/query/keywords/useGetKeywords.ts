@@ -26,6 +26,8 @@ export function useGetKeywords() {
     // lastPage: 마지막으로 로드된 페이지 데이터
     getNextPageParam: (lastPage) => lastPage.nextCursor,
     placeholderData: keepPreviousData,
+    staleTime: Infinity,
+    gcTime: Infinity,
   });
 
   const loading = useLoading(isLoading, isFetching);

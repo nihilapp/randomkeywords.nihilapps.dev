@@ -3,6 +3,7 @@ export const categoriesKeys = {
   list: () => [ ...categoriesKeys.all, 'list', ] as const,
   details: () => [ ...categoriesKeys.all, 'detail', ] as const,
   detailId: (id: string) => [ ...categoriesKeys.details(), id, ] as const,
+  detailName: (name: string) => [ ...categoriesKeys.details(), name, ] as const,
 };
 
 export const subCategoriesKeys = {

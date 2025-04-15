@@ -8,6 +8,7 @@ interface Props {}
 export const metadata = setMeta({
   title: `키워드 검색`,
   url: `/cms/keywords/search`,
+  robots: 'noindex, nofollow',
 });
 
 export default function KeywordSearchPage() {

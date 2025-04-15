@@ -15,7 +15,6 @@ interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
   styles?: string;
-  sub_category_id: string;
 }
 
 interface FormValues {
@@ -34,7 +33,7 @@ const cssVariants = cva(
   }
 );
 
-export function KeywordList({ styles, sub_category_id, ...props }: Props) {
+export function KeywordList({ styles, ...props }: Props) {
   const {
     keywords,
     isLoading,
@@ -57,7 +56,7 @@ export function KeywordList({ styles, sub_category_id, ...props }: Props) {
     mode: 'onSubmit',
     defaultValues: {
       search: '',
-      sub_category_id: sub_category_id ?? 'all',
+      sub_category_id: 'all',
     },
   });
 

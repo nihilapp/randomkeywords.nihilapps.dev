@@ -15,6 +15,8 @@ export function useGetKeywordById(id: string) {
     queryKey: keywordsKeys.detailId(id),
     queryFn: () => KeywordsQuery.getById(id),
     enabled: !!id,
+    staleTime: Infinity,
+    gcTime: Infinity,
   });
 
   const loading = useLoading(isLoading, isFetching);

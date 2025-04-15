@@ -8,6 +8,7 @@ interface Props {}
 export const metadata = setMeta({
   title: `카테고리 관리`,
   url: `/cms/categories`,
+  robots: 'noindex, nofollow',
 });
 
 export default function CmsCategoriesPage() {

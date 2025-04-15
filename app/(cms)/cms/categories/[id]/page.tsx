@@ -17,6 +17,7 @@ export async function generateMetadata({ params, }: Props) {
   return setMeta({
     title: `${category.name} 카테고리 정보`,
     url: `/cms/categories/${id}`,
+    robots: 'noindex, nofollow',
   });
 }
 

@@ -14,6 +14,8 @@ export function useGetCategories() {
   } = useQuery({
     queryKey: categoriesKeys.list(),
     queryFn: () => CategoriesQuery.getAll(),
+    staleTime: Infinity,
+    gcTime: Infinity,
   });
 
   const loading = useLoading(isLoading, isFetching);

@@ -18,8 +18,10 @@ export function useGetSubCategories() {
     queryKey: subCategoriesKeys.list(),
     queryFn: ({ pageParam, }) => SubCategoriesQuery.getAll({ cursor: pageParam, }),
     initialPageParam: undefined as string | undefined,
-    getNextPageParam: (lastPage) => lastPage.nextCursor,
+    getNextPageParam: (lastPage) => lastPage.next_cursor,
     placeholderData: keepPreviousData,
+    staleTime: Infinity,
+    gcTime: Infinity,
   });
 
   const loading = useLoading(isLoading, isFetching);

@@ -7,6 +7,7 @@ interface Props {}
 export const metadata = setMeta({
   title: `CMS`,
   url: `/cms`,
+  robots: 'noindex, nofollow',
 });
 
 export default function CmsPage() {
