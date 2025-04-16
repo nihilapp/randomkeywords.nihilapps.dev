@@ -29,3 +29,9 @@ export const keywordsKeys = {
   ] as const,
   background: () => [ ...keywordsKeys.all, 'background', ] as const,
 };
+
+export const jsonKeys = {
+  character: () => [ 'json', 'character', ] as const,
+  background: () => [ 'json', 'background', ] as const,
+  other: () => [ 'json', 'other', ] as const,
+};

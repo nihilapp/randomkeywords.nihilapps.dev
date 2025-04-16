@@ -1,7 +1,7 @@
 'use client';
 
 import { cva, type VariantProps } from 'class-variance-authority';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { cn } from '@/_libs';
 import { H2 } from '@/(common)/_components/H2';
 import { P } from '@/(common)/_components/P';
@@ -24,6 +24,16 @@ const cssVariants = cva(
 );
 
 export function Home({ styles, ...props }: Props) {
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('/api');
+      const data = await response.json();
+      console.log(data);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div
       className={cn(
