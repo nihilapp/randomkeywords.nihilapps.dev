@@ -27,4 +27,5 @@ export const keywordsKeys = {
     word,
     subCategoryId,
   ] as const,
+  background: () => [ ...keywordsKeys.all, 'background', ] as const,
 };

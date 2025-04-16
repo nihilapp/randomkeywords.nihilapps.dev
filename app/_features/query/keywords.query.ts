@@ -1,12 +1,19 @@
 import type { Keyword } from '@prisma/client';
 import { Api } from '@/_libs';
 import type {
+  BackgroundKeyword,
   CreateKeyword, DeleteKeywords, UpdateKeyword
 } from '@/_types';
+import type { ExKeyword } from '@/_types/keywords.types';
 
 export class KeywordsQuery {
-  // getAll 함수 수정: params (cursor, limit)를 받아 페이지네이션된 데이터 요청
-  static getAll(params?: { cursor?: string, limit?: number }) {
+  // 페이지네이션 없이 모든 키워드를 가져오는 함수
+  static getAll() {
+    return Api.getQuery<ExKeyword[]>('/keywords/all');
+  }
+
+  // 페이지네이션된 데이터를 요청하는 함수 (기존 getAll에서 이름 변경)
+  static getInfiniteAll(params?: { cursor?: string, limit?: number }) {
     // URLSearchParams를 사용하여 쿼리 문자열 생성
     const queryParams = new URLSearchParams();
     if (params?.limit) {
@@ -19,7 +26,7 @@ export class KeywordsQuery {
     // 쿼리 문자열이 있으면 URL에 추가
     const url = queryString ? `/keywords?${queryString}` : '/keywords';
 
-    // 반환 타입 명시 (필요시 @/_types에서 가져온 KeywordsPage 사용)
+    // 반환 타입 명시 (KeywordsPage 사용)
     return Api.getQuery<import('@/_types').KeywordsPage>(url);
   }
 
@@ -57,6 +64,10 @@ export class KeywordsQuery {
 
   static getBySubCategoryId(sub_category_id: string) {
     return Api.getQuery<Keyword[]>(`/keywords/sub_category_id/${sub_category_id}`);
+  }
+
+  static getBackground() {
+    return Api.getQuery<BackgroundKeyword>('/keywords/background');
   }
 
   static create(createKeywordDto: CreateKeyword) {

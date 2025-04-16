@@ -9,7 +9,7 @@ interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
   styles?: string;
-  mode?: 'single' | 'multiple';
+  mode?: 'single' | 'multiple' | 'background';
 }
 
 const cssVariants = cva(
@@ -24,7 +24,9 @@ const cssVariants = cva(
 );
 
 export function SelectedKeyword({ styles, mode = 'single', ...props }: Props) {
-  const { selectedKeyword, selected5Keywords, subCategory, } = useKeywordStore();
+  const {
+    selectedKeyword, selected5Keywords, subCategory, selectedPurpose, selectedOrigin, selectedClass,
+  } = useKeywordStore();
 
   return (
     <div
@@ -48,6 +50,20 @@ export function SelectedKeyword({ styles, mode = 'single', ...props }: Props) {
               {keyword}
             </span>
           ))}
+        </p>
+      )}
+      {mode === 'background' && (
+        <p className='flex flex-col gap-1 items-center justify-center'>
+          <span className='text-md text-black-500 font-500'>{subCategory}</span>
+          <span>
+            <span className='text-blue-500'>{selectedPurpose}</span> 위해
+          </span>
+          <span>
+            <span className='text-blue-500'>{selectedOrigin}</span>에서 온
+          </span>
+          <span>
+            <span className='text-blue-500'>{selectedClass}</span>
+          </span>
         </p>
       )}
     </div>

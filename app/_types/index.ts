@@ -24,5 +24,6 @@ export type {
   UpdateKeyword,
   DeleteKeywords,
   KeywordsPage,
-  KeywordInfiniteQueryData
+  KeywordInfiniteQueryData,
+  BackgroundKeyword
 } from './keywords.types';

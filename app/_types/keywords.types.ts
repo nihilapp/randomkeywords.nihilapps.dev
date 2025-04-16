@@ -29,3 +29,18 @@ export interface DeleteKeywords {
 }
 
 export type KeywordInfiniteQueryData = InfiniteData<KeywordsPage, string | undefined>;
+
+export interface BackgroundKeyword {
+  real: {
+    purpose: string[];
+    origin: string[];
+    class: string[];
+    count: number;
+  };
+  fantasy: {
+    purpose: string[];
+    origin: string[];
+    class: string[];
+    count: number;
+  };
+}

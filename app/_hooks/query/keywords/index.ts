@@ -6,3 +6,5 @@ export { useUpdateKeyword } from './useUpdateKeyword';
 export { useDeleteKeyword } from './useDeleteKeyword';
 export { useDeleteKeywords } from './useDeleteKeywords';
 export { useSearchKeywords } from './useSearchKeywords';
+export { useGetBackgroundKeywords } from './useGetBackgroundKeywords';
+export { useGetInfiniteKeywords } from './useGetInfiniteKeywords';

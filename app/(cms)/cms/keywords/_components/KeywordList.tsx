@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useInView } from 'react-intersection-observer';
 import { useRouter } from 'next/navigation';
-import { useGetKeywords } from '@/_hooks/query/keywords';
+import { useGetInfiniteKeywords } from '@/_hooks/query/keywords';
 import { useGetSubCategoryOptions } from '@/_hooks/query/sub_categories';
 import { cn } from '@/_libs';
 import { LoadingCircle, ListItem } from '@/(common)/_components';
@@ -41,7 +41,7 @@ export function KeywordList({ styles, ...props }: Props) {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useGetKeywords();
+  } = useGetInfiniteKeywords();
 
   const router = useRouter();
 

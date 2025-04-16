@@ -41,9 +41,9 @@ export function CmsHome({ styles, ...props }: Props) {
   } = useGetSubCategories();
 
   const {
+    keywords,
     loading: keywordsLoading,
     done: keywordsDone,
-    totalCount: keywordsTotalCount,
   } = useGetKeywords();
 
   return (
@@ -84,7 +84,7 @@ export function CmsHome({ styles, ...props }: Props) {
       {keywordsDone && (
         <CountCard
           name='키워드'
-          count={keywordsTotalCount}
+          count={keywords.length}
           icon={MdSell}
           styles='bg-red-100 text-red-500 border-red-200'
         />

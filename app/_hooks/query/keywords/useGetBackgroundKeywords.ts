@@ -4,16 +4,16 @@ import { KeywordsQuery } from '@/_features';
 import { useLoading } from '@/_hooks/useLoading';
 import { useDone } from '@/_hooks/useDone';
 
-export function useGetKeywords() {
+export function useGetBackgroundKeywords() {
   const {
-    data: keywords,
+    data: backgroundKeywords,
     isLoading,
-    isFetching,
     isSuccess,
+    isFetching,
     ...query
   } = useQuery({
-    queryKey: keywordsKeys.list(),
-    queryFn: () => KeywordsQuery.getAll(),
+    queryKey: keywordsKeys.background(),
+    queryFn: () => KeywordsQuery.getBackground(),
     staleTime: Infinity,
     gcTime: Infinity,
   });
@@ -22,7 +22,7 @@ export function useGetKeywords() {
   const done = useDone(loading, isSuccess);
 
   return {
-    keywords,
+    backgroundKeywords,
     loading,
     done,
     ...query,
