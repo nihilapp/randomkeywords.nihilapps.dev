@@ -30,9 +30,6 @@ export function SelectedKeyword({ className, mode = 'single', ...props }: Props)
 
   const isGem = (keyword: string) => keyword.includes('보석/') || keyword.includes('암석(광물)') || keyword.includes('금속(합금)');
 
-  console.log('mode', mode);
-  console.log('selectedKeywordList', selectedKeywordList);
-
   return (
     <div
       className={cn(

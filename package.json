@@ -3,7 +3,7 @@
   "scripts": {
     "remove": "rm -rf node_modules/.cache && rm -rf build/",
     "serve": "yarn run remove && next dev",
-    "start": "yarn run build && next start",
+    "start": "yarn run vercel:build && next start",
     "build": "yarn run remove && next build",
     "vercel:build": "prisma generate && prisma migrate deploy && yarn run remove && next build",
     "clean": "yarn cache clean",
