@@ -8,7 +8,7 @@ import { cn } from '@/_libs';
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
 }
 
 const cssVariants = cva(
@@ -22,12 +22,12 @@ const cssVariants = cva(
   }
 );
 
-export function LoadingCircle({ styles, ...props }: Props) {
+export function LoadingCircle({ className, ...props }: Props) {
   return (
     <div
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >

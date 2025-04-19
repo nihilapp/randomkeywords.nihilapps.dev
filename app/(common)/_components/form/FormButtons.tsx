@@ -7,7 +7,7 @@ import { cn } from '@/_libs';
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
 }
 
 const cssVariants = cva(
@@ -21,12 +21,12 @@ const cssVariants = cva(
   }
 );
 
-export function FormButtons({ styles, children, ...props }: Props) {
+export function FormButtons({ className, children, ...props }: Props) {
   return (
     <div
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >

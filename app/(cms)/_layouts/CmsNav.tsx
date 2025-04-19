@@ -12,7 +12,7 @@ import { MenuItem } from '@/(common)/_components';
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
 }
 
 const cssVariants = cva(
@@ -26,12 +26,12 @@ const cssVariants = cva(
   }
 );
 
-export function CmsNav({ styles, ...props }: Props) {
+export function CmsNav({ className, ...props }: Props) {
   return (
     <nav
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >

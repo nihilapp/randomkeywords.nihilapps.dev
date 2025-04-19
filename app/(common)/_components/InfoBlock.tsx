@@ -7,7 +7,7 @@ import { cn } from '@/_libs';
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
   name: string;
   content: string;
   suffix?: string;
@@ -25,13 +25,13 @@ const cssVariants = cva(
 );
 
 export function InfoBlock({
-  styles, name, content, suffix, ...props
+  className, name, content, suffix, ...props
 }: Props) {
   return (
     <div
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >

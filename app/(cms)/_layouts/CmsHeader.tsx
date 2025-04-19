@@ -9,7 +9,7 @@ import { siteConfig } from '@/_config';
 interface Props
   extends React.HTMLAttributes<HTMLElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
 }
 
 const cssVariants = cva(
@@ -23,12 +23,12 @@ const cssVariants = cva(
   }
 );
 
-export function CmsHeader({ styles, ...props }: Props) {
+export function CmsHeader({ className, ...props }: Props) {
   return (
     <header
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >

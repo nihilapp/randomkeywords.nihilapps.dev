@@ -10,7 +10,7 @@ import { useGetBackgroundJson } from '@/_hooks/query/json';
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
 }
 
 const cssVariants = cva(
@@ -24,7 +24,7 @@ const cssVariants = cva(
   }
 );
 
-export function BackgroundKeywords({ styles, ...props }: Props) {
+export function BackgroundKeywords({ className, ...props }: Props) {
   const {
     json,
     loading,
@@ -35,12 +35,12 @@ export function BackgroundKeywords({ styles, ...props }: Props) {
     <div
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >
       {loading && (
-        <LoadingCircle />
+        <LoadingCircle className='col-span-3' />
       )}
 
       {done && (

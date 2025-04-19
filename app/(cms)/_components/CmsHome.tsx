@@ -13,7 +13,7 @@ import { CountCard } from '@/(cms)/_components/CountCard';
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
 }
 
 const cssVariants = cva(
@@ -27,7 +27,7 @@ const cssVariants = cva(
   }
 );
 
-export function CmsHome({ styles, ...props }: Props) {
+export function CmsHome({ className, ...props }: Props) {
   const {
     categories,
     loading: categoriesLoading,
@@ -50,7 +50,7 @@ export function CmsHome({ styles, ...props }: Props) {
     <div
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >
@@ -62,7 +62,7 @@ export function CmsHome({ styles, ...props }: Props) {
           name='카테고리'
           count={categories.length}
           icon={MdFolder}
-          styles='bg-blue-100 text-blue-500 border-blue-200'
+          className='bg-blue-100 text-blue-500 border-blue-200'
         />
       )}
 
@@ -74,7 +74,7 @@ export function CmsHome({ styles, ...props }: Props) {
           name='서브 카테고리'
           count={subCategoriesTotalCount}
           icon={MdOutlineFolder}
-          styles='bg-green-100 text-green-600 border-green-200'
+          className='bg-green-100 text-green-600 border-green-200'
         />
       )}
 
@@ -86,7 +86,7 @@ export function CmsHome({ styles, ...props }: Props) {
           name='키워드'
           count={keywords.length}
           icon={MdSell}
-          styles='bg-red-100 text-red-500 border-red-200'
+          className='bg-red-100 text-red-500 border-red-200'
         />
       )}
     </div>

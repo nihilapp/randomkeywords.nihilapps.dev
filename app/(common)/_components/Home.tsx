@@ -9,7 +9,7 @@ import { P } from '@/(common)/_components/P';
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
 }
 
 const cssVariants = cva(
@@ -23,7 +23,7 @@ const cssVariants = cva(
   }
 );
 
-export function Home({ styles, ...props }: Props) {
+export function Home({ className, ...props }: Props) {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('/api');
@@ -39,7 +39,7 @@ export function Home({ styles, ...props }: Props) {
     <div
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >

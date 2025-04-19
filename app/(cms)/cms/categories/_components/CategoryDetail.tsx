@@ -23,18 +23,18 @@ const cssVariants = cva(
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
   id: string;
 }
 
-export function CategoryDetail({ styles, id, ...props }: Props) {
+export function CategoryDetail({ className, id, ...props }: Props) {
   const { category, loading, done, } = useGetCategoryById(id);
 
   return (
     <div
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >

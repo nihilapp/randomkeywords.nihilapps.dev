@@ -9,7 +9,7 @@ import { cn } from '@/_libs';
 interface Props
   extends React.HTMLAttributes<HTMLElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
 }
 
 const cssVariants = cva(
@@ -23,12 +23,12 @@ const cssVariants = cva(
   }
 );
 
-export function CmsFooter({ styles, ...props }: Props) {
+export function CmsFooter({ className, ...props }: Props) {
   return (
     <footer
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >

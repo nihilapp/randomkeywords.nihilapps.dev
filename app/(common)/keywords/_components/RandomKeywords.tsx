@@ -10,7 +10,7 @@ import { RandomButton } from '@/(common)/keywords/_components/RandomButton';
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
 }
 
 const cssVariants = cva(
@@ -24,14 +24,14 @@ const cssVariants = cva(
   }
 );
 
-export function RandomKeywords({ styles, ...props }: Props) {
+export function RandomKeywords({ className, ...props }: Props) {
   const { keywords, length, backgroundKeywords, } = getAllKeywords();
 
   return (
     <div
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >

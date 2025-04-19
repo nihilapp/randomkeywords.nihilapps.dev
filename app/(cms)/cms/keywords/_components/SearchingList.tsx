@@ -13,7 +13,7 @@ import { SearchBar } from '@/(cms)/cms/_components';
 interface Props {
   word: string;
   sub_category_id: string;
-  styles?: string;
+  className?: string;
 }
 
 interface FormValues {
@@ -21,7 +21,7 @@ interface FormValues {
   sub_category_id: string;
 }
 
-export function SearchingList({ word, sub_category_id, styles, }: Props) {
+export function SearchingList({ word, sub_category_id, className, }: Props) {
   const router = useRouter();
 
   const {
@@ -75,7 +75,7 @@ export function SearchingList({ word, sub_category_id, styles, }: Props) {
     <div
       className={cn(
         ``,
-        styles
+        className
       )}
     >
       {(isLoading || isLoadingSubCategories) && <LoadingCircle />}
@@ -95,7 +95,7 @@ export function SearchingList({ word, sub_category_id, styles, }: Props) {
                   subCategoryFieldName='sub_category_id'
                   subCategories={subCategoryOptions}
                   placeholder={`'${word}' 검색 결과 중 다시 검색`}
-                  styles='w-full'
+                  className='w-full'
                   onSubmit={form.handleSubmit(onSubmitSearch)}
                 />
               </div>

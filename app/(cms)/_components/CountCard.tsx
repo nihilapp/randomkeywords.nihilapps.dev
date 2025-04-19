@@ -8,7 +8,7 @@ import { cn } from '@/_libs';
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
   name: '카테고리' | '서브 카테고리' | '키워드';
   count: number;
   icon: IconType;
@@ -26,13 +26,13 @@ const cssVariants = cva(
 );
 
 export function CountCard({
-  styles, name, count, icon: Icon, ...props
+  className, name, count, icon: Icon, ...props
 }: Props) {
   return (
     <div
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >

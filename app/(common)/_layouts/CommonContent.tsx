@@ -10,7 +10,7 @@ import { CommonFooter } from '@/(common)/_layouts/CommonFooter';
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
   children: React.ReactNode;
 }
 
@@ -25,12 +25,12 @@ const cssVariants = cva(
   }
 );
 
-export function CommonContent({ children, styles, ...props }: Props) {
+export function CommonContent({ children, className, ...props }: Props) {
   return (
     <div
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >

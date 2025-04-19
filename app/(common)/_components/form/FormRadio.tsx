@@ -13,12 +13,11 @@ interface RadioItem {
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
   name: string;
   label: string;
   items: RadioItem[];
   errorMessage?: string;
-  errorStyles?: string;
 }
 
 const cssVariants = cva(
@@ -33,13 +32,13 @@ const cssVariants = cva(
 );
 
 export function FormRadio({
-  styles, name, label, items, errorMessage, errorStyles, ...props
+  className, name, label, items, errorMessage, ...props
 }: Props) {
   return (
     <div
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >
@@ -61,8 +60,7 @@ export function FormRadio({
       {errorMessage && (
         <span
           className={cn(
-            '',
-            errorStyles
+            ''
           )}
         >{errorMessage}
         </span>

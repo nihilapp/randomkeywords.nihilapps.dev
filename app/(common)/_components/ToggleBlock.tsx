@@ -8,7 +8,7 @@ import { cn } from '@/_libs';
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
   title: string;
   defaultOpen?: boolean;
 }
@@ -25,7 +25,7 @@ const cssVariants = cva(
 );
 
 function ToggleBlockComponent({
-  styles, title, children, defaultOpen = true, ...props
+  className, title, children, defaultOpen = true, ...props
 }: Props) {
   const [ isOpen, setIsOpen, ] = useState(
     defaultOpen
@@ -39,7 +39,7 @@ function ToggleBlockComponent({
     <div
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >

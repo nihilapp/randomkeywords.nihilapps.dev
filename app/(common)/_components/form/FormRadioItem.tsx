@@ -9,8 +9,7 @@ import { cn } from '@/_libs';
 interface Props
   extends React.HTMLAttributes<HTMLLabelElement>,
   VariantProps<typeof cssVariants> {
-  inputStyles?: string;
-  labelStyles?: string;
+  className?: string;
   name: string;
   label: string;
   value: string;
@@ -28,7 +27,7 @@ const cssVariants = cva(
 );
 
 export function FormRadioItem({
-  inputStyles, labelStyles, name, label, value, ...props
+  className, name, label, value, ...props
 }: Props) {
   const { register, watch, } = useFormContext();
   const isChecked = watch(name) === value;
@@ -38,7 +37,7 @@ export function FormRadioItem({
       className={cn(
         cssVariants({}),
         isChecked ? 'border-blue-500' : '',
-        labelStyles
+        className
       )}
       {...props}
     >
@@ -47,8 +46,7 @@ export function FormRadioItem({
         id={`${name}-${value}`}
         value={value}
         className={cn(
-          'hidden',
-          inputStyles
+          'hidden'
         )}
         {...register(name)}
       />

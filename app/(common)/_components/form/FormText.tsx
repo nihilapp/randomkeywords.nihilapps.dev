@@ -8,9 +8,7 @@ import { cn } from '@/_libs';
 interface Props
   extends React.LabelHTMLAttributes<HTMLLabelElement>,
   VariantProps<typeof labelCva> {
-  labelStyles?: string;
-  inputStyles?: string;
-  errorStyles?: string;
+  className?: string;
   name: string;
   label: string;
   errorMessage?: string;
@@ -29,7 +27,7 @@ const labelCva = cva(
 );
 
 export function FormText({
-  inputStyles, name, label, errorMessage, labelStyles, errorStyles, type = 'text', ...props
+  className, name, label, errorMessage, type = 'text', ...props
 }: Props) {
   const { register, formState: { touchedFields, }, } = useFormContext();
 
@@ -53,7 +51,7 @@ export function FormText({
     <label
       className={cn(
         labelCva({}),
-        labelStyles
+        className
       )}
       {...props}
     >
@@ -63,16 +61,14 @@ export function FormText({
         type={type}
         className={cn(
           'border border-black-200 rounded-2 p-2',
-          valid ? 'border-blue-500' : 'border-red-500',
-          inputStyles
+          valid ? 'border-blue-500' : 'border-red-500'
         )}
         {...register(name)}
       />
       {errorMessage && (
         <span
           className={cn(
-            'text-red-500 italic font-900',
-            errorStyles
+            'text-red-500 italic font-900'
           )}
         >
           {errorMessage}

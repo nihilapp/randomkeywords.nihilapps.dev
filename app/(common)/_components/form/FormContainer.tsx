@@ -8,7 +8,7 @@ import { cn } from '@/_libs';
 interface Props
   extends React.FormHTMLAttributes<HTMLFormElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
   form: UseFormReturn<any>;
   onSubmit: SubmitHandler<any>;
 }
@@ -25,7 +25,7 @@ const cssVariants = cva(
 );
 
 export function FormContainer({
-  styles, form, onSubmit, children, ...props
+  className, form, onSubmit, children, ...props
 }: Props) {
   return (
     <FormProvider {...form}>
@@ -33,7 +33,7 @@ export function FormContainer({
         onSubmit={form.handleSubmit(onSubmit)}
         className={cn(
           cssVariants({}),
-          styles
+          className
         )}
         {...props}
       >

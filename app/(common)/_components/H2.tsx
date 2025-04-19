@@ -7,7 +7,7 @@ import { cn } from '@/_libs';
 interface Props
   extends React.HTMLAttributes<HTMLHeadingElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
 }
 
 const cssVariants = cva(
@@ -21,12 +21,12 @@ const cssVariants = cva(
   }
 );
 
-export function H2({ styles, children, ...props }: Props) {
+export function H2({ className, children, ...props }: Props) {
   return (
     <h2
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >

@@ -10,7 +10,7 @@ import { useGetCharacterJson } from '@/_hooks/query/json';
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
 }
 
 const cssVariants = cva(
@@ -24,7 +24,7 @@ const cssVariants = cva(
   }
 );
 
-export function CharacterKeywords({ styles, ...props }: Props) {
+export function CharacterKeywords({ className, ...props }: Props) {
   const {
     json,
     loading,
@@ -35,12 +35,12 @@ export function CharacterKeywords({ styles, ...props }: Props) {
     <div
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >
       {loading && (
-        <LoadingCircle />
+        <LoadingCircle className='col-span-3' />
       )}
       {done && (
         Object.entries(json).map(([ subCategoryName, keywords, ]) => (

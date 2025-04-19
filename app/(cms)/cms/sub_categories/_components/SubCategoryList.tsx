@@ -14,7 +14,7 @@ import { SearchBar } from '@/(cms)/cms/_components';
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
 }
 
 interface FormValues {
@@ -32,7 +32,7 @@ const cssVariants = cva(
   }
 );
 
-export function SubCategoryList({ styles, ...props }: Props) {
+export function SubCategoryList({ className, ...props }: Props) {
   const {
     subCategories,
     isLoading,
@@ -81,7 +81,7 @@ export function SubCategoryList({ styles, ...props }: Props) {
     <div
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >
@@ -102,7 +102,7 @@ export function SubCategoryList({ styles, ...props }: Props) {
                   register={form.register}
                   name='search'
                   placeholder={`총 ${totalCount}개 서브 카테고리 검색`}
-                  styles='w-full'
+                  className='w-full'
                 />
               </div>
 

@@ -8,7 +8,7 @@ import { useKeywordStore } from '@/_entities/keywords';
 interface Props
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
   name: string;
   length: number;
   keywords?: string[];
@@ -32,7 +32,7 @@ const cssVariants = cva(
 );
 
 export function RandomButton({
-  styles, name, length, keywords, backgroundKeywords, mode = 'single', purposeData, originData, characterClassData, count = 5, ...props
+  className, name, length, keywords, backgroundKeywords, mode = 'single', purposeData, originData, characterClassData, count = 5, ...props
 }: Props) {
   const {
     setSubCategory, setSelectedPurpose, setSelectedOrigin, setSelectedClass, setSelectedKeywordList,
@@ -106,7 +106,7 @@ export function RandomButton({
     <button
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
       onClick={onClickButton}

@@ -10,7 +10,7 @@ import { AddKeywordForm } from '@/(cms)/cms/keywords/_components/AddKeywordForm'
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
   id: string;
 }
 
@@ -25,14 +25,14 @@ const cssVariants = cva(
   }
 );
 
-export function SubCategoryDetail({ styles, id, ...props }: Props) {
+export function SubCategoryDetail({ className, id, ...props }: Props) {
   const { subCategory, loading, done, } = useGetSubCategoryById(id);
 
   return (
     <div
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >

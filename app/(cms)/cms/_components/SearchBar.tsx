@@ -15,7 +15,7 @@ interface Props<T extends FieldValues> {
   register: UseFormRegister<T>;
   name: Path<T>;
   placeholder?: string;
-  styles?: string;
+  className?: string;
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
   subCategories?: SubCategoryOption[];
   subCategoryFieldName?: Path<T>;
@@ -25,13 +25,13 @@ export function SearchBar<T extends FieldValues>({
   register,
   name,
   placeholder = '검색어를 입력하세요.',
-  styles,
+  className,
   onSubmit,
   subCategories,
   subCategoryFieldName,
 }: Props<T>) {
   return (
-    <form className={cn('flex flex-row items-stretch', styles)} onSubmit={onSubmit}>
+    <form className={cn('flex flex-row items-stretch', className)} onSubmit={onSubmit}>
       {subCategories && subCategoryFieldName && (
         <select
           {...register(subCategoryFieldName)}

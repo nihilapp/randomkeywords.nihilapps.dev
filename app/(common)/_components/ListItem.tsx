@@ -8,7 +8,7 @@ import { cn } from '@/_libs';
 interface Props
   extends React.HTMLAttributes<HTMLAnchorElement | HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
   href?: string;
   name: string;
   length?: number;
@@ -28,7 +28,7 @@ const cssVariants = cva(
 );
 
 export function ListItem({
-  styles,
+  className,
   href,
   name,
   length,
@@ -38,7 +38,7 @@ export function ListItem({
 }: Props) {
   const commonClassName = cn(
     cssVariants({}),
-    styles
+    className
   );
 
   const innerContent = (

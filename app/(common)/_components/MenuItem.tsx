@@ -9,7 +9,7 @@ import { cn } from '@/_libs';
 interface Props
   extends React.HTMLAttributes<HTMLAnchorElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
   href: string;
   icon: IconType;
 }
@@ -26,7 +26,7 @@ const cssVariants = cva(
 );
 
 export function MenuItem({
-  styles,
+  className,
   children,
   href,
   icon: Icon,
@@ -37,7 +37,7 @@ export function MenuItem({
       href={href}
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >

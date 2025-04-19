@@ -8,7 +8,7 @@ import { useKeywordStore } from '@/_entities/keywords';
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
   mode?: 'single' | 'multiple' | 'background';
 }
 
@@ -23,18 +23,21 @@ const cssVariants = cva(
   }
 );
 
-export function SelectedKeyword({ styles, mode = 'single', ...props }: Props) {
+export function SelectedKeyword({ className, mode = 'single', ...props }: Props) {
   const {
-    selectedKeyword, subCategory, selectedPurpose, selectedOrigin, selectedClass, selectedKeywordList,
+    subCategory, selectedPurpose, selectedOrigin, selectedClass, selectedKeywordList,
   } = useKeywordStore();
 
   const isGem = (keyword: string) => keyword.includes('보석/') || keyword.includes('암석(광물)') || keyword.includes('금속(합금)');
+
+  console.log('mode', mode);
+  console.log('selectedKeywordList', selectedKeywordList);
 
   return (
     <div
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >
@@ -47,7 +50,7 @@ export function SelectedKeyword({ styles, mode = 'single', ...props }: Props) {
               <span className='text-md font-500 text-black-500 italic'>{selectedKeywordList[1]}</span>
             </div>
           ) : (
-            <p>{selectedKeyword}</p>
+            <p className='text-blue-500'>{selectedKeywordList[0]}</p>
           )}
         </div>
       )}
@@ -91,7 +94,7 @@ export function SelectedKeyword({ styles, mode = 'single', ...props }: Props) {
         ) : (
           <div className='flex flex-col gap-1 items-center justify-center'>
             <p className='text-md text-black-500 font-500'>{subCategory}</p>
-            <p>
+            <p className='text-blue-500'>
               버튼을 클릭하세요.
             </p>
           </div>

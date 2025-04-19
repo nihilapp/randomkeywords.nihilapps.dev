@@ -13,7 +13,7 @@ import { siteConfig } from '@/_config';
 interface Props
   extends React.HTMLAttributes<HTMLAnchorElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
   href?: string;
   title?: string;
 }
@@ -31,7 +31,7 @@ const cssVariants = cva(
 
 export function Logo({
   href = '/',
-  styles,
+  className,
   title = `${siteConfig.title}`,
   ...props
 }: Props) {
@@ -40,7 +40,7 @@ export function Logo({
       href={href}
       className={cn(
         cssVariants({}),
-        styles
+        className
       )}
       {...props}
     >

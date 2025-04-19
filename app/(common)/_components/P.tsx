@@ -7,7 +7,6 @@ import { cn } from '@/_libs';
 interface Props
   extends React.HTMLAttributes<HTMLParagraphElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
   className?: string;
 }
 
@@ -23,13 +22,12 @@ const cssVariants = cva(
 );
 
 export function P({
-  styles, children, className, ...props
+  children, className, ...props
 }: Props) {
   return (
     <p
       className={cn(
         cssVariants({}),
-        styles,
         className
       )}
       {...props}

@@ -7,7 +7,7 @@ import { cn } from '@/_libs';
 interface Props
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
   VariantProps<typeof cssVariants> {
-  styles?: string;
+  className?: string;
   onClick?: () => void;
 }
 
@@ -31,13 +31,13 @@ const cssVariants = cva(
 );
 
 export function Button({
-  styles, variant, children, onClick, ...props
+  className, variant, children, onClick, ...props
 }: Props) {
   return (
     <button
       className={cn(
         cssVariants({ variant, }),
-        styles
+        className
       )}
       {...props}
       onClick={onClick || (() => {})}
