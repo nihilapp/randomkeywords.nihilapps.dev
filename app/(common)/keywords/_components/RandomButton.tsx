@@ -2,7 +2,7 @@
 
 import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
-import { cn, selectFive, selectOne } from '@/_libs';
+import { cn, selectOne, selectMany } from '@/_libs';
 import { useKeywordStore } from '@/_entities/keywords';
 
 interface Props
@@ -11,11 +11,13 @@ interface Props
   styles?: string;
   name: string;
   length: number;
-  keywords: string[];
+  keywords?: string[];
+  backgroundKeywords?: string[];
   purposeData?: string[];
   originData?: string[];
   characterClassData?: string[];
   mode?: 'single' | 'multiple' | 'background';
+  count?: number;
 }
 
 const cssVariants = cva(
@@ -30,27 +32,58 @@ const cssVariants = cva(
 );
 
 export function RandomButton({
-  styles, name, length, keywords, mode = 'single', purposeData, originData, characterClassData, ...props
+  styles, name, length, keywords, backgroundKeywords, mode = 'single', purposeData, originData, characterClassData, count = 5, ...props
 }: Props) {
   const {
-    setSelectedKeyword, setSubCategory, setSelected5Keywords, setSelectedPurpose, setSelectedOrigin, setSelectedClass,
+    setSubCategory, setSelectedPurpose, setSelectedOrigin, setSelectedClass, setSelectedKeywordList,
   } = useKeywordStore();
 
   const onClickButton = () => {
     if (mode === 'single') {
-      if (keywords && keywords.length > 0) {
-        const randomKeyword = selectOne(keywords);
-        setSelectedKeyword(randomKeyword);
-        setSubCategory(name);
+      let randomKeyword: string[];
+      if (name === '아르카나') {
+        randomKeyword = selectOne(keywords).split(':');
       } else {
-        console.warn(`No keywords provided for subCategory: ${name}`);
+        if (keywords && keywords.length > 0) {
+          randomKeyword = [ selectOne(keywords), ];
+        } else {
+          console.warn(`No keywords provided for subCategory: ${name}`);
+        }
       }
+      setSelectedKeywordList(randomKeyword);
+      setSubCategory(name);
     }
 
     if (mode === 'multiple') {
       if (keywords && keywords.length > 0) {
-        const randomKeywords = selectFive(keywords);
-        setSelected5Keywords(randomKeywords);
+        if (count === 1) {
+          const randomKeyword = selectOne(keywords);
+          const bRandomKeyword = selectOne(backgroundKeywords);
+
+          // 2분의 1 확률로 배경 키워드 / 그 외 랜덤 키워드 로 결정됨.
+          const randomNumber = Math.floor(Math.random() * 4);
+
+          if (randomNumber === 0) {
+            setSelectedKeywordList([ bRandomKeyword, ]);
+          } else {
+            setSelectedKeywordList([ randomKeyword, ]);
+          }
+        } else {
+          let backgroundRate: number;
+          if (count === 5) {
+            backgroundRate = 1;
+          } else if (count === 10) {
+            backgroundRate = 2;
+          } else if (count === 50) {
+            backgroundRate = 5;
+          } else if (count === 100) {
+            backgroundRate = 10;
+          }
+
+          const randomKeywords = selectMany(keywords, count - backgroundRate);
+          const bKeywords = selectMany(backgroundKeywords, backgroundRate);
+          setSelectedKeywordList([ ...randomKeywords, ...bKeywords, ]);
+        }
         setSubCategory(name);
       } else {
         console.warn(`No keywords provided for subCategory: ${name}`);

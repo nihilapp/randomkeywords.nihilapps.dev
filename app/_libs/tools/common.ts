@@ -1,5 +1,4 @@
 import { v4 as uuid } from 'uuid';
-import { createId } from '@paralleldrive/cuid2';
 
 export class Common {
   public uuid(key?: string) {
@@ -8,14 +7,6 @@ export class Common {
     }
 
     return uuid();
-  }
-
-  public cuid(key?: string) {
-    if (key) {
-      return `${key}-${createId()}`;
-    }
-
-    return createId();
   }
 
   public string<T>(data: T) {

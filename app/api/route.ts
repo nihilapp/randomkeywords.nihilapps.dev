@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 import path from 'path';
 import fs, { unlink } from 'fs/promises';
 import { DB } from '@/api/_libs';
@@ -13,7 +13,10 @@ function genDateString() {
   return `${year}-${month}-${day}`;
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const { searchParams, } = req.nextUrl;
+  const forceCreate = searchParams.get('forceCreate');
+
   const categoryNames = [ '캐릭터 관련', '배경스토리 관련', '기타', ];
   const todayDateString = genDateString(); // 오늘 날짜 문자열 미리 생성
   const jsonDir = path.join(process.cwd(), 'json');
@@ -45,7 +48,7 @@ export async function GET() {
     }));
 
     // 오늘 날짜 파일이 이미 존재하면 작업 중단
-    if (todayFileExists) {
+    if (todayFileExists && forceCreate !== 'true') {
       console.log(`오늘 (${todayDateString})의 데이터는 이미 생성되어 있습니다.`);
       // 상태 코드와 메시지 반환
       return NextResponse.json({ message: `오늘 (${todayDateString}) 데이터가 이미 생성되었습니다.`, }, { status: 200, });

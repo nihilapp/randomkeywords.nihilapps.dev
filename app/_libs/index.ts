@@ -4,4 +4,5 @@ export { cn } from './cn';
 export { setMeta } from './setMeta';
 export { getSubCategoryIds } from './getSubCategoryIds';
 export { selectOne } from './selectOne';
-export { selectFive } from './selectFive';
+export { selectMany } from './selectMany';
+export { getAllKeywords } from './getAllKeywords';

@@ -2,7 +2,7 @@
 
 import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
-import { cn } from '@/_libs';
+import { cn, tools } from '@/_libs';
 import { useKeywordStore } from '@/_entities/keywords';
 
 interface Props
@@ -14,7 +14,7 @@ interface Props
 
 const cssVariants = cva(
   [
-    `text-center font-900 text-h3`,
+    `text-center font-900 text-h5`,
   ],
   {
     variants: {},
@@ -25,8 +25,10 @@ const cssVariants = cva(
 
 export function SelectedKeyword({ styles, mode = 'single', ...props }: Props) {
   const {
-    selectedKeyword, selected5Keywords, subCategory, selectedPurpose, selectedOrigin, selectedClass,
+    selectedKeyword, subCategory, selectedPurpose, selectedOrigin, selectedClass, selectedKeywordList,
   } = useKeywordStore();
+
+  const isGem = (keyword: string) => keyword.includes('보석/') || keyword.includes('암석(광물)') || keyword.includes('금속(합금)');
 
   return (
     <div
@@ -37,34 +39,63 @@ export function SelectedKeyword({ styles, mode = 'single', ...props }: Props) {
       {...props}
     >
       {mode === 'single' && (
-        <p className='flex flex-col gap-1 items-center justify-center'>
-          <span className='text-md text-black-500 font-500'>{subCategory}</span>
-          <span>{selectedKeyword}</span>
-        </p>
+        <div className='flex flex-col gap-1 items-center justify-center'>
+          <p className='text-md text-black-500 font-500'>{subCategory}</p>
+          {subCategory === '아르카나' ? (
+            <div>
+              <span className='text-blue-500'>{selectedKeywordList[0]}</span>
+              <span className='text-md font-500 text-black-500 italic'>{selectedKeywordList[1]}</span>
+            </div>
+          ) : (
+            <p>{selectedKeyword}</p>
+          )}
+        </div>
       )}
       {mode === 'multiple' && (
-        <p className='flex flex-col gap-1 items-center justify-center'>
-          <span className='text-md text-black-500 font-500'>{subCategory}</span>
-          {selected5Keywords.map((keyword) => (
-            <span key={keyword}>
-              {keyword}
-            </span>
-          ))}
-        </p>
+        <div className='space-y-2'>
+          <p className='text-md text-black-500 font-500'>{subCategory}</p>
+          <div className='space-y-1'>
+            {selectedKeywordList.map((keyword) => (
+              <p key={tools.common.uuid()} className='text-blue-500 flex flex-col items-center justify-center border border-black-100 rounded-2 p-2'>
+                {keyword.includes(' (') && isGem(keyword) ? (
+                  <>
+                    <span>{keyword.split(' (')[0]}</span>
+                    <span
+                      className='text-md font-500 text-black-500 italic'
+                    >
+                      {'('}{keyword.split(' (')[1]}
+                    </span>
+                  </>
+                ) : (
+                  keyword
+                )}
+              </p>
+            ))}
+          </div>
+        </div>
       )}
       {mode === 'background' && (
-        <p className='flex flex-col gap-1 items-center justify-center'>
-          <span className='text-md text-black-500 font-500'>{subCategory}</span>
-          <span>
-            <span className='text-blue-500'>{selectedPurpose}</span> 위해
-          </span>
-          <span>
-            <span className='text-blue-500'>{selectedOrigin}</span>에서 온
-          </span>
-          <span>
-            <span className='text-blue-500'>{selectedClass}</span>
-          </span>
-        </p>
+        (selectedPurpose && selectedOrigin && selectedClass) ? (
+          <div className='flex flex-col gap-1 items-center justify-center'>
+            <p className='text-md text-black-500 font-500'>{subCategory}</p>
+            <p>
+              <span className='text-blue-500'>{selectedPurpose}</span> 위해
+            </p>
+            <p>
+              <span className='text-blue-500'>{selectedOrigin}</span>에서 온
+            </p>
+            <p>
+              <span className='text-blue-500'>{selectedClass}</span>
+            </p>
+          </div>
+        ) : (
+          <div className='flex flex-col gap-1 items-center justify-center'>
+            <p className='text-md text-black-500 font-500'>{subCategory}</p>
+            <p>
+              버튼을 클릭하세요.
+            </p>
+          </div>
+        )
       )}
     </div>
   );

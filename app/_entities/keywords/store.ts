@@ -3,8 +3,8 @@ import { create } from 'zustand';
 interface KeywordState {
   selectedKeyword: string;
   setSelectedKeyword: (keyword: string) => void;
-  selected5Keywords: string[];
-  setSelected5Keywords: (keywords: string[]) => void;
+  selectedKeywordList: string[];
+  setSelectedKeywordList: (keywordList: string[]) => void;
   selectedPurpose: string;
   setSelectedPurpose: (purpose: string) => void;
   selectedOrigin: string;
@@ -40,10 +40,10 @@ export const useKeywordStore = create<KeywordState>((set) => ({
     { selectedClass: characterClass, }
   ),
 
-  // 5개 키워드 목록
-  selected5Keywords: [ '버튼을 클릭하세요.', '', '', '', '', ],
-  setSelected5Keywords: (keywords) => set(
-    { selected5Keywords: keywords, }
+  // 키워드 목록
+  selectedKeywordList: [ '버튼을 클릭하세요.', ],
+  setSelectedKeywordList: (keywordList) => set(
+    { selectedKeywordList: keywordList, }
   ),
 
   // 서브 카테고리

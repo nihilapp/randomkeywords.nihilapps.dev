@@ -15,7 +15,7 @@ interface Props
 
 const cssVariants = cva(
   [
-    ``,
+    `grid grid-cols-2 gap-2 mo-md:grid-cols-3`,
   ],
   {
     variants: {},
@@ -43,16 +43,14 @@ export function OtherKeywords({ styles, ...props }: Props) {
         <LoadingCircle />
       )}
       {done && (
-        <div className='grid grid-cols-2 gap-2 mo-md:grid-cols-3'>
-          {Object.entries(json).map(([ subCategoryName, keywords, ]) => (
-            <RandomButton
-              key={subCategoryName}
-              name={subCategoryName}
-              length={keywords.length}
-              keywords={keywords}
-            />
-          ))}
-        </div>
+        Object.entries(json).map(([ subCategoryName, keywords, ]) => (
+          <RandomButton
+            key={subCategoryName}
+            name={subCategoryName}
+            length={keywords.length}
+            keywords={keywords}
+          />
+        ))
       )}
     </div>
   );

@@ -1,10 +1,9 @@
 import type { Keyword } from '@prisma/client';
 import { Api } from '@/_libs';
 import type {
-  BackgroundKeyword,
   CreateKeyword, DeleteKeywords, UpdateKeyword
 } from '@/_types';
-import type { ExKeyword } from '@/_types/keywords.types';
+import type { BackgroundKeyword, ExKeyword } from '@/_types/keywords.types';
 
 export class KeywordsQuery {
   // 페이지네이션 없이 모든 키워드를 가져오는 함수

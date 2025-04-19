@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { keywordsKeys } from '@/_data';
-import { KeywordsQuery } from '@/_features';
+import { jsonKeys } from '@/_data';
+import { JsonQuery } from '@/_features';
 import { useLoading } from '@/_hooks/useLoading';
 import { useDone } from '@/_hooks/useDone';
 
@@ -12,8 +12,8 @@ export function useGetBackgroundKeywords() {
     isFetching,
     ...query
   } = useQuery({
-    queryKey: keywordsKeys.background(),
-    queryFn: () => KeywordsQuery.getBackground(),
+    queryKey: jsonKeys.background(),
+    queryFn: () => JsonQuery.getBackgroundJson(),
     staleTime: Infinity,
     gcTime: Infinity,
   });

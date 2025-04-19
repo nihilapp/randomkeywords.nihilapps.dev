@@ -3,9 +3,9 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
 import { cn } from '@/_libs';
-import { useGetBackgroundKeywords } from '@/_hooks/query/keywords';
 import { LoadingCircle } from '@/(common)/_components';
 import { RandomButton } from '@/(common)/keywords/_components/RandomButton';
+import { useGetBackgroundJson } from '@/_hooks/query/json';
 
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -15,7 +15,7 @@ interface Props
 
 const cssVariants = cva(
   [
-    ``,
+    `grid grid-cols-2 gap-2 mo-md:grid-cols-3`,
   ],
   {
     variants: {},
@@ -26,10 +26,10 @@ const cssVariants = cva(
 
 export function BackgroundKeywords({ styles, ...props }: Props) {
   const {
-    backgroundKeywords,
+    json,
     loading,
     done,
-  } = useGetBackgroundKeywords();
+  } = useGetBackgroundJson();
 
   return (
     <div
@@ -44,25 +44,25 @@ export function BackgroundKeywords({ styles, ...props }: Props) {
       )}
 
       {done && (
-        <div className='grid grid-cols-2 gap-2 mo-md:grid-cols-3'>
+        <>
           <RandomButton
             name='배경스토리(현실)'
-            purposeData={backgroundKeywords.real.purpose}
-            originData={backgroundKeywords.real.origin}
-            characterClassData={backgroundKeywords.real.class}
-            length={backgroundKeywords.real.count}
+            purposeData={json.real.purpose}
+            originData={json.real.origin}
+            characterClassData={json.real.class}
+            length={json.real.count}
             mode='background'
           />
 
           <RandomButton
             name='배경스토리(판타지)'
-            purposeData={backgroundKeywords.fantasy.purpose}
-            originData={backgroundKeywords.fantasy.origin}
-            characterClassData={backgroundKeywords.fantasy.class}
-            length={backgroundKeywords.fantasy.count}
+            purposeData={json.fantasy.purpose}
+            originData={json.fantasy.origin}
+            characterClassData={json.fantasy.class}
+            length={json.fantasy.count}
             mode='background'
           />
-        </div>
+        </>
       )}
     </div>
   );

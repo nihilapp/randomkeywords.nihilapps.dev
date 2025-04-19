@@ -4,15 +4,41 @@ import path from 'path';
 
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), 'json', '기타.json'); // 파일 이름 변경
-    const fileContent = await fs.readFile(filePath, 'utf8');
+    const filePath = path
+      .join(process.cwd(), 'json', '기타.json');
+
+    const fileContent = await fs
+      .readFile(filePath, 'utf8');
+
     const jsonData = JSON.parse(fileContent);
-    return NextResponse.json(jsonData, { status: 200, });
+
+    return NextResponse.json(
+      jsonData,
+      {
+        status: 200,
+      }
+    );
   } catch (error: any) {
-    console.error('Error reading other.json:', error);
+    console.error(
+      '기타 관련 데이터 파일 읽기 오류:',
+      error
+    );
+
     if (error.code === 'ENOENT') {
-      return NextResponse.json({ error: 'Other data file not found.', }, { status: 404, });
+      return NextResponse.json(
+        {
+          error: '기타 관련 데이터 파일을 찾을 수 없습니다.',
+        },
+        {
+          status: 404,
+        }
+      );
     }
-    return NextResponse.json({ error: 'Internal Server Error reading other data.', }, { status: 500, });
+    return NextResponse.json(
+      {
+        error: '기타 관련 데이터 파일 읽기 오류',
+      },
+      { status: 500, }
+    );
   }
 }

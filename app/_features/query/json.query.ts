@@ -1,4 +1,5 @@
 import { Api } from '@/_libs';
+import type { BackgroundKeyword } from '@/_types';
 
 // 공통 JSON 데이터 구조 타입 정의
 interface KeywordsByCategory {
@@ -11,7 +12,7 @@ export class JsonQuery {
   }
 
   static async getBackgroundJson() {
-    return Api.getQuery<KeywordsByCategory>('/json/background');
+    return Api.getQuery<BackgroundKeyword>('/json/background');
   }
 
   static async getOtherJson() {

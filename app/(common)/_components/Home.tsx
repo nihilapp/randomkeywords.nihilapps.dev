@@ -27,6 +27,7 @@ export function Home({ styles, ...props }: Props) {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('/api');
+      // const response = await fetch('/api?forceCreate=true');
       const data = await response.json();
       console.log(data);
     };
