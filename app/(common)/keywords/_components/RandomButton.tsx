@@ -2,7 +2,9 @@
 
 import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
-import { cn, selectOne, selectMany } from '@/_libs';
+import {
+  cn, selectOne, selectMany, shuffleArray
+} from '@/_libs';
 import { useKeywordStore } from '@/_entities/keywords';
 
 interface Props
@@ -82,7 +84,8 @@ export function RandomButton({
 
           const randomKeywords = selectMany(keywords, count - backgroundRate);
           const bKeywords = selectMany(backgroundKeywords, backgroundRate);
-          setSelectedKeywordList([ ...randomKeywords, ...bKeywords, ]);
+          const shuffledKeywords = shuffleArray([ ...randomKeywords, ...bKeywords, ]);
+          setSelectedKeywordList(shuffledKeywords);
         }
         setSubCategory(name);
       } else {

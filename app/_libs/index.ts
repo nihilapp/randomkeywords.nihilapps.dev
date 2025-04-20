@@ -6,3 +6,4 @@ export { getSubCategoryIds } from './getSubCategoryIds';
 export { selectOne } from './selectOne';
 export { selectMany } from './selectMany';
 export { getAllKeywords } from './getAllKeywords';
+export { shuffleArray } from './shuffleArray';
