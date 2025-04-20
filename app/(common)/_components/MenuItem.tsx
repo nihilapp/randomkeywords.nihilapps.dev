@@ -12,6 +12,7 @@ interface Props
   className?: string;
   href: string;
   icon: IconType;
+  onLinkClick?: () => void;
 }
 
 const cssVariants = cva(
@@ -30,8 +31,18 @@ export function MenuItem({
   children,
   href,
   icon: Icon,
+  onLinkClick,
   ...props
 }: Props) {
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (onLinkClick) {
+      onLinkClick();
+    }
+    if (props.onClick) {
+      props.onClick(event);
+    }
+  };
+
   return (
     <Link
       href={href}
@@ -39,6 +50,7 @@ export function MenuItem({
         cssVariants({}),
         className
       )}
+      onClick={handleClick}
       {...props}
     >
       <Icon />

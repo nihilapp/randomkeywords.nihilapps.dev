@@ -10,9 +10,10 @@ import { cn } from '@/_libs';
 import { MenuItem } from '@/(common)/_components';
 
 interface Props
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends React.HTMLAttributes<HTMLElement>,
   VariantProps<typeof cssVariants> {
   className?: string;
+  onLinkClick?: () => void;
 }
 
 const cssVariants = cva(
@@ -26,7 +27,7 @@ const cssVariants = cva(
   }
 );
 
-export function CmsNav({ className, ...props }: Props) {
+export function CmsNav({ className, onLinkClick, ...props }: Props) {
   return (
     <nav
       className={cn(
@@ -40,6 +41,7 @@ export function CmsNav({ className, ...props }: Props) {
           <MenuItem
             href='/cms'
             icon={MdSettings}
+            onLinkClick={onLinkClick}
           >
             CMS 홈
           </MenuItem>
@@ -48,6 +50,7 @@ export function CmsNav({ className, ...props }: Props) {
           <MenuItem
             href='/cms/categories'
             icon={MdFolder}
+            onLinkClick={onLinkClick}
           >
             카테고리 관리
           </MenuItem>
@@ -56,6 +59,7 @@ export function CmsNav({ className, ...props }: Props) {
           <MenuItem
             href='/cms/sub_categories'
             icon={MdOutlineFolder}
+            onLinkClick={onLinkClick}
           >
             서브 카테고리 관리
           </MenuItem>
@@ -64,6 +68,7 @@ export function CmsNav({ className, ...props }: Props) {
           <MenuItem
             href='/cms/keywords'
             icon={MdSell}
+            onLinkClick={onLinkClick}
           >
             키워드 관리
           </MenuItem>

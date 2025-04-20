@@ -10,6 +10,7 @@ interface Props
   extends React.HTMLAttributes<HTMLElement>,
   VariantProps<typeof cssVariants> {
   className?: string;
+  onLinkClick?: () => void;
 }
 
 const cssVariants = cva(
@@ -23,7 +24,7 @@ const cssVariants = cva(
   }
 );
 
-export function CommonNav({ className, ...props }: Props) {
+export function CommonNav({ className, onLinkClick, ...props }: Props) {
   return (
     <nav
       className={cn(
@@ -38,6 +39,7 @@ export function CommonNav({ className, ...props }: Props) {
             <MenuItem
               href={menu.href}
               icon={menu.icon}
+              onLinkClick={onLinkClick}
             >
               {menu.label}
             </MenuItem>
