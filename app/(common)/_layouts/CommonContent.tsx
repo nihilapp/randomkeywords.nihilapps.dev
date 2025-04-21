@@ -33,7 +33,7 @@ export function CommonContent({ children, className, ...props }: Props) {
 
   useEffect(() => {
     if (isDesktop) {
-      setIsOpen(false);
+      setIsOpen(true);
     }
   }, [ isDesktop, ]);
 
