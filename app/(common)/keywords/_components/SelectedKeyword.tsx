@@ -3,7 +3,9 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
 import { cn, tools } from '@/_libs';
-import { useKeywordStore } from '@/_entities/keywords';
+import {
+  useSelectedClass, useSelectedKeywordList, useSelectedOrigin, useSelectedPurpose, useSubCategory
+} from '@/_entities/keywords';
 
 interface Props
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -24,9 +26,11 @@ const cssVariants = cva(
 );
 
 export function SelectedKeyword({ className, mode = 'single', ...props }: Props) {
-  const {
-    subCategory, selectedPurpose, selectedOrigin, selectedClass, selectedKeywordList,
-  } = useKeywordStore();
+  const subCategory = useSubCategory();
+  const selectedPurpose = useSelectedPurpose();
+  const selectedOrigin = useSelectedOrigin();
+  const selectedClass = useSelectedClass();
+  const selectedKeywordList = useSelectedKeywordList();
 
   const isGem = (keyword: string) => keyword.includes('보석/') || keyword.includes('암석(광물)') || keyword.includes('금속(합금)');
 
