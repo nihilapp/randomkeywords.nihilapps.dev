@@ -42,9 +42,9 @@ export function SelectedKeyword({ className, mode = 'single', ...props }: Props)
         <div className='flex flex-col gap-1 items-center justify-center'>
           <p className='text-md text-black-500 font-500'>{subCategory}</p>
           {subCategory === '아르카나' ? (
-            <div>
+            <div className='flex flex-col gap-1'>
               <span className='text-blue-500'>{selectedKeywordList[0]}</span>
-              <span className='text-md font-500 text-black-500 italic'>{selectedKeywordList[1]}</span>
+              <span className='text-md font-500 leading-1 text-black-500 italic mb-3'>{selectedKeywordList[1]}</span>
             </div>
           ) : (
             <p className='text-blue-500'>{selectedKeywordList[0]}</p>

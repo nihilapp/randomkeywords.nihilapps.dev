@@ -1,4 +1,4 @@
-import type { Category } from '@prisma/client';
+import type { Category } from '@/_prisma/client';
 import { Api } from '@/_libs';
 import type {
   ExCategory,

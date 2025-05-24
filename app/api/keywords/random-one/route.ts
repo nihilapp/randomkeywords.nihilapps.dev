@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Keyword } from '@prisma/client';
+import { Keyword } from '@/_prisma/client';
 import { DB } from '@/api/_libs';
 
 export async function GET(request: NextRequest) {

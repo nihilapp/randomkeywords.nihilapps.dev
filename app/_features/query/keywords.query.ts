@@ -1,4 +1,4 @@
-import type { Keyword } from '@prisma/client';
+import type { Keyword } from '@/_prisma/client';
 import { Api } from '@/_libs';
 import type {
   CreateKeyword, DeleteKeywords, UpdateKeyword

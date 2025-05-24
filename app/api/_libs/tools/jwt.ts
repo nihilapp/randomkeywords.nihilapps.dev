@@ -1,6 +1,6 @@
-import { User } from '@prisma/client';
 import { jwtVerify, SignJWT } from 'jose';
 import { cookies } from 'next/headers';
+import { User } from '@/_prisma/client';
 import {
   CreateToken, TokenInfo, TokenMode
 } from '@/_types';

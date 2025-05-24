@@ -1,4 +1,4 @@
-import type { Prisma } from '@prisma/client';
+import type { Prisma } from '@/_prisma/client';
 
 export type ExSubCategory = Prisma.SubCategoryGetPayload<{
   include: {

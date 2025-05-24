@@ -1,4 +1,4 @@
-import type { Prisma, SubCategory } from '@prisma/client';
+import type { Prisma, SubCategory } from '@/_prisma/client';
 import { Api } from '@/_libs';
 import type {
   CreateSubCategory, DeleteSubCategories, ExSubCategory, UpdateSubCategory

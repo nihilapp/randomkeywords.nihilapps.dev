@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import type { Prisma } from '@prisma/client';
+import type { Prisma } from '@/_prisma/client';
 import { DB } from '@/api/_libs';
 
 // 한 페이지에 보여줄 기본 개수

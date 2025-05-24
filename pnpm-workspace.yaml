@@ -1,0 +1,14 @@
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@prisma/client'
+  - '@prisma/engines'
+  - '@scarf/scarf'
+  - '@tailwindcss/oxide'
+  - '@tree-sitter-grammars/tree-sitter-yaml'
+  - core-js-pure
+  - prisma
+  - sharp
+  - supabase
+  - tree-sitter
+  - tree-sitter-json
+  - unrs-resolver

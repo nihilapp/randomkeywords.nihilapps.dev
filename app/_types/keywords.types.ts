@@ -1,5 +1,5 @@
 import type { InfiniteData } from '@tanstack/react-query';
-import type { Prisma } from '@prisma/client';
+import type { Prisma } from '@/_prisma/client';
 
 export interface KeywordsPage {
   items: ExKeyword[];
