@@ -5,7 +5,7 @@ import React from 'react';
 import {
   cn, selectOne, selectMany, shuffleArray
 } from '@/_libs';
-import { useKeywordStore } from '@/_entities/keywords';
+import { useKeywordActions } from '@/_entities/keywords';
 
 interface Props
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -37,8 +37,12 @@ export function RandomButton({
   className, name, length, keywords, backgroundKeywords, mode = 'single', purposeData, originData, characterClassData, count = 5, ...props
 }: Props) {
   const {
-    setSubCategory, setSelectedPurpose, setSelectedOrigin, setSelectedClass, setSelectedKeywordList,
-  } = useKeywordStore();
+    setSelectedKeywordList,
+    setSelectedPurpose,
+    setSelectedOrigin,
+    setSelectedClass,
+    setSubCategory,
+  } = useKeywordActions();
 
   const onClickButton = () => {
     if (mode === 'single') {

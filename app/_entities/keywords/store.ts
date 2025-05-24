@@ -1,54 +1,61 @@
 import { create } from 'zustand';
 
-interface KeywordState {
-  selectedKeyword: string;
+interface KeywordActions {
   setSelectedKeyword: (keyword: string) => void;
-  selectedKeywordList: string[];
   setSelectedKeywordList: (keywordList: string[]) => void;
-  selectedPurpose: string;
   setSelectedPurpose: (purpose: string) => void;
-  selectedOrigin: string;
   setSelectedOrigin: (origin: string) => void;
-  selectedClass: string;
   setSelectedClass: (characterClass: string) => void;
-  subCategory: string;
   setSubCategory: (subCategory: string) => void;
 }
 
-export const useKeywordStore = create<KeywordState>((set) => ({
-  // 단일 키워드
-  selectedKeyword: '버튼을 클릭하세요.',
-  setSelectedKeyword: (keyword) => set(
-    { selectedKeyword: keyword, }
-  ),
+interface KeywordState {
+  selectedKeyword: string;
+  selectedKeywordList: string[];
+  selectedPurpose: string;
+  selectedOrigin: string;
+  selectedClass: string;
+  subCategory: string;
+  actions: KeywordActions;
+}
 
-  // 목적
-  selectedPurpose: '',
-  setSelectedPurpose: (purpose) => set(
-    { selectedPurpose: purpose, }
-  ),
+const KeywordStore = create<KeywordState>()((
+  (set) => ({
+    selectedKeyword: '버튼을 클릭하세요.',
+    selectedPurpose: '',
+    selectedOrigin: '',
+    selectedClass: '',
+    selectedKeywordList: [ '버튼을 클릭하세요.', ],
+    subCategory: '',
 
-  // 출신지
-  selectedOrigin: '',
-  setSelectedOrigin: (origin) => set(
-    { selectedOrigin: origin, }
-  ),
+    actions: {
+      setSelectedKeyword: (keyword) => set(
+        { selectedKeyword: keyword, }
+      ),
+      setSelectedPurpose: (purpose) => set(
+        { selectedPurpose: purpose, }
+      ),
+      setSelectedOrigin: (origin) => set(
+        { selectedOrigin: origin, }
+      ),
+      setSelectedClass: (characterClass) => set(
+        { selectedClass: characterClass, }
+      ),
+      setSelectedKeywordList: (keywordList) => set(
+        { selectedKeywordList: keywordList, }
+      ),
+      setSubCategory: (subCategory) => set(
+        { subCategory, }
+      ),
+    },
+  })
+));
 
-  // 직업
-  selectedClass: '',
-  setSelectedClass: (characterClass) => set(
-    { selectedClass: characterClass, }
-  ),
+export const useSelectedKeyword = () => KeywordStore((state) => state.selectedKeyword);
+export const useSelectedKeywordList = () => KeywordStore((state) => state.selectedKeywordList);
+export const useSelectedPurpose = () => KeywordStore((state) => state.selectedPurpose);
+export const useSelectedOrigin = () => KeywordStore((state) => state.selectedOrigin);
+export const useSelectedClass = () => KeywordStore((state) => state.selectedClass);
+export const useSubCategory = () => KeywordStore((state) => state.subCategory);
 
-  // 키워드 목록
-  selectedKeywordList: [ '버튼을 클릭하세요.', ],
-  setSelectedKeywordList: (keywordList) => set(
-    { selectedKeywordList: keywordList, }
-  ),
-
-  // 서브 카테고리
-  subCategory: '',
-  setSubCategory: (subCategory) => set(
-    { subCategory, }
-  ),
-}));
+export const useKeywordActions = () => KeywordStore((state) => state.actions);
